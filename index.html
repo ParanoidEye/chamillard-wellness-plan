@@ -2368,6 +2368,8 @@ function renderExercise() {
     if (kidSlug) localStorage.setItem('exHighlight_' + currentMonth, kidSlug);
     render();
   }
+  window.switchExTab = switchExTab;
+  window.kidifyAct = kidifyAct;
 
   const exTab = localStorage.getItem('exTab_'+currentMonth)||'plan';
 
