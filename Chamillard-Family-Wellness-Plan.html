@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chamillard Family Full-Year Wellness Plan (Aug 2026–Dec 2027)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest" defer></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        teal: { 50:'#e6f5f7', 100:'#b3e0e6', 200:'#80ccd5', 300:'#4db7c4', 400:'#1aa3b3', 500:'#0d6b7c', 600:'#0b5c6b', 700:'#094d5a', 800:'#073e49', 900:'#052f38' },
+        cream: { 50:'#fffdf9', 100:'#fdf8f0', 200:'#faf1e2', 300:'#f5e8d0' },
+        sage: { 50:'#f0f5f1', 100:'#d4e3d8', 200:'#b8d1bf', 300:'#9cbfa6', 400:'#7b9e87', 500:'#638068', 600:'#4b6050', 700:'#3a4a3e' },
+        coral: { 50:'#fdf0ec', 100:'#f9d6cc', 200:'#f3b8a8', 300:'#ecA088', 400:'#e07a5f', 500:'#d4634a', 600:'#b84e38', 700:'#963f2e' },
+        charcoal: { 50:'#f2f3f4', 100:'#d6d9dc', 200:'#b0b5ba', 300:'#8a9098', 400:'#646c76', 500:'#2d3748', 600:'#252e3d', 700:'#1d2532' },
+        gold: { 50:'#fef9e7', 100:'#fcefc1', 200:'#f9e08b', 300:'#f5d054', 400:'#d4a82d', 500:'#b88c1a' },
+        purple: { 50:'#f5f0fa', 100:'#e4d5f2', 200:'#c9a8e4', 300:'#a87bcc', 400:'#8854b4', 500:'#6b3f92' }
+      },
+      fontFamily: {
+        display: ['Nunito', 'sans-serif'],
+        sans: ['Inter', 'sans-serif']
+      }
+    }
+  }
+};
+</script>
+<style>
+:root {
+  --teal: #0d6b7c; --cream: #fdf8f0; --sage: #7b9e87; --coral: #e07a5f;
+  --charcoal: #2d3748; --white: #ffffff;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--charcoal); margin:0; }
+.font-display { font-family: 'Nunito', sans-serif; }
+
+/* Sidebar */
+#sidebar { width:220px; min-height:100vh; background: linear-gradient(180deg, #0d6b7c 0%, #094d5a 100%); position:fixed; left:0; top:0; z-index:40; overflow-y:auto; transition: transform .3s; }
+#sidebar .month-btn { display:block; width:100%; text-align:left; padding:7px 14px; font-size:12px; color:#b3e0e6; border:none; background:none; cursor:pointer; transition: all .15s; border-left:3px solid transparent; }
+#sidebar .month-btn:hover { background:rgba(255,255,255,.1); color:#fff; }
+#sidebar .month-btn.active { background:rgba(255,255,255,.15); color:#fff; font-weight:700; border-left-color:#e07a5f; }
+#sidebar .phase-badge { font-size:9px; display:block; opacity:.7; margin-top:1px; }
+
+/* Main */
+#main { margin-left:220px; min-height:100vh; }
+#tab-bar { display:flex; flex-wrap:wrap; gap:4px; padding:8px 16px; background:#fff; border-bottom:1px solid #e6f5f7; position:sticky; top:0; z-index:30; }
+.tab-btn { padding:6px 12px; font-size:12px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:#f0f5f1; color:#2d3748; transition: all .15s; white-space:nowrap; }
+.tab-btn.active { background:#0d6b7c; color:#fff; }
+.tab-btn:hover:not(.active) { background:#d4e3d8; }
+
+#content { padding:20px; max-width:1200px; margin:0 auto; }
+
+/* Cards */
+.card { background:#fff; border-radius:14px; padding:20px; box-shadow:0 2px 12px rgba(13,107,124,.06); margin-bottom:16px; }
+.card-sm { background:#fff; border-radius:10px; padding:14px; box-shadow:0 1px 6px rgba(13,107,124,.05); }
+
+/* Pills */
+.pill { display:inline-block; padding:2px 8px; border-radius:20px; font-size:10px; font-weight:600; }
+.pill-yellow { background:#fef9e7; color:#b88c1a; }
+.pill-green { background:#f0f5f1; color:#4b6050; }
+.pill-teal { background:#e6f5f7; color:#0d6b7c; }
+.pill-orange { background:#fdf0ec; color:#d4634a; }
+.pill-coral { background:#f9d6cc; color:#b84e38; }
+.pill-sage { background:#d4e3d8; color:#3a4a3e; }
+.pill-gold { background:#fef9e7; color:#b88c1a; }
+.pill-purple { background:#f5f0fa; color:#6b3f92; }
+
+/* Calendar */
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; }
+.cal-header { font-size:11px; font-weight:700; text-align:center; padding:6px 2px; color:#0d6b7c; }
+.cal-cell { border:1px solid #e6f5f7; border-radius:8px; padding:4px; min-height:90px; font-size:9px; background:#fff; }
+.cal-cell .day-num { font-weight:700; font-size:12px; color:#0d6b7c; }
+.cal-empty { background:transparent; border:none; }
+
+/* Tables */
+.meal-table { width:100%; border-collapse:separate; border-spacing:0; font-size:11px; }
+.meal-table th { background:#0d6b7c; color:#fff; padding:8px 6px; text-align:left; font-size:11px; font-weight:600; }
+.meal-table th:first-child { border-radius:8px 0 0 0; }
+.meal-table th:last-child { border-radius:0 8px 0 0; }
+.meal-table td { padding:7px 6px; border-bottom:1px solid #e6f5f7; }
+.meal-table tr:nth-child(even) { background:#fdf8f0; }
+.meal-table tr:hover { background:#e6f5f7; }
+
+/* Recipe cards */
+.recipe-card { background:#fff; border-radius:12px; padding:16px; box-shadow:0 1px 8px rgba(13,107,124,.06); margin-bottom:12px; page-break-inside:avoid; }
+.recipe-card h4 { color:#0d6b7c; font-family:'Nunito',sans-serif; font-weight:700; font-size:15px; margin:0 0 8px; }
+.kid-box { background:#fdf0ec; border-radius:8px; padding:10px; margin-top:8px; border-left:3px solid #e07a5f; }
+
+/* Star chart */
+.star-cell { width:28px; height:28px; display:flex; align-items:center; justify-content:center; cursor:pointer; border-radius:6px; font-size:16px; transition:all .15s; border:1px solid #e6f5f7; }
+.star-cell:hover { background:#fef9e7; }
+.star-cell.filled { background:#fef9e7; }
+
+/* Checkbox */
+.cb-item { display:flex; align-items:flex-start; gap:8px; padding:4px 0; font-size:13px; }
+.cb-item input[type=checkbox] { margin-top:3px; accent-color:#0d6b7c; width:16px; height:16px; }
+
+/* Sticky subnav */
+.sticky-sub { position:sticky; top:48px; background:#fdf8f0; z-index:20; padding:8px 0; border-bottom:1px solid #e6f5f7; }
+.sticky-sub button { padding:5px 14px; border-radius:20px; font-size:12px; font-weight:600; border:1px solid #b3e0e6; background:#fff; color:#0d6b7c; cursor:pointer; transition:all .15s; }
+.sticky-sub button:hover, .sticky-sub button.active { background:#0d6b7c; color:#fff; }
+
+/* Print */
+@media print {
+  #sidebar, #tab-bar, #mobile-menu-btn, #mobile-sidebar, .no-print, .sticky-sub { display:none !important; }
+  #main { margin-left:0 !important; }
+  body { background:#fff !important; }
+  .card, .recipe-card { box-shadow:none !important; border:1px solid #ddd; }
+  .recipe-card { page-break-inside:avoid !important; }
+  .recipe-section-header { page-break-before:always !important; }
+  .grocery-week { page-break-before:always !important; }
+  .tracker-section { page-break-before:always !important; }
+  @page { size:letter; margin:0.5in; }
+  * { font-size:11pt; }
+  .cal-grid { font-size:8pt; }
+}
+
+/* Mobile */
+@media (max-width:768px) {
+  #sidebar { transform:translateX(-100%); }
+  #sidebar.open { transform:translateX(0); }
+  #main { margin-left:0; }
+  .cal-cell { min-height:60px; font-size:7px; }
+  .cal-cell .day-num { font-size:10px; }
+  #tab-bar { gap:3px; padding:6px 8px; }
+  .tab-btn { padding:5px 8px; font-size:10px; }
+}
+/* ── CALENDAR VIEW TOGGLE ── */
+.cal-view-btn{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1.5px solid #b3e0e6;background:#fff;color:#0d6b7c;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.cal-view-btn:hover{background:#e6f5f7;}
+.cal-view-active{background:#0d6b7c!important;color:#fff!important;border-color:#0d6b7c!important;}
+/* Compact month grid */
+.cal-grid-month{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;min-width:560px;}
+.cal-header-sm{background:#0d6b7c;color:#fff;text-align:center;font-size:10px;font-weight:700;padding:4px 2px;border-radius:4px 4px 0 0;}
+.cal-cell-sm{background:#fff;border:1px solid #e6f5f7;border-radius:4px;padding:3px 2px;min-height:68px;page-break-inside:avoid;}
+.cal-day-num{font-weight:700;font-size:11px;color:#0d6b7c;margin-bottom:2px;}
+.cal-pill-xs{display:block;border-radius:3px;padding:1px 3px;margin-bottom:1px;font-size:8.5px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cal-y{background:#fef9e7;color:#b88c1a;}.cal-g{background:#f0f5f1;color:#4b6050;}
+.cal-t{background:#e6f5f7;color:#0b5c6b;}.cal-o{background:#fdf0ec;color:#b84e38;}
+/* Week view */
+.week-view-header{font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:#0d6b7c;padding:8px 12px;background:#e6f5f7;border-radius:8px;margin-bottom:12px;}
+.week-view-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px;}
+.week-cell{background:#fff;border:1.5px solid #e6f5f7;border-radius:10px;padding:10px 8px;box-shadow:0 1px 4px rgba(13,107,124,.07);page-break-inside:avoid;}
+.week-day-label{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#0d6b7c;margin-bottom:8px;border-bottom:1.5px solid #e6f5f7;padding-bottom:4px;}
+.week-day-num{font-size:11px;color:#7b9e87;font-weight:600;margin-left:4px;}
+.week-meal-row{display:flex;flex-direction:column;border-radius:6px;padding:5px 6px;margin-bottom:4px;}
+.week-meal-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;opacity:.65;margin-bottom:1px;}
+.week-meal-name{font-size:11px;font-weight:600;line-height:1.3;}
+.week-breakfast{background:#fef9e7;color:#b88c1a;}.week-lunch{background:#f0f5f1;color:#4b6050;}
+.week-dinner{background:#e6f5f7;color:#0b5c6b;}.week-snack{background:#fdf0ec;color:#b84e38;}
+@media print{
+  #cal-view-bar{display:none!important;}
+  .cal-grid-month{min-width:unset!important;gap:1px;}
+  .cal-cell-sm{min-height:52px!important;}
+  .cal-pill-xs{font-size:7px!important;}
+  .recipe-card{page-break-inside:avoid;}
+  .recipe-section-header{page-break-before:always;}
+  @page{size:landscape;margin:8mm;}
+}
+
+.recipe-nav-btn.active { background:#0d6b7c !important; color:#fff !important; font-weight:700; border-color:#0d6b7c !important; }
+</style>
+</head>
+<body data-id="0">
+<app-icon data-id="1" hidden data-icon="heart-pulse" data-palette="Green"></app-icon>
+
+<!-- Mobile Menu Button -->
+<button data-id="2" id="mobile-menu-btn" class="md:hidden fixed top-2 left-2 z-50 bg-teal-500 text-white p-2 rounded-lg shadow-lg">
+  <i data-id="3" data-lucide="menu" class="w-6 h-6"></i>
+</button>
+
+<!-- Sidebar -->
+<div data-id="4" id="sidebar">
+  <div data-id="5" class="p-4 border-b border-teal-400/20">
+    <h1 data-id="6" class="font-display text-white font-extrabold text-sm leading-tight">🏠 Chamillard Family</h1>
+    <p data-id="7" class="text-teal-100 text-[10px] mt-1">Wellness Plan</p>
+    <p data-id="8" class="text-teal-200 text-[9px]">Aug 2026 – Dec 2027</p>
+  </div>
+  <div data-id="9" id="month-nav" class="py-2"></div>
+  <div data-id="10" class="p-3 border-t border-teal-400/20">
+    <div data-id="11" class="text-[10px] text-teal-200">👨 Nick &amp; 👩 Megan</div>
+    <div data-id="12" class="text-[10px] text-coral-300 mt-1">👧 Aleene 11 · Kaily 9 · Lilly 7</div>
+  </div>
+</div>
+
+<!-- Main -->
+<div data-id="13" id="main">
+  <!-- Tab Bar -->
+  <div data-id="14" id="tab-bar">
+    <button data-id="15" class="tab-btn active" data-tab="calendar">📅 Calendar</button>
+    <button data-id="16" class="tab-btn" data-tab="meals">🍽️ Meal Plan</button>
+    <button data-id="17" class="tab-btn" data-tab="recipes">📋 Recipes</button>
+    <button data-id="18" class="tab-btn" data-tab="grocery">🛒 Grocery</button>
+    <button data-id="19" class="tab-btn" data-tab="batch">🥘 Batch Prep</button>
+    <button data-id="20" class="tab-btn" data-tab="freezer">🧊 Freezer</button>
+    <button data-id="21" class="tab-btn" data-tab="exercise">💪 Exercise</button>
+    <button data-id="22" class="tab-btn" data-tab="tracker">📊 Tracker</button>
+    <button data-id="23" class="tab-btn" data-tab="budget">💰 Budget</button>
+    <button data-id="24" class="tab-btn" data-tab="kids">⭐ Kids</button>
+    <button data-id="25" class="no-print tab-btn" id="print-btn" style="background:#e07a5f;color:#fff;">🖨️ Print</button>
+  </div>
+
+  <!-- Content -->
+  <div data-id="26" id="content"></div>
+
+  <footer data-id="27" class="py-6 text-center">
+    <p data-id="28" class="text-xs text-charcoal-300">Made by Copilot</p>
+  </footer>
+</div>
+
+<script>
+window.onerror = function(msg, src, line, col, err) {
+  var d = document.getElementById('content');
+  if (d) d.innerHTML = '<div style="padding:24px;background:#fee2e2;border:2px solid #dc2626;border-radius:12px;color:#991b1b;font-family:monospace;margin:20px;">' + '<strong style="font-size:16px;">&#9888; Uncaught JS Error</strong><br><br>' + '<strong>Message:</strong> ' + msg + '<br><strong>Line:</strong> ' + line + '</div>';
+  return false;
+};
+// ═══════════════════════════════════
+// DATA LAYER
+// ═══════════════════════════════════
+const planCache = {};
+
+const MB = [
+  'Banana Oat Pancakes','Avocado Egg Toast','Turkey Sausage Scramble','Mango Smoothie Bowl',
+  'Sweet Potato Hash & Eggs','Egg Muffin Cups','Overnight Oats & Berries','Chia Pudding & Mango',
+  'Apple Cinnamon Oatmeal','Veggie Egg White Scramble','Banana Almond Smoothie',
+  'Sweet Potato Toast & Avocado','French Toast (dairy-free)','Warm Spiced Oatmeal',
+  'Pumpkin Oatmeal','Veggie Egg Muffins','Chia Pudding & Banana','Whole Wheat Toast & Poached Egg',
+  'Berry Overnight Oats','Green Smoothie Bowl','Egg & Avocado Wrap','Almond Butter Toast & Banana',
+  'Zucchini & Egg Scramble','Pear & Oat Breakfast Bowl','Blueberry Oat Muffins (dairy-free)',
+  'Savory Oat Bowl with Fried Egg','Turkey Sausage & Sweet Potato Bowl','Banana Nut Oatmeal',
+  'Apple Walnut Overnight Oats','Cinnamon Sweet Potato Oatmeal','Spinach & Egg Scramble',
+  'Cranberry Oatmeal','Egg & Kale Scramble','Pumpkin Spice Oatmeal','Chia Pudding & Apple',
+  'Sweet Potato Egg Muffins','Pear Overnight Oats','Turkey Sausage & Egg Scramble',
+  'Overnight Oats & Cinnamon Apple','Smoothie Bowl (almond milk)','Overnight Oats & Cranberry',
+  'Banana Almond Pancakes','Egg & Sweet Potato Hash','Veggie Egg Muffin Cups',
+  'Avocado Toast & Poached Egg'
+];
+
+const ML = [
+  'Turkey Lettuce Wraps','Chicken & Avocado Rice Bowl','Black Bean & Corn Bowl','Lentil Soup',
+  'Egg Salad Cups','Quinoa Veggie Bowl','Turkey Taco Bowl','White Bean Kale Soup',
+  'Chicken Veggie Soup','Turkey Hummus Wrap','Lentil & Carrot Soup','Quinoa Black Bean Bowl',
+  'Chicken Lettuce Wraps','Avocado & Egg Rice Bowl','Butternut Squash Soup',
+  'Turkey & Avocado Rice Bowl','Chicken Noodle Soup','Chickpea & Veggie Bowl',
+  'Black Bean & Corn Wraps','Lentil & Sweet Potato Soup','Chicken & Brown Rice Bowl',
+  'White Bean & Spinach Soup','Turkey & Zucchini Bowl','Ground Turkey Taco Lettuce Wraps',
+  'Avocado & Black Bean Bowl','Chicken & Asparagus Rice Bowl','Lentil & Veggie Bowl',
+  'Black Bean Soup','Quinoa & Cucumber Bowl','Egg Salad Lettuce Cups',
+  'Quinoa & Roasted Veggie Bowl','Spring Pea & Mint Soup','Turkey Wrap with Hummus',
+  'Black Bean & Corn Salad Bowl','Quinoa & Cucumber Salad Bowl','Turkey & White Bean Soup',
+  'Lentil & Spinach Soup','Chicken Veggie Chowder','Turkey & Veggie Soup',
+  'Quinoa Cranberry Bowl','Grilled Chicken & Corn Salad Bowl','Black Bean & Mango Salad',
+  'Quinoa & Cucumber Lemon Bowl','Lentil Salad','Chickpea & Avocado Bowl'
+];
+
+const MD = [
+  'Baked Chicken & Roasted Broccoli Rice','Ground Turkey Veggie Stir-Fry','White Chicken Chili',
+  'Stuffed Bell Peppers','Slow Cooker White Bean Chicken Soup','Turkey Meatballs & Zucchini Noodles',
+  'Chicken Fajita Bowls','Beef & Broccoli Brown Rice','Turkey Meatloaf & Roasted Veggies',
+  'Chicken & Veggie Fried Rice','Lentil Vegetable Stew','Baked Chicken Thighs & Root Veggies',
+  'Ground Turkey Shepherd\'s Pie','Turkey Chili','Slow Cooker Chicken Tacos',
+  'Pork Tenderloin & Sweet Potatoes','Turkey & Black Bean Bowl','Slow Cooker Turkey Lentil Stew',
+  'Herb Roasted Turkey Breast & Green Beans','Chicken & Vegetable Casserole',
+  'Beef Stew with Potatoes & Carrots','Stuffed Acorn Squash with Turkey & Rice',
+  'Slow Cooker Pulled Turkey Sandwiches','Beef & Vegetable Stew',
+  'Baked Chicken Thighs & Brussels Sprouts','Ground Turkey Veggie Skillet with Rice',
+  'Chicken & White Bean Stew','Turkey Meatloaf & Mashed Sweet Potato','Pork Chops & Roasted Veggies',
+  'Lemon Herb Chicken & Green Beans','Turkey & Veggie Skillet','Turkey Meatballs & Spaghetti Squash',
+  'Herb Roasted Turkey Breast','Ground Turkey & Veggie Soup','Beef Bok Choy Stir-Fry',
+  'Grilled Turkey Burgers & Coleslaw','Chicken & Veggie Kabob Bowl','Ground Turkey Taco Bowls',
+  'Turkey Meatballs & Rice Noodles','Baked Pork Tenderloin & Roasted Asparagus',
+  'Spring Vegetable Chicken Soup','Ground Turkey & Pea Stir-Fry',
+  'Slow Cooker Turkey Herb Roast & Root Veggies','Watermelon Chicken Salad Bowl',
+  'Baked Chicken Thighs & Roasted Carrots'
+];
+
+const MS = [
+  'Apple & Almond Butter','Hummus & Cucumbers','Hard-Boiled Eggs','Edamame',
+  'Rice Cakes & Avocado','Banana & PB','Veggie Sticks & Hummus','Trail Mix',
+  'Pumpkin Seeds','Orange Slices','Pear & Almond Butter','Celery & PB',
+  'Apple Slices & Cinnamon','Hummus & Peppers','Apple & Walnut','Hummus & Carrots',
+  'Banana & Almond Butter','Rice Cakes & PB','Cranberry Trail Mix','Hummus & Veggie Sticks',
+  'Orange & Almond Butter','Hummus & Pita','Banana & Walnut','Strawberry & Almond Butter',
+  'Hummus & Snap Peas','Watermelon Slices','Mango Slices','Frozen Banana Pops',
+  'Cucumber & Hummus','Grapes & Almond Butter','Roasted Chickpeas','Apple Slices & PB',
+  'Walnuts & Dried Cranberry','Sunflower Seeds & Raisins','Apple & Sunflower Butter',
+  'Mango & Coconut','Watermelon & Mint','Berry Mix & Almond Butter','Peach Slices',
+  'Frozen Mango Bites'
+];
+
+const ROT_START = {
+  A:[0,0,0,0], B:[2,1,1,2], C:[4,3,2,4], D:[7,6,4,6],
+  E:[9,9,7,8], F:[11,13,9,5], G:[13,11,12,9], H:[14,14,13,8]
+};
+
+function poolSlice(master, start, len) {
+  return Array.from({length:len}, (_,i) => master[(start+i)%master.length]);
+}
+
+const MEAL_POOLS = {};
+for (const [rot,[bs,ls,ds,ss]] of Object.entries(ROT_START)) {
+  MEAL_POOLS[rot] = {
+    breakfasts: poolSlice(MB,bs,31),
+    lunches: poolSlice(ML,ls,31),
+    dinners: poolSlice(MD,ds,31),
+    snacks: poolSlice(MS,ss,31)
+  };
+}
+
+const MONTHS = ['Aug 2026','Sep 2026','Oct 2026','Nov 2026','Dec 2026','Jan 2027','Feb 2027',
+  'Mar 2027','Apr 2027','May 2027','Jun 2027','Jul 2027','Aug 2027','Sep 2027','Oct 2027',
+  'Nov 2027','Dec 2027'];
+
+const MONTH_META = {
+  'Aug 2026':{rotation:'A',days:31,shift:0,phase:'🌱 Phase 1: Foundation'},
+  'Sep 2026':{rotation:'B',days:30,shift:0,phase:'🌱 Phase 1: Foundation'},
+  'Oct 2026':{rotation:'C',days:31,shift:0,phase:'🌱 Phase 1: Foundation'},
+  'Nov 2026':{rotation:'D',days:30,shift:0,phase:'❄️ Phase 2: Winter Strength'},
+  'Dec 2026':{rotation:'E',days:31,shift:0,phase:'❄️ Phase 2: Winter Strength'},
+  'Jan 2027':{rotation:'E',days:31,shift:9,phase:'🌸 Phase 3: Spring Build'},
+  'Feb 2027':{rotation:'F',days:28,shift:0,phase:'🌸 Phase 3: Spring Build'},
+  'Mar 2027':{rotation:'F',days:31,shift:11,phase:'🌸 Phase 3: Spring Build'},
+  'Apr 2027':{rotation:'F',days:30,shift:21,phase:'🌸 Phase 3: Spring Build'},
+  'May 2027':{rotation:'G',days:31,shift:0,phase:'☀️ Phase 4: Summer Power'},
+  'Jun 2027':{rotation:'G',days:30,shift:13,phase:'☀️ Phase 4: Summer Power'},
+  'Jul 2027':{rotation:'G',days:31,shift:27,phase:'☀️ Phase 4: Summer Power'},
+  'Aug 2027':{rotation:'H',days:31,shift:0,phase:'🍂 Phase 5: Fall Endurance'},
+  'Sep 2027':{rotation:'H',days:30,shift:7,phase:'🍂 Phase 5: Fall Endurance'},
+  'Oct 2027':{rotation:'H',days:31,shift:14,phase:'🍂 Phase 5: Fall Endurance'},
+  'Nov 2027':{rotation:'H',days:30,shift:21,phase:'🍂 Phase 5: Fall Endurance'},
+  'Dec 2027':{rotation:'H',days:31,shift:28,phase:'🍂 Phase 5: Fall Endurance'}
+};
+
+// ── SEASONAL SWAPS ──
+// Applied at render time — pools stay untouched
+const SEASONAL_SWAPS = {
+  summer: {
+    'Warm Spiced Oatmeal':                      'Tropical Mango Smoothie Bowl',
+    'Pumpkin Oatmeal':                           'Strawberry Banana Smoothie Bowl',
+    'Pumpkin Spice Oatmeal':                     'Peach & Honey Smoothie Bowl',
+    'Cranberry Oatmeal':                         'Mixed Berry Smoothie Bowl',
+    'Stuffed Acorn Squash with Turkey & Rice':   'Grilled Turkey & Corn Salad Bowl',
+    'Pumpkin Seeds':                             'Mango & Coconut',
+    'Cranberry Trail Mix':                       'Frozen Banana Pops'
+  },
+  fall: {
+    'Watermelon Slices':                         'Apple Slices & Cinnamon',
+    'Mango Slices':                              'Pear & Almond Butter',
+    'Frozen Banana Pops':                        'Roasted Chickpeas',
+    'Mango & Coconut':                           'Apple & Walnut',
+    'Watermelon & Mint':                         'Celery & PB',
+    'Berry Mix & Almond Butter':                 'Hummus & Peppers',
+    'Peach Slices':                              'Orange Slices',
+    'Chicken & Asparagus Rice Bowl':             'Butternut Squash Soup',
+    'Spring Pea & Mint Soup':                    'Lentil & Sweet Potato Soup',
+    'Baked Pork Tenderloin & Roasted Asparagus': 'Baked Chicken Thighs & Root Veggies',
+    'Watermelon Chicken Salad Bowl':             'Turkey Chili'
+  },
+  winter: {
+    'Watermelon Slices':                         'Walnuts & Dried Cranberry',
+    'Mango Slices':                              'Orange Slices',
+    'Frozen Banana Pops':                        'Roasted Chickpeas',
+    'Mango & Coconut':                           'Orange & Almond Butter',
+    'Watermelon & Mint':                         'Hummus & Pita',
+    'Berry Mix & Almond Butter':                 'Pumpkin Seeds',
+    'Peach Slices':                              'Apple & Walnut',
+    'Chicken & Asparagus Rice Bowl':             'Chicken Noodle Soup',
+    'Spring Pea & Mint Soup':                    'White Bean Kale Soup',
+    'Baked Pork Tenderloin & Roasted Asparagus': 'Herb Roasted Turkey Breast & Green Beans',
+    'Watermelon Chicken Salad Bowl':             'Beef Stew with Potatoes & Carrots'
+  }
+};
+
+function getSeasonFromKey(monthKey) {
+  var m = monthKey.split(' ')[0];
+  if (m==='Jun'||m==='Jul'||m==='Aug') return 'summer';
+  if (m==='Sep'||m==='Oct'||m==='Nov') return 'fall';
+  if (m==='Dec'||m==='Jan'||m==='Feb') return 'winter';
+  return 'spring';
+}
+
+function seasonalizeMeal(meal, season) {
+  var swaps = SEASONAL_SWAPS[season];
+  return (swaps && swaps[meal]) ? swaps[meal] : meal;
+}
+
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function buildDailyPlan(monthKey) {
+  if (planCache[monthKey]) return planCache[monthKey];
+  const {rotation,days,shift} = MONTH_META[monthKey];
+  const p = MEAL_POOLS[rotation];
+  const _mn = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const _pts = monthKey.split(" ");
+  const startDow = new Date(parseInt(_pts[1]), _mn.indexOf(_pts[0]), 1).getDay();
+  const season = getSeasonFromKey(monthKey);
+  const plan = [];
+  for (let d=0; d<days; d++) {
+    plan.push({
+      day: d+1,
+      dayName: DAY_NAMES[(startDow+d)%7],
+      breakfast: seasonalizeMeal(p.breakfasts[d], season),
+      lunch:     seasonalizeMeal(p.lunches[(d+shift)%31], season),
+      dinner:    seasonalizeMeal(p.dinners[(d+(shift*2)%31+31)%31], season),
+      snack:     seasonalizeMeal(p.snacks[(d+(shift*3)%31+31)%31], season)
+    });
+  }
+  planCache[monthKey] = plan;
+  return plan;
+}
+
+// Missions
+const MISSIONS = {
+  'Aug 2026':'🌟 Try 3 new vegetables this month!','Sep 2026':'🍂 Help cook dinner 4 times!',
+  'Oct 2026':'🎃 Stay active every weekday!','Nov 2026':'🦃 Eat a rainbow veggie every meal!',
+  'Dec 2026':'❄️ Drink 6 cups of water daily!','Jan 2027':'🎯 Plan one meal this month!',
+  'Feb 2027':'💪 Complete every workout!','Mar 2027':'🌸 Try 2 new healthy recipes!',
+  'Apr 2027':'🐣 Eat a veggie at every meal!','May 2027':'☀️ Be active outside 3× this week!',
+  'Jun 2027':'🌈 Eat all colors of the rainbow!','Jul 2027':'💧 Water challenge — stay hydrated!',
+  'Aug 2027':'🏆 1-year mark — finish strongest yet!','Sep 2027':'🍎 Add one new snack to the routine!',
+  'Oct 2027':'🎯 Perfect prep week — prep 3 meals!','Nov 2027':'🦃 Exercise AND write one gratitude daily!',
+  'Dec 2027':'🏅 Final month — 17-month CHAMPION!'
+};
+
+const BUDGET_TIPS = [
+  'Buy oats, rice, and beans in bulk — saves 30-40% vs individual boxes.',
+  'Freeze ripe bananas for smoothies instead of buying frozen fruit.',
+  'Shop seasonal produce — it\'s cheaper and fresher.',
+  'Use the freezer: cook double batches and freeze half.',
+  'Compare unit prices, not package prices.',
+  'Stock up on canned beans when on sale — they last forever.',
+  'Buy whole chickens and portion them yourself to save $2-3/lb.',
+  'Make your own almond milk — ¼ the price of store-bought.',
+  'Grow herbs on the windowsill: basil, cilantro, mint.',
+  'Use leftover veggie scraps for homemade broth.',
+  'Plan meals around what\'s already in the freezer.',
+  'Buy ground turkey in bulk packs and freeze portions.',
+  'Skip pre-cut veggies — whole ones cost half the price.',
+  'Use dry lentils instead of canned — much cheaper per serving.',
+  'Buy frozen broccoli and spinach — same nutrition, lower cost.',
+  'Shop the perimeter of the store first for fresh basics.',
+  'End-of-plan celebration: you saved an estimated $2,000+ over 17 months!'
+];
+
+// ── RECIPE DATABASE ──
+const RECIPE_DB = {};
+
+function addRecipe(name,cat,data){RECIPE_DB[name]={category:cat,...data};}
+
+addRecipe('Banana Oat Pancakes','breakfast',{prep:'10min',cook:'15min',serves:5,freezer:true,
+  ingredients:['2 ripe bananas','2 cups rolled oats (blended)','4 eggs','1 tsp cinnamon','1 tsp vanilla','½ cup almond milk','pinch salt'],
+  steps:['Mash bananas.','Blend oats to flour.','Mix all to batter.','Cook ¼-cup portions on nonstick pan 2–3 min per side.','Serve with fruit.'],
+  kids:{aleene:'Mash bananas',kaily:'Blend oats',lilly:'Sprinkle cinnamon'},
+  nutrition:{cal:210,protein:'8g',fat:'5g',carbs:'35g',sugar:'8g'}});
+
+addRecipe('Overnight Oats & Berries','breakfast',{prep:'10min',cook:'0',serves:5,freezer:false,
+  ingredients:['2 cups rolled oats','2.5 cups almond milk','1 tbsp chia seeds','1 cup frozen berries','1 tsp cinnamon','1 tsp vanilla','1 tbsp honey'],
+  steps:['Mix oats, milk, chia, cinnamon, vanilla.','Divide into 5 jars.','Top with berries.','Refrigerate 8+ hr.','Drizzle honey; eat cold or microwave 90s.'],
+  kids:{aleene:'Divide into jars',kaily:'Stir mixture',lilly:'Add berries'},
+  nutrition:{cal:240,protein:'8g',fat:'5g',carbs:'40g',sugar:'7g'}});
+
+addRecipe('White Chicken Chili','dinner',{prep:'10min',cook:'6–8hr',serves:5,freezer:true,
+  ingredients:['1.5 lbs chicken breast','2 cans white beans (drained)','1 can green chiles','4 cups low-sodium chicken broth','1 tsp cumin','1 tsp garlic powder','1 tsp onion powder'],
+  steps:['Place chicken in slow cooker.','Add beans, chiles, broth, spices.','Cook LOW 6–8 hr or HIGH 3–4 hr.','Shred chicken; return to pot.','Stir; serve.'],
+  kids:{aleene:'Drain/rinse beans',kaily:'Measure spices',lilly:'Stir pot'},
+  nutrition:{cal:280,protein:'32g',fat:'4g',carbs:'24g',sugar:'2g'}});
+
+addRecipe('Stuffed Bell Peppers','dinner',{prep:'20min',cook:'35min',serves:5,freezer:true,
+  ingredients:['5 bell peppers','1 lb ground turkey','1.5 cups brown rice (cooked)','1 can black beans (drained)','1 tsp cumin','1 tsp garlic powder','2 cups chicken broth'],
+  steps:['Preheat 375°F; cut tops off peppers.','Brown turkey; drain.','Mix turkey, rice, beans, spices.','Stuff peppers; place in baking dish.','Pour broth around peppers.','Cover; bake 35 min.'],
+  kids:{aleene:'Mix filling',kaily:'Scoop into peppers',lilly:'Place in dish'},
+  nutrition:{cal:310,protein:'26g',fat:'7g',carbs:'34g',sugar:'4g'}});
+
+addRecipe('Ground Turkey Veggie Stir-Fry','dinner',{prep:'10min',cook:'15min',serves:5,freezer:true,
+  ingredients:['1 lb ground turkey','3 cups broccoli florets','1 cup snap peas','2 cups brown rice (cooked)','3 tbsp low-sodium soy sauce','1 tsp sesame oil','1 tsp garlic powder'],
+  steps:['Brown turkey; drain.','Add broccoli & snap peas; stir-fry 5 min.','Mix sauce; pour over.','Stir-fry 3 more min.','Serve over rice.'],
+  kids:{aleene:'Measure sauce',kaily:'Wash broccoli',lilly:'Scoop rice'},
+  nutrition:{cal:320,protein:'28g',fat:'8g',carbs:'32g',sugar:'2g'}});
+
+addRecipe('Turkey Meatballs & Zucchini Noodles','dinner',{prep:'15min',cook:'20min',serves:5,freezer:true,
+  ingredients:['1 lb ground turkey','1 egg','½ cup oat flour','1 tsp Italian seasoning','1 tsp garlic powder','4 medium zucchini','2 tbsp olive oil'],
+  steps:['Mix turkey, egg, oat flour, seasonings; roll into 1-inch balls.','Bake 400°F 18–20 min.','Spiralize zucchini.','Sauté noodles in olive oil 3 min.','Top with meatballs.'],
+  kids:{aleene:'Roll meatballs',kaily:'Spiralize zucchini',lilly:'Sprinkle seasoning'},
+  nutrition:{cal:290,protein:'30g',fat:'10g',carbs:'14g',sugar:'3g'}});
+
+addRecipe('Egg Muffin Cups','breakfast',{prep:'10min',cook:'22min',serves:5,freezer:true,
+  ingredients:['10 eggs','1 cup frozen spinach (thawed/squeezed)','½ cup diced bell pepper','½ cup diced onion','1 tsp garlic powder','salt & pepper','nonstick spray'],
+  steps:['Preheat 350°F; spray muffin tin.','Whisk eggs with spices.','Fold in veggies.','Pour into cups (¾ full).','Bake 20–22 min until set.'],
+  kids:{aleene:'Whisk eggs',kaily:'Dice peppers',lilly:'Spray tin'},
+  nutrition:{cal:180,protein:'16g',fat:'9g',carbs:'6g',sugar:'2g'}});
+
+addRecipe('Beef & Broccoli Brown Rice','dinner',{prep:'10min',cook:'15min',serves:5,freezer:true,
+  ingredients:['1 lb lean beef sirloin (thin-sliced)','4 cups broccoli florets','3 tbsp low-sodium soy sauce','1 tbsp cornstarch','1 tsp ginger powder','1 tsp garlic powder','2 cups brown rice (cooked)'],
+  steps:['Toss beef with cornstarch, soy sauce, ginger, garlic.','Cook beef in hot skillet 3–4 min; set aside.','Stir-fry broccoli 4 min.','Return beef; toss 2 min.','Serve over rice.'],
+  kids:{aleene:'Measure sauce',kaily:'Wash broccoli',lilly:'Scoop rice'},
+  nutrition:{cal:340,protein:'30g',fat:'9g',carbs:'30g',sugar:'2g'}});
+
+addRecipe('Turkey Meatloaf & Roasted Veggies','dinner',{prep:'10min',cook:'50min',serves:5,freezer:true,
+  ingredients:['1.5 lbs ground turkey','1 egg','½ cup oat flour','1 small onion (grated)','1 tsp garlic powder','1 tsp Worcestershire sauce','1 tsp Italian seasoning'],
+  steps:['Preheat 375°F.','Mix all.','Press into greased loaf pan.','Bake 45–50 min to 165°F.','Rest 10 min; slice.'],
+  kids:{aleene:'Mix ingredients',kaily:'Press into pan',lilly:'Set timer'},
+  nutrition:{cal:270,protein:'28g',fat:'8g',carbs:'12g',sugar:'1g'}});
+
+addRecipe('Lemon Herb Chicken & Green Beans','dinner',{prep:'35min',cook:'35min',serves:5,freezer:true,
+  ingredients:['1.5 lbs chicken thighs (boneless, skinless)','2 lbs green beans','3 tbsp olive oil','2 lemons (juice+zest)','1 tsp garlic powder','1 tsp dried oregano','salt & pepper'],
+  steps:['Marinate chicken in lemon juice, oil, garlic, oregano 30 min.','Preheat 400°F.','Roast chicken 20 min.','Add green beans.','Roast 15 more min.'],
+  kids:{aleene:'Juice lemons',kaily:'Toss green beans',lilly:'Zest lemon'},
+  nutrition:{cal:280,protein:'30g',fat:'10g',carbs:'12g',sugar:'3g'}});
+
+addRecipe('Ground Turkey Shepherd\'s Pie','dinner',{prep:'20min',cook:'30min',serves:5,freezer:true,
+  ingredients:['1.5 lbs ground turkey','2 cups frozen mixed veggies','1 cup chicken broth','3 large sweet potatoes','3 tbsp almond milk','1 tsp garlic powder','1 tsp onion powder'],
+  steps:['Boil & mash sweet potatoes with almond milk.','Brown turkey; drain.','Add veggies & broth; simmer 5 min.','Pour into baking dish.','Top with mash.','Bake 375°F 20 min.'],
+  kids:{aleene:'Mash potatoes',kaily:'Scoop filling',lilly:'Spread topping'},
+  nutrition:{cal:320,protein:'27g',fat:'8g',carbs:'30g',sugar:'6g'}});
+
+addRecipe('Chicken Fajita Bowls','dinner',{prep:'15min',cook:'20min',serves:5,freezer:true,
+  ingredients:['1.5 lbs chicken breast (thin-sliced)','3 bell peppers (sliced)','1 large onion (sliced)','2 tbsp olive oil','1 tsp chili powder','1 tsp cumin','2 cups brown rice (cooked)'],
+  steps:['Season chicken with spices.','Cook in oil 6–7 min; remove.','Sauté peppers & onion 5 min.','Return chicken; toss.','Serve over rice with avocado.'],
+  kids:{aleene:'Slice peppers',kaily:'Measure spices',lilly:'Scoop rice'},
+  nutrition:{cal:300,protein:'30g',fat:'8g',carbs:'28g',sugar:'4g'}});
+
+addRecipe('Slow Cooker White Bean Chicken Soup','dinner',{prep:'10min',cook:'6–7hr',serves:5,freezer:true,
+  ingredients:['1.5 lbs chicken thighs','2 cans white beans (drained)','4 cups chicken broth','2 cups chopped kale','1 tsp garlic powder','1 tsp Italian seasoning','1 tsp onion powder'],
+  steps:['Place chicken in slow cooker.','Add beans, broth, spices.','Cook LOW 6–7 hr.','Shred chicken; return.','Add kale; cook 10 min.'],
+  kids:{aleene:'Drain beans',kaily:'Measure broth',lilly:'Add kale'},
+  nutrition:{cal:290,protein:'31g',fat:'5g',carbs:'22g',sugar:'1g'}});
+
+addRecipe('Grilled Turkey Burgers & Coleslaw','dinner',{prep:'15min',cook:'15min',serves:5,freezer:true,
+  ingredients:['1.5 lbs ground turkey','1 egg','2 tbsp Worcestershire sauce','1 tsp garlic powder','1 tsp onion powder','5 whole-wheat buns','2 cups shredded cabbage + 2 tbsp apple cider vinegar'],
+  steps:['Mix turkey, egg, Worcestershire, spices; form 5 patties.','Cook 5–6 min per side to 165°F.','Toss cabbage with vinegar for slaw.','Serve patty on bun with slaw.'],
+  kids:{aleene:'Form patties',kaily:'Toss slaw',lilly:'Set buns'},
+  nutrition:{cal:310,protein:'28g',fat:'9g',carbs:'24g',sugar:'4g'}});
+
+addRecipe('Herb Roasted Turkey Breast','dinner',{prep:'10min',cook:'75min',serves:5,freezer:true,
+  ingredients:['2 lb boneless turkey breast','2 tbsp olive oil','1 tsp garlic powder','1 tsp dried rosemary','1 tsp dried thyme','1 tsp onion powder','salt & pepper'],
+  steps:['Preheat 350°F.','Rub turkey with olive oil.','Mix seasonings; press on all sides.','Place in roasting pan.','Roast 60–75 min to 165°F.','Rest 15 min; slice.'],
+  kids:{aleene:'Mix spice rub',kaily:'Rub olive oil',lilly:'Pour broth in pan'},
+  nutrition:{cal:250,protein:'35g',fat:'7g',carbs:'1g',sugar:'0g'}});
+
+addRecipe('Baked Chicken Thighs & Root Veggies','dinner',{prep:'15min',cook:'40min',serves:5,freezer:true,
+  ingredients:['5 chicken thighs (boneless, skinless)','3 carrots (chopped)','2 parsnips (chopped)','2 potatoes (cubed)','2 tbsp olive oil','1 tsp garlic powder','1 tsp dried thyme'],
+  steps:['Preheat 400°F.','Toss veggies with oil, garlic, thyme; spread on sheet pan.','Season chicken; place over veggies.','Roast 35–40 min to 165°F.','Rest 5 min; serve.'],
+  kids:{aleene:'Chop carrots',kaily:'Toss veggies in oil',lilly:'Arrange on pan'},
+  nutrition:{cal:300,protein:'28g',fat:'10g',carbs:'24g',sugar:'3g'}});
+
+addRecipe('Lentil Vegetable Stew','dinner',{prep:'10min',cook:'30min',serves:5,freezer:true,
+  ingredients:['1.5 cups green lentils','4 cups veggie broth','2 cups chopped carrots','1 cup chopped celery','1 tsp cumin','1 tsp garlic powder','1 tsp turmeric'],
+  steps:['Rinse lentils.','Combine all in pot; bring to boil.','Simmer 25–30 min.','Season with salt & pepper.','Serve with whole-grain bread.'],
+  kids:{aleene:'Chop celery',kaily:'Rinse lentils',lilly:'Measure & stir spices'},
+  nutrition:{cal:260,protein:'16g',fat:'1g',carbs:'42g',sugar:'4g'}});
+
+addRecipe('Pumpkin Oatmeal','breakfast',{prep:'2min',cook:'8min',serves:5,freezer:false,
+  ingredients:['2 cups rolled oats','3 cups almond milk','1 cup canned pure pumpkin','1 tsp cinnamon','½ tsp nutmeg','1 tbsp maple syrup','2 tbsp pumpkin seeds'],
+  steps:['Bring almond milk to simmer.','Stir in oats; cook 5 min.','Add pumpkin, cinnamon, nutmeg.','Cook 2 more min.','Top with pumpkin seeds & syrup.'],
+  kids:{aleene:'Stir oatmeal',kaily:'Measure spices',lilly:'Sprinkle seeds'},
+  nutrition:{cal:230,protein:'7g',fat:'5g',carbs:'38g',sugar:'5g'}});
+
+// Generate remaining recipes automatically
+// ── SEASONAL RECIPE CARDS ──
+const SEASONAL_RECIPES = {
+  // SUMMER
+  'Grilled Chicken & Corn Salsa Bowl':{prep:'15 min',cook:'20 min',serves:5,freezer:false,cat:'dinner',
+    ingredients:['1.5 lbs chicken breast','2 cups corn kernels','2 avocados (diced)','1 can black beans','1 lime (juice)','1 tsp cumin','1 tsp garlic powder'],
+    steps:['Season chicken with cumin, garlic, salt.','Cook 6-7 min per side; slice.','Mix corn, beans, avocado, lime juice.','Serve chicken over salsa.','Garnish with cilantro if desired.'],
+    kids:{aleene:'Dice avocado',kaily:'Mix salsa',lilly:'Squeeze lime'},
+    nutrition:{cal:'320',protein:'32g',fat:'10g',carbs:'28g',sugar:'4g'}},
+  'Turkey & Zucchini Skillet':{prep:'10 min',cook:'20 min',serves:5,freezer:true,cat:'dinner',
+    ingredients:['1 lb ground turkey','4 zucchini (diced)','1 cup corn kernels','1 tsp garlic powder','1 tsp Italian seasoning','2 tbsp olive oil','salt and pepper'],
+    steps:['Brown turkey in olive oil; drain.','Add zucchini; cook 5 min.','Add corn and seasonings.','Stir-fry 5 more min.','Serve in bowls.'],
+    kids:{aleene:'Dice zucchini',kaily:'Measure seasonings',lilly:'Stir the skillet'},
+    nutrition:{cal:'270',protein:'26g',fat:'10g',carbs:'16g',sugar:'4g'}},
+  'Peach & Oat Smoothie Bowl':{prep:'10 min',cook:'0 min',serves:5,freezer:false,cat:'breakfast',
+    ingredients:['3 ripe peaches (or frozen)','2 cups almond milk','1.5 cups rolled oats','1 tbsp almond butter','1 tsp vanilla','1 tbsp honey','banana slices and pumpkin seeds for topping'],
+    steps:['Blend peaches, almond milk, almond butter, vanilla smooth.','Stir in oats; rest 2 min.','Divide into 5 bowls.','Top with banana, pumpkin seeds, honey.','Serve immediately.'],
+    kids:{aleene:'Blend base',kaily:'Stir in oats',lilly:'Add toppings'},
+    nutrition:{cal:'240',protein:'7g',fat:'6g',carbs:'38g',sugar:'12g'}},
+  'Blueberry Lemon Overnight Oats':{prep:'10 min',cook:'0 min',serves:5,freezer:false,cat:'breakfast',
+    ingredients:['2 cups rolled oats','2.5 cups almond milk','1 cup blueberries','1 lemon (zest and juice)','1 tbsp chia seeds','1 tsp vanilla','1 tbsp honey'],
+    steps:['Mix oats, milk, chia, lemon zest and juice, vanilla.','Divide into 5 jars.','Top with blueberries.','Refrigerate overnight.','Drizzle honey before serving.'],
+    kids:{aleene:'Zest lemon',kaily:'Divide into jars',lilly:'Add blueberries'},
+    nutrition:{cal:'230',protein:'7g',fat:'4g',carbs:'40g',sugar:'9g'}},
+  'Grilled Corn & Black Bean Bowl':{prep:'15 min',cook:'15 min',serves:5,freezer:false,cat:'lunch',
+    ingredients:['1.5 cups corn (grilled)','2 cans black beans (drained)','2 avocados (diced)','2 cups brown rice (cooked)','1 lime (juice)','1 tsp cumin','cilantro optional'],
+    steps:['Grill corn 3-4 min; cut kernels.','Warm beans with cumin.','Build bowls: rice, beans, corn, avocado.','Squeeze lime over each bowl.','Add cilantro if desired.'],
+    kids:{aleene:'Cut corn kernels',kaily:'Warm beans in pot',lilly:'Scoop rice into bowls'},
+    nutrition:{cal:'310',protein:'12g',fat:'8g',carbs:'48g',sugar:'4g'}},
+  'Watermelon Arugula Chicken Bowl':{prep:'15 min',cook:'15 min',serves:5,freezer:false,cat:'lunch',
+    ingredients:['1.5 lbs chicken breast (grilled, sliced)','4 cups cubed watermelon','3 cups arugula or spinach','1/4 red onion (thin sliced)','2 tbsp lime juice','1 tbsp olive oil','salt and pepper'],
+    steps:['Grill chicken 6-7 min per side; slice.','Cube watermelon; thinly slice onion.','Toss greens, watermelon, onion with lime juice and oil.','Top with sliced chicken.','Serve immediately.'],
+    kids:{aleene:'Cube watermelon',kaily:'Toss salad ingredients',lilly:'Arrange greens in bowls'},
+    nutrition:{cal:'270',protein:'30g',fat:'7g',carbs:'20g',sugar:'12g'}},
+  // FALL
+  'Butternut Squash Turkey Chili':{prep:'15 min',cook:'35 min',serves:5,freezer:true,cat:'dinner',
+    ingredients:['1 lb ground turkey','2 cups butternut squash (cubed)','2 cans white beans (drained)','3 cups chicken broth','1 tsp cumin','1 tsp chili powder','1 tsp garlic powder'],
+    steps:['Brown turkey; drain.','Add squash, broth, spices.','Simmer 15 min until squash softens.','Add beans; simmer 10 more min.','Season and serve.'],
+    kids:{aleene:'Drain and rinse beans',kaily:'Measure spices',lilly:'Stir the pot'},
+    nutrition:{cal:'300',protein:'28g',fat:'6g',carbs:'30g',sugar:'4g'}},
+  'Harvest Chicken & Apple One-Pan Bake':{prep:'15 min',cook:'40 min',serves:5,freezer:false,cat:'dinner',
+    ingredients:['5 chicken thighs (boneless)','3 apples (sliced)','2 sweet potatoes (cubed)','2 tbsp olive oil','1 tsp cinnamon','1 tsp garlic powder','1 tsp dried thyme'],
+    steps:['Preheat 400F.','Toss sweet potatoes and apples with oil, cinnamon, thyme.','Spread on sheet pan.','Season chicken; place on top.','Roast 35-40 min to 165F.'],
+    kids:{aleene:'Slice apples',kaily:'Toss veggies in oil',lilly:'Sprinkle cinnamon'},
+    nutrition:{cal:'320',protein:'28g',fat:'10g',carbs:'28g',sugar:'12g'}},
+  'Spiced Pumpkin French Toast':{prep:'10 min',cook:'15 min',serves:5,freezer:true,cat:'breakfast',
+    ingredients:['10 slices whole-grain bread','4 eggs','1/2 cup canned pumpkin','1/2 cup almond milk','1 tsp cinnamon','1/2 tsp nutmeg','1 tsp vanilla'],
+    steps:['Whisk eggs, pumpkin, milk, cinnamon, nutmeg, vanilla.','Dip bread; coat both sides.','Cook on nonstick pan 2-3 min per side.','Serve 2 slices per person.','Drizzle with a little maple syrup.'],
+    kids:{aleene:'Whisk pumpkin mixture',kaily:'Dip bread slices',lilly:'Sprinkle cinnamon on top'},
+    nutrition:{cal:'240',protein:'10g',fat:'6g',carbs:'34g',sugar:'6g'}},
+  'Roasted Butternut Squash Soup':{prep:'15 min',cook:'35 min',serves:5,freezer:true,cat:'lunch',
+    ingredients:['1 large butternut squash (cubed)','4 cups chicken broth','1 small onion (chopped)','1 tsp garlic powder','1 tsp cinnamon','1 tbsp olive oil','salt and pepper'],
+    steps:['Preheat 400F. Toss squash with oil; roast 25 min.','Saute onion in pot 5 min.','Add roasted squash, broth, garlic, cinnamon.','Simmer 10 min; blend smooth.','Season and serve.'],
+    kids:{aleene:'Toss squash in oil',kaily:'Measure spices',lilly:'Press blender button'},
+    nutrition:{cal:'160',protein:'4g',fat:'3g',carbs:'28g',sugar:'6g'}},
+  'Harvest Apple Oatmeal':{prep:'5 min',cook:'10 min',serves:5,freezer:false,cat:'breakfast',
+    ingredients:['2 cups rolled oats','3 cups almond milk','2 apples (diced)','1 tsp cinnamon','1/4 tsp nutmeg','1 tbsp maple syrup','2 tbsp walnuts (chopped)'],
+    steps:['Bring almond milk to simmer.','Add oats; cook 5 min.','Stir in apples, cinnamon, nutmeg; cook 3 more min.','Divide into 5 bowls.','Top with walnuts and maple syrup.'],
+    kids:{aleene:'Dice apples',kaily:'Stir oatmeal',lilly:'Sprinkle walnuts'},
+    nutrition:{cal:'230',protein:'6g',fat:'5g',carbs:'38g',sugar:'10g'}},
+  'Apple Turkey Harvest Bowl':{prep:'15 min',cook:'15 min',serves:5,freezer:false,cat:'lunch',
+    ingredients:['1.5 lbs turkey breast (cooked, sliced)','2 apples (diced)','2 cups cooked quinoa','2 cups kale or spinach','2 tbsp olive oil','1 tbsp apple cider vinegar','1 tsp honey'],
+    steps:['Whisk olive oil, vinegar, honey for dressing.','Toss greens with dressing.','Build bowls: quinoa base, greens, turkey, apple.','Drizzle remaining dressing.','Serve immediately.'],
+    kids:{aleene:'Dice apples',kaily:'Toss greens with dressing',lilly:'Scoop quinoa into bowls'},
+    nutrition:{cal:'290',protein:'28g',fat:'8g',carbs:'26g',sugar:'8g'}},
+  // WINTER
+  'Slow Cooker Beef Stew & Root Veggies':{prep:'20 min',cook:'480 min',serves:5,freezer:true,cat:'dinner',
+    ingredients:['1.5 lbs lean beef stew meat','3 carrots (chopped)','2 parsnips (chopped)','2 potatoes (cubed)','4 cups beef broth (low-sodium)','1 tsp garlic powder','1 tsp dried thyme'],
+    steps:['Place beef in slow cooker.','Add all veggies, broth, garlic, thyme.','Cook LOW 8 hrs or HIGH 4 hrs.','Stir; adjust seasoning.','Serve in bowls.'],
+    kids:{aleene:'Chop carrots',kaily:'Measure broth',lilly:'Stir the pot'},
+    nutrition:{cal:'320',protein:'30g',fat:'9g',carbs:'26g',sugar:'5g'}},
+  'One-Pan Herb Chicken & Winter Vegetables':{prep:'15 min',cook:'40 min',serves:5,freezer:false,cat:'dinner',
+    ingredients:['5 chicken thighs (boneless)','2 parsnips (chopped)','2 turnips (cubed)','3 carrots (chopped)','2 tbsp olive oil','1 tsp dried rosemary','1 tsp dried thyme'],
+    steps:['Preheat 400F.','Toss veggies with oil, rosemary, thyme.','Spread on sheet pan.','Season chicken; nestle over veggies.','Roast 35-40 min to 165F.'],
+    kids:{aleene:'Chop carrots',kaily:'Toss veggies in oil',lilly:'Sprinkle herbs'},
+    nutrition:{cal:'300',protein:'28g',fat:'10g',carbs:'22g',sugar:'5g'}},
+  'Hot Cocoa Oatmeal (dairy-free)':{prep:'5 min',cook:'8 min',serves:5,freezer:false,cat:'breakfast',
+    ingredients:['2 cups rolled oats','3 cups almond milk','2 tbsp unsweetened cocoa powder','1 tbsp maple syrup','1 tsp vanilla','pinch of salt','dairy-free dark chocolate chips for topping'],
+    steps:['Bring almond milk to simmer.','Whisk in cocoa until smooth.','Add oats; cook 5-6 min stirring.','Stir in maple syrup and vanilla.','Serve with chocolate chips on top.'],
+    kids:{aleene:'Whisk cocoa into milk',kaily:'Stir oatmeal while cooking',lilly:'Add chocolate chip topping'},
+    nutrition:{cal:'225',protein:'7g',fat:'5g',carbs:'38g',sugar:'8g'}},
+  'Turkey & Wild Rice Soup':{prep:'15 min',cook:'35 min',serves:5,freezer:true,cat:'lunch',
+    ingredients:['1 lb ground turkey','1 cup wild rice','4 cups chicken broth','2 carrots (diced)','2 stalks celery (diced)','1 tsp garlic powder','1 tsp dried thyme'],
+    steps:['Brown turkey in large pot; drain.','Add carrots and celery; cook 5 min.','Add broth, wild rice, garlic, thyme.','Simmer 25 min until rice is tender.','Season with salt and pepper; serve.'],
+    kids:{aleene:'Dice carrots',kaily:'Measure rice',lilly:'Stir the soup'},
+    nutrition:{cal:'290',protein:'26g',fat:'6g',carbs:'32g',sugar:'3g'}},
+  'Ginger Carrot Soup':{prep:'15 min',cook:'30 min',serves:5,freezer:true,cat:'lunch',
+    ingredients:['2 lbs carrots (chopped)','1 small onion (chopped)','2 tsp ground ginger','4 cups vegetable broth','1 can light coconut milk','1 tsp garlic powder','1 tbsp olive oil'],
+    steps:['Saute onion in olive oil 5 min.','Add carrots, ginger, garlic; cook 3 min.','Add broth; simmer 20 min until tender.','Stir in coconut milk; blend smooth.','Season with salt and pepper; serve.'],
+    kids:{aleene:'Chop carrots',kaily:'Measure coconut milk',lilly:'Press blender button'},
+    nutrition:{cal:'190',protein:'4g',fat:'7g',carbs:'28g',sugar:'10g'}},
+  'Slow Cooker Apple Cider Pulled Turkey':{prep:'10 min',cook:'480 min',serves:5,freezer:true,cat:'dinner',
+    ingredients:['2 lbs turkey breast (boneless)','1 cup unsweetened apple cider','1 tsp garlic powder','1 tsp onion powder','1 tsp smoked paprika','salt and pepper','5 whole-wheat buns'],
+    steps:['Place turkey in slow cooker.','Mix cider with spices; pour over turkey.','Cook LOW 8 hrs or HIGH 4 hrs.','Shred turkey; stir into juices.','Serve on buns with simple coleslaw.'],
+    kids:{aleene:'Mix spice blend',kaily:'Pour cider over turkey',lilly:'Shred turkey with forks'},
+    nutrition:{cal:'310',protein:'34g',fat:'5g',carbs:'28g',sugar:'6g'}},
+  'Cinnamon Pear Overnight Oats':{prep:'10 min',cook:'0 min',serves:5,freezer:false,cat:'breakfast',
+    ingredients:['2 cups rolled oats','2.5 cups almond milk','2 ripe pears (diced)','1 tbsp chia seeds','1 tsp cinnamon','1 tsp vanilla','1 tbsp honey'],
+    steps:['Mix oats, milk, chia, cinnamon, vanilla.','Divide into 5 jars.','Top with diced pear.','Refrigerate overnight.','Drizzle honey before serving.'],
+    kids:{aleene:'Dice pears',kaily:'Divide into jars',lilly:'Add pear topping'},
+    nutrition:{cal:'235',protein:'7g',fat:'4g',carbs:'42g',sugar:'10g'}},
+  // SPRING
+  'Lemon Asparagus Chicken Sheet Pan':{prep:'15 min',cook:'30 min',serves:5,freezer:false,cat:'dinner',
+    ingredients:['1.5 lbs chicken thighs (boneless)','2 lbs asparagus (trimmed)','2 lemons (juice and zest)','2 tbsp olive oil','1 tsp garlic powder','1 tsp dried oregano','salt and pepper'],
+    steps:['Preheat 400F.','Marinate chicken in lemon juice, oil, garlic, oregano 15 min.','Roast chicken 15 min.','Add asparagus around chicken; drizzle oil.','Roast 15 more min; zest lemon over dish.'],
+    kids:{aleene:'Juice lemons',kaily:'Toss asparagus in oil',lilly:'Zest lemon over finished dish'},
+    nutrition:{cal:'285',protein:'30g',fat:'10g',carbs:'10g',sugar:'3g'}},
+  'Spring Pea & Turkey Pasta (gluten-free)':{prep:'15 min',cook:'20 min',serves:5,freezer:false,cat:'dinner',
+    ingredients:['1 lb ground turkey','2 cups frozen peas','12 oz gluten-free pasta','3 cups chicken broth','1 tsp garlic powder','1 tbsp olive oil','1 lemon (juice)'],
+    steps:['Cook pasta per package; drain.','Brown turkey in olive oil; drain.','Add broth, garlic, peas; simmer 5 min.','Toss with pasta and lemon juice.','Serve immediately.'],
+    kids:{aleene:'Measure peas',kaily:'Squeeze lemon',lilly:'Toss pasta in pot'},
+    nutrition:{cal:'350',protein:'28g',fat:'8g',carbs:'42g',sugar:'4g'}},
+  'Strawberry Overnight Oats':{prep:'10 min',cook:'0 min',serves:5,freezer:false,cat:'breakfast',
+    ingredients:['2 cups rolled oats','2.5 cups almond milk','1 cup fresh strawberries (sliced)','1 tbsp chia seeds','1 tsp vanilla','1 tsp lemon zest','1 tbsp honey'],
+    steps:['Mix oats, milk, chia, vanilla, lemon zest.','Divide into 5 jars.','Top with strawberries.','Refrigerate overnight.','Drizzle honey before serving.'],
+    kids:{aleene:'Slice strawberries',kaily:'Divide into jars',lilly:'Add strawberry topping'},
+    nutrition:{cal:'235',protein:'7g',fat:'4g',carbs:'42g',sugar:'10g'}},
+  'Asparagus & Chicken Rice Bowl':{prep:'15 min',cook:'20 min',serves:5,freezer:false,cat:'lunch',
+    ingredients:['1.5 lbs chicken breast (sliced)','2 lbs asparagus (cut in 2-inch pieces)','2 cups brown rice (cooked)','2 tbsp olive oil','1 lemon (juice)','1 tsp garlic powder','salt and pepper'],
+    steps:['Season chicken; cook in oil 6-7 min.','Saute asparagus in same pan 4-5 min.','Build bowls: rice base, chicken, asparagus.','Squeeze lemon over each bowl.','Serve immediately.'],
+    kids:{aleene:'Cut asparagus pieces',kaily:'Season chicken',lilly:'Scoop rice into bowls'},
+    nutrition:{cal:'310',protein:'32g',fat:'9g',carbs:'26g',sugar:'3g'}},
+  'Lemony Chickpea & Veggie Bowl':{prep:'15 min',cook:'15 min',serves:5,freezer:false,cat:'lunch',
+    ingredients:['2 cans chickpeas (drained)','2 cups snap peas','1 cucumber (sliced)','2 cups cooked quinoa','2 tbsp olive oil','2 lemons (juice and zest)','1 tsp garlic powder'],
+    steps:['Warm chickpeas with garlic in olive oil 5 min.','Toss snap peas and cucumber with lemon juice.','Build bowls: quinoa, chickpeas, veggie mix.','Zest lemon over each bowl.','Drizzle oil and serve.'],
+    kids:{aleene:'Slice cucumber',kaily:'Zest lemons',lilly:'Scoop quinoa into bowls'},
+    nutrition:{cal:'320',protein:'14g',fat:'9g',carbs:'46g',sugar:'5g'}},
+  'Spring Veggie & Turkey Stir-Fry':{prep:'15 min',cook:'15 min',serves:5,freezer:true,cat:'dinner',
+    ingredients:['1 lb ground turkey','2 cups snap peas','1 cup sliced asparagus','1 cup sliced bell peppers','3 tbsp low-sodium soy sauce','1 tsp garlic powder','2 cups brown rice (cooked)'],
+    steps:['Brown turkey; drain.','Add all vegetables; stir-fry 5 min.','Pour soy sauce and garlic over everything.','Stir-fry 3 more min.','Serve over brown rice.'],
+    kids:{aleene:'Slice bell peppers',kaily:'Measure soy sauce',lilly:'Scoop rice into bowls'},
+    nutrition:{cal:'290',protein:'28g',fat:'8g',carbs:'28g',sugar:'4g'}},
+};
+Object.assign(RECIPE_DB, SEASONAL_RECIPES);
+
+function genRecipe(name) {
+  if (RECIPE_DB[name]) return RECIPE_DB[name];
+  const isBreakfast = MB.includes(name);
+  const isLunch     = ML.includes(name);
+  const isDinner    = MD.includes(name);
+  const isSnack     = MS.includes(name);
+  const cat = isBreakfast?'breakfast':isLunch?'lunch':isDinner?'dinner':'snack';
+  const isSoup     = /soup|stew|chili|chowder/i.test(name);
+  const isSlow     = /slow cooker/i.test(name);
+  const isBaked    = /baked|roast|meatloaf|shepherd/i.test(name);
+  const isStirFry  = /stir.fry|skillet|fajita/i.test(name);
+  const isOats     = /oat|overnight|chia|pudding/i.test(name);
+  const isSalad    = /salad|lettuce|wrap/i.test(name);
+  const isSmoothie = /smoothie/i.test(name);
+  const isToast    = /toast/i.test(name) && !isSmoothie;
+  const isGreenSmoothie = /green/i.test(name) && isSmoothie;
+  const isBowl     = /bowl/i.test(name) && !isSmoothie && !isOats && !isToast;
+  const freezer    = isSoup||isBaked||isStirFry||/meatball|burger|muffin cup|pancake|chili|taco/i.test(name);
+
+  let prep='15min', cook='25min';
+  if(isOats)            { prep='5min';  cook='0min'; }
+  if(isSmoothie)        { prep='5min';  cook='0min'; }
+  if(isSlow)            { prep='15min'; cook='6–8hr'; }
+  if(isBaked)           { prep='15min'; cook='35min'; }
+  if(isSoup && !isSlow) { prep='10min'; cook='30min'; }
+  if(isSnack)           { prep='5min';  cook='0min'; }
+  if(isToast)           { prep='5min';  cook='10min'; }
+
+  let cal=300, protein='20g', fat='8g', carbs='30g', sugar='4g';
+  if(isBreakfast) { cal=320; protein='12g'; fat='8g';  carbs='42g'; sugar='8g'; }
+  if(isSnack)     { cal=150; protein='4g';  fat='6g';  carbs='18g'; sugar='5g'; }
+  if(isLunch)     { cal=380; protein='28g'; fat='10g'; carbs='38g'; sugar='4g'; }
+  if(isDinner)    { cal=450; protein='35g'; fat='14g'; carbs='40g'; sugar='5g'; }
+
+  const ing = [];
+  // Protein
+  if      (/chicken/i.test(name))               ing.push('1.5 lbs chicken breast');
+  else if (/turkey/i.test(name))                ing.push('1 lb ground turkey');
+  else if (/beef/i.test(name))                  ing.push('1 lb lean ground beef');
+  else if (/pork/i.test(name))                  ing.push('1 lb pork tenderloin');
+  else if (/egg|scramble|frittata/i.test(name)) ing.push('6 large eggs');
+  else if (/lentil/i.test(name))                ing.push('1.5 cups green lentils');
+  else if (/black bean/i.test(name))            ing.push('2 cans black beans, drained');
+  else if (/white bean/i.test(name))            ing.push('2 cans white beans, drained');
+  else if (/chickpea/i.test(name))              ing.push('2 cans chickpeas, drained');
+  else if (/quinoa/i.test(name))                ing.push('1.5 cups quinoa, rinsed');
+
+  // Grains
+  if (/oat/i.test(name))    ing.push('2 cups rolled oats');
+  if (/chia/i.test(name) && !ing.some(function(x){return /chia/.test(x);})) ing.push('3 tbsp chia seeds');
+  if (/rice(?! cake)/i.test(name) && !ing.some(function(x){return /rice/.test(x);})) ing.push('2 cups brown rice, cooked');
+  if (/pasta|noodle/i.test(name)) ing.push('8 oz whole wheat pasta');
+  if (/toast|bread/i.test(name))  ing.push('5 slices whole wheat bread');
+
+  // Vegetables - always type-specific, never skipped
+  if (isSoup || isSlow) {
+    ing.push('2 carrots, diced');
+    ing.push('3 stalks celery, sliced');
+    ing.push('1 yellow onion, diced');
+    if      (/spring|vegetable|veggie/i.test(name)) { ing.push('1 cup frozen peas'); ing.push('1 cup zucchini, chopped'); }
+    else if (/butternut|squash/i.test(name))        { ing.push('3 cups butternut squash, cubed'); }
+    else if (/kale|white bean/i.test(name))         { ing.push('3 cups chopped kale'); }
+    else if (/sweet potato/i.test(name))            { ing.push('2 sweet potatoes, cubed'); }
+    else                                             { ing.push('2 cups baby spinach'); }
+    ing.push('4 cups low-sodium chicken broth');
+  } else if (isStirFry) {
+    ing.push('1 red bell pepper, sliced');
+    ing.push('2 cups broccoli florets');
+    ing.push('1 cup snap peas');
+    ing.push('3 cloves garlic, minced');
+  } else if (isBaked && !isOats) {
+    if      (/broccoli/i.test(name))    { ing.push('3 cups broccoli florets'); }
+    else if (/brussels/i.test(name))    { ing.push('2 cups Brussels sprouts, halved'); }
+    else if (/asparagus/i.test(name))   { ing.push('1 bunch asparagus, trimmed'); }
+    else if (/root|carrot/i.test(name)) { ing.push('3 carrots, chopped'); ing.push('2 parsnips, chopped'); }
+    else if (/sweet potato/i.test(name)){ ing.push('3 sweet potatoes, cubed'); }
+    else                                 { ing.push('2 cups mixed roasting vegetables'); }
+  } else if (isSalad || isBowl) {
+    if (/corn/i.test(name))     { ing.push('1 cup corn kernels'); }
+    if (/cucumber/i.test(name)) { ing.push('1 cucumber, diced'); }
+    ing.push('2 cups mixed greens');
+    ing.push('1 cup cucumber, diced');
+  } else if (!isOats && !isSmoothie && !isSnack && !isToast) {
+    ing.push('1 cup diced bell pepper');
+    ing.push('1 cup zucchini, sliced');
+    ing.push('1 yellow onion, diced');
+  }
+
+  // Fruit
+  if (/banana/i.test(name))                         ing.push('3 ripe bananas');
+  if (/mango/i.test(name))                          ing.push('1 cup frozen mango chunks');
+  if (/berry|blueberry|strawberry/i.test(name))     ing.push('1 cup mixed berries');
+  if (/apple/i.test(name) && !isSnack)              ing.push('1 apple, diced');
+  if (/peach/i.test(name))                          ing.push('1 cup frozen peaches');
+  if (/avocado/i.test(name))                        ing.push('2 ripe avocados');
+  if (/sweet potato/i.test(name) && !ing.some(function(x){return /sweet potato/.test(x);})) ing.push('2 sweet potatoes');
+
+  // Pantry
+  if (/almond butter|almond milk/i.test(name))      ing.push('3 tbsp almond butter');
+  if (/hummus/i.test(name))                         ing.push('1 cup hummus');
+  if (/pumpkin/i.test(name))                        ing.push('1 cup canned pumpkin puree');
+  if (/peanut butter|pb/i.test(name))             ing.push('3 tbsp peanut butter');
+  if (!isSoup && !isSlow && !isSnack && !isOats && !isSmoothie && !isToast) {
+    ing.push('2 tbsp olive oil');
+    ing.push('1 tsp garlic powder, 1 tsp cumin, salt & pepper');
+  }
+  if (isOats)     { ing.push('1 tsp cinnamon'); ing.push('1 tbsp honey or maple syrup'); }
+  if (isSmoothie) {
+    if (isGreenSmoothie) {
+      ing.push('5 cups fresh spinach or baby kale');
+      ing.push('5 frozen bananas, sliced');
+      ing.push('2.5 cups frozen strawberries or mixed berries');
+      ing.push('2.5 cups unsweetened almond milk');
+      ing.push('5 tbsp honey or maple syrup');
+      ing.push('optional: 5 tbsp chia seeds or ground flax');
+    } else {
+      ing.push('2.5 cups unsweetened almond milk');
+      ing.push('5 frozen bananas');
+      ing.push('2.5 cups frozen fruit of choice');
+      ing.push('5 tbsp honey or maple syrup');
+    }
+  }
+  if (isSoup || isSlow) { /* broth already added above */ }
+  if (isToast) {
+    // ingredients are added above via the egg/bread/protein lines;
+    // add vinegar + seasoning
+    ing.push('1 tbsp white vinegar (for poaching)');
+    ing.push('salt & freshly ground black pepper');
+    if (/avocado/i.test(name)) { ing.push('2 ripe avocados, mashed'); }
+  }
+
+  // Snack specifics
+  if (isSnack) {
+    if (/rice cake/i.test(name))    ing.push('6 rice cakes');
+    if (/trail mix/i.test(name))    { ing.push('1 cup mixed nuts'); ing.push('1/2 cup dried fruit'); }
+    if (/edamame/i.test(name))      ing.push('2 cups shelled edamame');
+    if (/hard.boil/i.test(name))    { ing.push('6 large eggs'); ing.push('1 tsp everything bagel seasoning'); }
+    if (/walnut/i.test(name))       { ing.push('1 cup walnuts'); ing.push('1/4 cup dried cranberries'); }
+    if (/sunflower/i.test(name))    { ing.push('1/2 cup sunflower seeds'); ing.push('1/4 cup raisins'); }
+    if (ing.length < 2)             { ing.push('fresh cut vegetables or fruit'); ing.push('dipping sauce of choice'); }
+  }
+
+  const ingredients = ing.slice(0, 9);
+
+  // Expanded kid-friendly steps
+  var steps;
+  if (isSlow) {
+    steps = [
+      'Wash your hands and gather all ingredients on the counter.',
+      'Dice the onion, carrots, and celery into small bite-sized pieces.',
+      'If using raw protein, cut into 1-inch chunks and pat dry with a paper towel.',
+      'Add the protein to the slow cooker first, then layer vegetables on top.',
+      'Pour in the broth and sprinkle all the spices evenly over everything.',
+      'Put the lid on securely. Set to LOW for 6-8 hours (or HIGH for 3-4 hours).',
+      'When done, use two forks to shred the protein right in the pot.',
+      'Taste, adjust salt if needed, and serve with rice or bread.'
+    ];
+  } else if (isSoup) {
+    steps = [
+      'Wash your hands and chop all vegetables into small, even pieces.',
+      'Heat olive oil in a large pot over medium heat until it shimmers.',
+      'Add the onion and cook, stirring often, for 3 minutes until softened.',
+      'Add the garlic and remaining vegetables; stir and cook 3 more minutes.',
+      'If using raw protein, add it now and stir until no longer pink.',
+      'Pour in all the broth and bring to a boil over high heat.',
+      'Reduce to low heat, cover, and simmer 20 minutes until vegetables are tender.',
+      'Season with salt, pepper, and spices. Taste and adjust. Serve hot!'
+    ];
+  } else if (isBaked) {
+    steps = [
+      'Preheat the oven to 375F and line a baking sheet with foil or parchment.',
+      'Wash and cut all vegetables into similar-sized pieces so they cook evenly.',
+      'Pat the protein completely dry with paper towels - this helps it brown nicely.',
+      'In a small bowl, mix olive oil, garlic powder, cumin, salt, and pepper.',
+      'Coat the protein all over with the spice mixture using your hands or a brush.',
+      'Arrange protein on one side of the pan and vegetables on the other.',
+      'Drizzle vegetables with a little extra olive oil and toss to coat evenly.',
+      'Bake 30-40 minutes until protein is cooked through and vegetables are tender.',
+      'Let rest 5 minutes before serving - this keeps everything juicy!'
+    ];
+  } else if (isStirFry) {
+    steps = [
+      'Wash your hands and prep all vegetables - slice evenly so everything cooks at the same speed.',
+      'In a small bowl, stir together soy sauce, garlic, and any other sauce ingredients. Set aside.',
+      'Heat a large skillet or wok over HIGH heat until very hot.',
+      'Add 1 tbsp oil and swirl to coat. Add protein in a single layer - do not crowd it.',
+      'Cook protein without stirring 2 minutes, then stir and cook until done. Remove to a plate.',
+      'Add remaining oil to the pan. Add vegetables starting with the firmest ones first.',
+      'Stir-fry 3-4 minutes, tossing constantly, until vegetables are tender-crisp.',
+      'Return protein to the pan, pour sauce over everything, and toss to combine.',
+      'Serve immediately over brown rice or noodles!'
+    ];
+  } else if (isOats && /overnight/i.test(name)) {
+    steps = [
+      'Measure oats into a mason jar or container with a tight-fitting lid.',
+      'Pour in the almond milk and stir well so all the oats are wet.',
+      'Add chia seeds and stir again quickly to prevent clumping.',
+      'Stir in cinnamon and your sweetener of choice.',
+      'Add any mix-ins like nut butter or berries, or keep separate for the morning.',
+      'Seal the jar tightly and refrigerate for at least 6 hours or overnight.',
+      'In the morning, give it a big stir. Add a splash of milk if too thick.',
+      'Top with fresh fruit, nuts, or a drizzle of honey and enjoy cold!'
+    ];
+  } else if (isOats) {
+    steps = [
+      'Measure oats and almond milk into a small saucepan.',
+      'Place over medium heat and stir constantly as the mixture warms up.',
+      'Once it starts to bubble gently, reduce the heat to low.',
+      'Keep stirring every minute for 4-5 minutes until thick and creamy.',
+      'Remove from heat and stir in cinnamon and sweetener.',
+      'Spoon into bowls and let cool 1-2 minutes so no one burns their mouth.',
+      'Add your favorite toppings - fruit, nuts, or a drizzle of nut butter.',
+      'Enjoy while warm!'
+    ];
+  } else if (isSmoothie) {
+    steps = [
+      'Gather all ingredients and place them near the blender.',
+      'Add the liquid (almond milk) to the blender first - this helps everything blend smoothly.',
+      'Add the frozen or fresh fruit next.',
+      'Spoon in nut butter, honey, or any other add-ins.',
+      'Put the lid on tightly and press it down with your hand before blending.',
+      'Blend on high for 45-60 seconds until completely smooth with no chunks.',
+      'Taste - add more honey if sweeter, more milk if too thick.',
+      'Pour into bowls or glasses, add toppings, and enjoy right away!'
+    ];
+  } else if (isSalad || isBowl) {
+    steps = [
+      'Wash all vegetables and fruit under cold running water.',
+      'Chop or slice each ingredient into bite-sized pieces.',
+      'Cook any grains (rice or quinoa) per package directions; let cool slightly.',
+      'Cook protein if needed - let cool, then slice or cube it.',
+      'In a small bowl or jar, whisk together all dressing ingredients until combined.',
+      'Build the bowl: start with greens or grains as your base.',
+      'Arrange colorful toppings in sections for a beautiful presentation.',
+      'Drizzle dressing over the top just before serving and enjoy!'
+    ];
+  } else if (isSnack) {
+    steps = [
+      'Wash your hands and gather all the ingredients.',
+      'Wash any fresh fruit or vegetables under cold running water.',
+      'Slice or cut everything into easy, fun-sized pieces for snacking.',
+      'Arrange on a plate or in a container in a colorful pattern.',
+      'Add any dipping sauce or nut butter in a small bowl on the side.',
+      'Enjoy right away or seal tightly to save for later!'
+    ];
+  } else if (isToast) {
+    steps = [
+      'Wash your hands and gather all ingredients on the counter.',
+      'Fill a medium saucepan with 3 inches of water and bring to a gentle simmer — small bubbles, not a rolling boil.',
+      'Add 1 tbsp white vinegar to the water — this helps the egg whites hold their shape.',
+      'Crack each egg individually into a small cup or ramekin first — never directly into the water.',
+      'While the water simmers, toast the whole wheat bread slices until golden brown.',
+      'Using a spoon, stir the water gently in a circle to create a soft vortex, then slide one egg from the cup into the center.',
+      'Poach 2.5–3 min for a runny yolk, or 4 min for a firmer set yolk. Repeat for remaining eggs.',
+      'Lift each egg with a slotted spoon and drain briefly on a paper towel.',
+      'Place toast on plates, top each slice with a poached egg, season with salt & pepper, and serve immediately!'
+    ];
+  } else {
+    steps = [
+      'Wash your hands and gather all ingredients on the counter.',
+      'Dice the onion and chop all vegetables into similar-sized pieces.',
+      'Pat protein completely dry, then season all over with garlic powder, cumin, salt, and pepper.',
+      'Heat olive oil in a large skillet over medium-high heat until shimmering.',
+      'Add protein and cook until browned and cooked through, turning once halfway.',
+      'Remove protein to a plate; add vegetables to the same pan.',
+      'Cook vegetables 4-5 minutes, stirring often, until tender and slightly caramelized.',
+      'Return protein to the pan, stir everything together, and heat through 1 minute.',
+      'Taste, adjust seasoning, plate up, and serve hot!'
+    ];
+  }
+
+  return {category:cat, prep:prep, cook:cook, serves:5, freezer:freezer, 
+    ingredients:ingredients, steps:steps,
+    kids: isSlow      ? {aleene:'Load ingredients into slow cooker', kaily:'Measure spices and broth',      lilly:'Stir everything together'}
+         : isSoup      ? {aleene:'Chop vegetables and brown protein',  kaily:'Measure and pour in broth',    lilly:'Stir the pot and taste-test'}
+         : isBaked     ? {aleene:'Season and arrange in baking dish',  kaily:'Preheat oven and set timer',   lilly:'Sprinkle toppings on top'}
+         : isStirFry   ? {aleene:'Slice protein and vegetables',       kaily:'Mix the stir-fry sauce',       lilly:'Toss ingredients in the pan'}
+         : isOats      ? {aleene:'Measure oats and pour the liquid',   kaily:'Stir in mix-ins and spices',   lilly:'Add fruit and toppings'}
+         : isSmoothie  ? {aleene:'Add all ingredients to blender',     kaily:'Press blend and watch it go',  lilly:'Pour into bowls or glasses'}
+         : isSalad     ? {aleene:'Chop and prep all the toppings',     kaily:'Whisk together the dressing',  lilly:'Toss the salad and plate it'}
+         : isSnack     ? {aleene:'Portion out the ingredients',        kaily:'Arrange nicely on the plate',  lilly:'Add the dipping sauce'}
+         : isToast     ? {aleene:'Toast the bread slices',             kaily:'Crack eggs into small cups',      lilly:'Season with salt and pepper'}
+         :               {aleene:'Prep and season the protein',        kaily:'Chop and measure vegetables',  lilly:'Plate and add the finishing touch'},
+    nutrition:{cal:cal, protein:protein, fat:fat, carbs:carbs, sugar:sugar}};
+}
+
+// ═══════════════════════════════════
+// STATE
+// ═══════════════════════════════════
+let currentMonth = 'Aug 2026';
+let currentTab = 'calendar';
+let currentRecipeCategory = 'breakfasts';
+
+function slugName(n) {
+  return 'recipe-' + n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function goToRecipe(name) {
+  // Detect which category this recipe belongs to
+  const meta = MONTH_META[currentMonth];
+  const pool = MEAL_POOLS[meta.rotation];
+  if (pool.lunches.includes(name))       currentRecipeCategory = 'lunches';
+  else if (pool.dinners.includes(name))  currentRecipeCategory = 'dinners';
+  else if (pool.snacks.includes(name))   currentRecipeCategory = 'snacks';
+  else                                   currentRecipeCategory = 'breakfasts';
+
+  currentTab = 'recipes';
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.tab === 'recipes');
+  });
+  document.getElementById('content').innerHTML = renderRecipes();
+  bindDynamicEvents();
+  setTimeout(function() {
+    var el = document.getElementById(slugName(name));
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.style.outline = '3px solid #e07a5f';
+      el.style.outlineOffset = '3px';
+      setTimeout(function() { el.style.outline = ''; el.style.outlineOffset = ''; }, 2000);
+    }
+  }, 150);
+}
+
+function setRecipeCategory(cat) {
+  currentRecipeCategory = cat;
+  document.getElementById('content').innerHTML = renderRecipes();
+  bindDynamicEvents();
+}
+
+// ═══════════════════════════════════
+// RENDER SIDEBAR
+// ═══════════════════════════════════
+function renderSidebar() {
+  const nav = document.getElementById('month-nav');
+  nav.innerHTML = MONTHS.map(m => {
+    const meta = MONTH_META[m];
+    return `<button class="month-btn ${m===currentMonth?'active':''}" data-month="${m}">
+      ${m}<span class="phase-badge">${meta.phase}</span>
+    </button>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════
+// TAB RENDERERS
+// ═══════════════════════════════════
+
+let calendarView = 'month';
+
+function getSeason(mk) {
+  var m = mk.split(' ')[0];
+  if(['Jun','Jul','Aug'].indexOf(m)>-1) return 'Summer';
+  if(['Sep','Oct','Nov'].indexOf(m)>-1) return 'Fall';
+  if(['Dec','Jan','Feb'].indexOf(m)>-1) return 'Winter';
+  return 'Spring';
+}
+function getSeasonEmoji(mk) {
+  var s=getSeason(mk);
+  return s==='Summer'?'&#9728;&#65039;':s==='Fall'?'&#127810;':s==='Winter'?'&#10052;&#65039;':'&#127800;';
+}
+
+function renderCalendar() {
+  var plan = buildDailyPlan(currentMonth);
+  var meta = MONTH_META[currentMonth];
+  var mn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var pts = currentMonth.split(' ');
+  var startDow = new Date(parseInt(pts[1]), mn.indexOf(pts[0]), 1).getDay();
+  var emoji = getSeasonEmoji(currentMonth);
+  var season = getSeason(currentMonth);
+  // Chunk plan into weeks
+  var weeks = [];
+  var firstWeekDays = (startDow === 0) ? 7 : (7 - startDow);
+  weeks.push(plan.slice(0, firstWeekDays));
+  for(var i=firstWeekDays;i<plan.length;i+=7) weeks.push(plan.slice(i,i+7));
+  var html = '<div class="card">';
+  html += '<h2 class="font-display text-xl font-bold text-teal-500 mb-1">' + emoji + ' ' + currentMonth + ' Calendar</h2>';
+  html += '<p class="text-xs text-charcoal-300 mb-3">' + meta.phase + ' &middot; ' + meta.days + ' days &middot; ' + season + '</p>';
+  // Toggle buttons
+  html += '<div class="flex flex-wrap gap-2 mb-4" id="cal-view-bar">';
+  html += '<button class="cal-view-btn' + (calendarView==='month'?' cal-view-active':'') + '" data-calview="month">Full Month</button>';
+  weeks.forEach(function(w,wi) {
+    var vk='week'+(wi+1);
+    html += '<button class="cal-view-btn'+(calendarView===vk?' cal-view-active':'')
+           +'" data-calview="'+vk+'">Week '+(wi+1)+' <small style="opacity:.6">('+ w[0].day +'-'+ w[w.length-1].day +')</small></button>';
+  });
+  html += '</div>';
+  if(calendarView==='month') {
+    // Compact month grid
+    html += '<div style="overflow-x:auto"><div class="cal-grid-month">';
+    DAY_NAMES.forEach(function(d){ html += '<div class="cal-header-sm">'+d+'</div>'; });
+    for(var i=0;i<startDow;i++) html += '<div class="cal-empty"></div>';
+    plan.forEach(function(p) {
+      html += '<div class="cal-cell-sm">';
+      html += '<div class="cal-day-num">'+p.day+'</div>';
+      html += '<div class="cal-pill-xs cal-y" title="'+p.breakfast+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.breakfast.length>15?p.breakfast.slice(0,14)+'...':p.breakfast)+'</div>';
+      html += '<div class="cal-pill-xs cal-g" title="'+p.lunch+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.lunch.length>15?p.lunch.slice(0,14)+'...':p.lunch)+'</div>';
+      html += '<div class="cal-pill-xs cal-t" title="'+p.dinner+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.dinner.length>15?p.dinner.slice(0,14)+'...':p.dinner)+'</div>';
+      html += '<div class="cal-pill-xs cal-o" title="'+p.snack+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.snack.length>15?p.snack.slice(0,14)+'...':p.snack)+'</div>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  } else {
+    // Large week view — full names
+    var wi = parseInt(calendarView.replace('week','')) - 1;
+    var wPlan = weeks[wi] || [];
+    html += '<div class="week-view-header">' + emoji + ' ' + season
+           + ' &mdash; Week '+(wi+1)+' &nbsp;<span style="font-weight:400;font-size:13px">Days '
+           + (wPlan[0]?wPlan[0].day:'') + '&ndash;' + (wPlan[wPlan.length-1]?wPlan[wPlan.length-1].day:'')
+           + '</span></div>';
+    html += '<div class="week-view-grid">';
+    wPlan.forEach(function(p) {
+      html += '<div class="week-cell">';
+      html += '<div class="week-day-label">'+p.dayName+' <span class="week-day-num">'+p.day+'</span></div>';
+      html += '<div class="week-meal-row week-breakfast"><span class="week-meal-label">Breakfast</span><span class="week-meal-name" title="'+p.breakfast+'" onclick="goToRecipe(this.title)" style="cursor:pointer;text-decoration:underline dotted">'+p.breakfast+'</span></div>';
+      html += '<div class="week-meal-row week-lunch"><span class="week-meal-label">Lunch</span><span class="week-meal-name" title="'+p.lunch+'" onclick="goToRecipe(this.title)" style="cursor:pointer;text-decoration:underline dotted">'+p.lunch+'</span></div>';
+      html += '<div class="week-meal-row week-dinner"><span class="week-meal-label">Dinner</span><span class="week-meal-name" title="'+p.dinner+'" onclick="goToRecipe(this.title)" style="cursor:pointer;text-decoration:underline dotted">'+p.dinner+'</span></div>';
+      html += '<div class="week-meal-row week-snack"><span class="week-meal-label">Snack</span><span class="week-meal-name" title="'+p.snack+'" onclick="goToRecipe(this.title)" style="cursor:pointer;text-decoration:underline dotted">'+p.snack+'</span></div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function renderMeals() {
+  const plan = buildDailyPlan(currentMonth);
+  const meta = MONTH_META[currentMonth];
+  const badges = ['pill-teal','pill-sage','pill-coral','pill-gold','pill-purple'];
+  const badgeLabels = ['teal','sage','coral','gold','purple'];
+  let html = `<div class="card">
+    <h2 class="font-display text-xl font-bold text-teal-500 mb-1">🍽️ ${currentMonth} Meal Plan</h2>
+    <p class="text-xs text-charcoal-300 mb-2">${meta.phase}</p>
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span class="pill pill-coral">🚫🧀 Dairy-Free</span>
+      <span class="pill pill-coral">🚫🍅 Tomato-Free</span>
+      <span class="pill pill-coral">🚫🦐 Seafood-Free</span>
+      <span class="pill pill-sage">✅ Low-Fat</span>
+      <span class="pill pill-sage">✅ Low-Sugar</span>
+      <span class="pill pill-teal">✅ Freezer-Friendly</span>
+    </div>`;
+  const weeks = [];
+  for(let i=0;i<plan.length;i+=7) weeks.push(plan.slice(i,i+7));
+  weeks.forEach((w,wi) => {
+    const s = w[0].day, e = w[w.length-1].day;
+    html += `<h3 class="font-display font-bold text-sm mt-4 mb-2"><span class="pill ${badges[wi]}">📅 Week ${wi+1} — Days ${s}–${e}</span></h3>
+    <div class="overflow-x-auto"><table class="meal-table"><thead><tr>
+      <th>Day</th><th>Date</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th><th>Snack</th><th>~Cal</th><th>Prep</th>
+    </tr></thead><tbody>`;
+    w.forEach(d => {
+      const prepTime = /overnight|chia/i.test(d.breakfast)?'Overnight':/oat|smoothie/i.test(d.breakfast)?'5 min':/slow/i.test(d.dinner)?'10 min':/baked|roast/i.test(d.dinner)?'20 min':'15 min';
+      html += `<tr><td class="font-semibold">${d.dayName}</td><td>${d.day}</td>
+        <td>${d.breakfast}</td><td>${d.lunch}</td><td>${d.dinner}</td><td>${d.snack}</td>
+        <td class="text-center">~980</td><td class="text-center">${prepTime}</td></tr>`;
+    });
+    html += '</tbody></table></div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderRecipes() {
+  const meta = MONTH_META[currentMonth];
+  const pool = MEAL_POOLS[meta.rotation];
+  const categories = [
+    {key:'breakfasts',label:'🍳 Breakfasts',items:pool.breakfasts},
+    {key:'lunches',label:'🥗 Lunches',items:pool.lunches},
+    {key:'dinners',label:'🍽️ Dinners',items:pool.dinners},
+    {key:'snacks',label:'🍎 Snacks',items:pool.snacks}
+  ];
+  const activeCat = categories.find(c => c.key === currentRecipeCategory) || categories[0];
+  let html = `<div class="sticky-sub no-print flex flex-wrap gap-2 mb-4">
+    ${categories.map(c=>`<button class="recipe-nav-btn${c.key===activeCat.key?' active':''}" onclick="setRecipeCategory('${c.key}')">${c.label}</button>`).join('')}
+  </div>`;
+  html += `<div id="section-${activeCat.key}">
+    <h3 class="font-display text-lg font-bold text-teal-500 mt-6 mb-3 pb-2 border-b-2 border-teal-100">${activeCat.label} <span class="text-xs text-charcoal-300 font-normal">(${activeCat.items.length} recipes – Rotation ${meta.rotation})</span></h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">`;
+  activeCat.items.forEach(name => {
+    const r = RECIPE_DB[name] || genRecipe(name);
+    html += `<div class="recipe-card" id="${slugName(name)}">
+      <h4>${name}</h4>
+      <div class="flex flex-wrap gap-1 mb-2">
+        <span class="pill pill-teal">⏱ Prep: ${r.prep}</span>
+        <span class="pill pill-sage">🔥 Cook: ${r.cook}</span>
+        <span class="pill pill-gold">👨‍👩‍👧‍👧 Serves ${r.serves}</span>
+        <span class="pill ${r.freezer?'pill-teal':'pill-coral'}">${r.freezer?'🧊 Freezer ✅':'❌ No Freeze'}</span>
+      </div>
+      <div class="text-xs mb-2"><strong>Ingredients:</strong> ${r.ingredients.join(' · ')}</div>
+      <ol class="text-xs pl-4 mb-2" style="list-style:decimal;">
+        ${r.steps.map(s=>`<li class="mb-0.5">${s}</li>`).join('')}
+      </ol>
+      <div class="kid-box">
+        <div class="text-xs font-bold text-coral-500 mb-1">👧 Kid Helper Tasks</div>
+        <div class="text-xs">Aleene (11): ${r.kids.aleene} · Kaily (9): ${r.kids.kaily} · Lilly (7): ${r.kids.lilly}</div>
+      </div>
+      <div class="text-[10px] text-charcoal-300 mt-2">📊 Per serving: ${r.nutrition.cal}cal · ${r.nutrition.protein} protein · ${r.nutrition.fat} fat · ${r.nutrition.carbs} carbs · ${r.nutrition.sugar} sugar</div>
+    </div>`;
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function renderGrocery() {
+  const plan = buildDailyPlan(currentMonth);
+  const mn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const pts = currentMonth.split(' ');
+  const year = parseInt(pts[1]);
+  const monthIdx = mn.indexOf(pts[0]);
+
+  // Group into Saturday-Friday shopping weeks
+  // Days before the first Saturday form their own partial week
+  const weeks = [];
+  let week = [];
+  plan.forEach(d => {
+    if (d.dayName === 'Sat' && week.length > 0) {
+      weeks.push(week);
+      week = [];
+    }
+    week.push(d);
+  });
+  if (week.length > 0) weeks.push(week);
+
+  // Categorize an ingredient string into grocery department
+  function catIng(ing) {
+    const low = ing.toLowerCase();
+    if (/chicken|turkey|beef|pork|egg|tofu|sausage/i.test(low)) return 'protein';
+    if (/almond milk|oat milk|coconut milk|dairy.free|non.dairy/i.test(low)) return 'dairy';
+    if (/broccoli|carrot|onion|bell pepper|zucchini|kale|spinach|garlic(?! powder)|cucumber|snap pea|avocado|banana|apple|mango|orange|pear|berr|sweet potato|lemon|lime|ginger|celery|asparagus|green bean|corn|mushroom|arugula|romaine|cilantro|parsley|jalape|mixed greens|shredded carrot|frozen fruit|frozen mixed/i.test(low)) return 'produce';
+    if (/frozen/i.test(low)) return 'frozen';
+    return 'pantry';
+  }
+
+  // Format a calendar date label
+  function fmtDate(yr, mIdx, dayNum) {
+    const dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const mo  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const d = new Date(yr, mIdx, dayNum);
+    return `${dow[d.getDay()]} ${mo[d.getMonth()]} ${dayNum}`;
+  }
+
+  let html = `<div class="card"><h2 class="font-display text-xl font-bold text-teal-500 mb-3">🛒 ${currentMonth} Grocery Lists</h2>
+    <p class="text-xs text-charcoal-300 mb-4">Saturday morning shopping · Sat–Fri weekly lists · dairy-free, tomato-free, seafood-free</p>`;
+
+  weeks.forEach((w, wi) => {
+    const firstDay = w[0].day;
+    const lastDay  = w[w.length - 1].day;
+    const startLabel = fmtDate(year, monthIdx, firstDay);
+    const endLabel   = fmtDate(year, monthIdx, lastDay);
+
+    const isSatStart = w[0].dayName === 'Sat';
+    const tripHeader = isSatStart
+      ? `🛒 Shopping Trip: ${startLabel} – ${endLabel}`
+      : `🛒 Carry-over week: ${startLabel} – ${endLabel}`;
+
+    // Collect all meal names for this week
+    const allMeals = new Set();
+    w.forEach(d => [d.breakfast, d.lunch, d.dinner, d.snack].forEach(m => allMeals.add(m)));
+
+    // ── ingredient deduplication helpers ──────────────────────────────────
+    const _UNICODE_FRAC = {'½':0.5,'¼':0.25,'¾':0.75,'⅓':1/3,'⅔':2/3,'⅛':0.125,'⅜':0.375,'⅝':0.625,'⅞':0.875};
+    function _parseQty(s) {
+      s = (s||'').trim();
+      if (_UNICODE_FRAC[s] !== undefined) return _UNICODE_FRAC[s];
+      const rng = s.match(/^(\d+(?:\.\d+)?)\s*[–-]\s*(\d+(?:\.\d+)?)$/);
+      if (rng) return (parseFloat(rng[1]) + parseFloat(rng[2])) / 2;
+      const n = parseFloat(s);
+      return isNaN(n) ? 0 : n;
+    }
+    const _UNITS = 'cups?|tbsp|tsp|lbs?|oz|g|kg|cloves?|cans?|slices?|pieces?|scoops?|handfuls?|pkg|packages?|bags?|jars?|heads?|bunch|stalks?|pinch';
+    const _UNIT_RE = new RegExp('^(\\d+(?:[./]\\d+)?(?:\\s*[–-]\\s*\\d+(?:[./]\\d+)?)?|[½¼¾⅓⅔⅛⅜⅝⅞])?\\s*(' + _UNITS + ')?\\s*(?:of\\s+)?(.+)$', 'i');
+    function _parseIng(raw) {
+      const m = raw.trim().match(_UNIT_RE);
+      if (!m) return { qty:0, unit:'', name:raw.trim() };
+      return { qty: _parseQty(m[1]), unit: (m[2]||'').toLowerCase().replace(/s$/,''), name: (m[3]||raw).trim() };
+    }
+    const _STRIP_MODS = /\b(large|small|medium|extra|big|mini|jumbo|ripe|frozen|fresh|raw|cooked|diced|sliced|chopped|mashed|cubed|shredded|grated|minced|peeled|pitted|halved|whole|baby|unsweetened|sweetened|boneless|skinless|lean|ground|dried|canned)\b\s*/gi;
+    function _canonIng(raw) {
+      let s = raw.toLowerCase().trim();
+      // strip leading qty+unit
+      s = s.replace(/^(\d+(?:[./]\d+)?(?:\s*[–-]\s*\d+(?:[./]\d+)?)?|[½¼¾⅓⅔⅛⅜⅝⅞])\s*/, '');
+      s = s.replace(new RegExp('^(' + _UNITS + ')s?\\s+(?:of\\s+)?', 'i'), '');
+      s = s.replace(_STRIP_MODS, '').replace(/,.*$/, '').replace(/\(.*?\)/g, '').replace(/\s+/g,' ').trim();
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+    function _mergeIngs(rawList) {
+      const map = new Map(); // canon -> {display, qty, unit}
+      rawList.forEach(raw => {
+        const { qty, unit } = _parseIng(raw);
+        const canon = _canonIng(raw);
+        if (!map.has(canon)) {
+          map.set(canon, { display: canon, qty, unit: unit || '' });
+        } else {
+          map.get(canon).qty += qty;
+        }
+      });
+      const out = [];
+      map.forEach(({ display, qty, unit }) => {
+        if (qty > 0) {
+          const qs = Number.isInteger(qty) ? `${qty}` : `${Math.round(qty * 10) / 10}`;
+          const us = unit ? ` ${unit}` : '';
+          out.push(`${display} (×${qs}${us})`);
+        } else {
+          out.push(display);
+        }
+      });
+      return out;
+    }
+    // ── end helpers ─────────────────────────────────────────────────────────
+
+    // Aggregate ingredients from each recipe into raw arrays per category
+    const catRaw = { protein:[], produce:[], pantry:[], frozen:[], dairy:[] };
+    // Fixed weekly staples (not qty-merged)
+    const _STAPLES = [
+      'Olive oil (16 oz bottle)',
+      'Garlic powder (refill if low)',
+      'Cumin (refill if low)',
+      'Salt & black pepper',
+      'Unsweetened almond milk (½ gallon)'
+    ];
+    catRaw.pantry.push('Olive oil (16 oz bottle)','Garlic powder (refill if low)','Cumin (refill if low)','Salt & black pepper');
+    catRaw.dairy.push('Unsweetened almond milk (½ gallon)');
+
+    allMeals.forEach(mealName => {
+      try {
+        const r = genRecipe(mealName);
+        (r.ingredients || []).forEach(ing => {
+          const cat = catIng(ing);
+          catRaw[cat].push(ing);
+        });
+      } catch(e) { /* skip unknown */ }
+    });
+
+    // Build final cats: staples first (deduped), then merged recipe ingredients
+    const _stapleSet = new Set(_STAPLES);
+    const cats = {};
+    ['protein','produce','pantry','frozen','dairy'].forEach(key => {
+      const fixed   = [...new Set(catRaw[key].filter(i => _stapleSet.has(i)))];
+      const recipe  = catRaw[key].filter(i => !_stapleSet.has(i));
+      cats[key] = [...fixed, ..._mergeIngs(recipe)];
+    });
+
+    // Estimate cost using week index for slight variation
+    const est = 135 + (wi % 4) * 5;
+
+    html += `<div class="${wi > 0 ? 'mt-6 pt-4 border-t border-teal-100' : ''}">
+      <h3 class="font-display font-bold text-sm mt-2 mb-3">
+        <span class="pill pill-teal">${tripHeader}</span>
+        <span class="text-xs text-charcoal-300 ml-2">Est. $${est}–${est + 20}</span>
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">`;
+
+    [
+      { title: '🥩 Proteins',       key: 'protein' },
+      { title: '🥦 Produce',        key: 'produce' },
+      { title: '🥫 Pantry',         key: 'pantry'  },
+      { title: '❄️ Frozen',         key: 'frozen'  },
+      { title: '🧴 Dairy-Free',     key: 'dairy'   }
+    ].forEach(sec => {
+      if (cats[sec.key].length === 0) return;
+      html += `<div class="card-sm"><h4 class="font-bold text-xs text-teal-600 mb-2">${sec.title}</h4>`;
+      cats[sec.key].forEach(item => {
+        html += `<div class="cb-item"><input type="checkbox"><span>${item}</span></div>`;
+      });
+      html += '</div>';
+    });
+
+    html += '</div></div>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+
+function renderBatch() {
+  const plan = buildDailyPlan(currentMonth);
+  const weeks = [];
+  for(let i=0;i<plan.length;i+=7) weeks.push(plan.slice(i,i+7));
+  let html = `<div class="card"><h2 class="font-display text-xl font-bold text-teal-500 mb-3">🥘 ${currentMonth} Sunday Batch Prep</h2>
+    <p class="text-xs text-charcoal-300 mb-4">4 weekly prep sessions · 7:00–10:30 AM</p>`;
+  weeks.forEach((w,wi) => {
+    const slowMeal = w.find(d=>/slow/i.test(d.dinner));
+    const oatMeal = w.find(d=>/overnight|chia/i.test(d.breakfast));
+    const muffinMeal = w.find(d=>/muffin/i.test(d.breakfast));
+    const freezeMeals = w.filter(d=>{const r=RECIPE_DB[d.dinner]||genRecipe(d.dinner);return r.freezer;});
+    html += `<div class="card-sm mt-3">
+      <h4 class="font-bold text-sm text-teal-600 mb-2">🗓️ Week ${wi+1} Prep — Sunday before Days ${w[0].day}–${w[w.length-1].day}</h4>
+      <div class="cb-item"><input type="checkbox"><span><strong>7:00 AM</strong> — ${slowMeal?'Start slow cooker: '+slowMeal.dinner:'Prep slow cooker ingredients for the week'}</span></div>
+      <div class="cb-item"><input type="checkbox"><span><strong>8:00</strong> — Hard-boil 12 eggs</span></div>
+      <div class="cb-item"><input type="checkbox"><span><strong>8:15</strong> — Chop all vegetables for the week</span></div>
+      <div class="cb-item"><input type="checkbox"><span><strong>8:45</strong> — Cook large rice batch (6–8 cups brown rice)</span></div>
+      <div class="cb-item"><input type="checkbox"><span><strong>9:15</strong> — ${oatMeal?'Mix overnight oats: '+oatMeal.breakfast+' for Mon–Tue':'Prep breakfast items for Mon–Tue'}</span></div>
+      <div class="cb-item"><input type="checkbox"><span><strong>9:30</strong> — ${muffinMeal?'Bake: '+muffinMeal.breakfast:'Bake egg muffin cups for quick breakfasts'}</span></div>
+      <div class="cb-item"><input type="checkbox"><span><strong>9:55</strong> — Portion meals into labeled containers (5 per meal)</span></div>
+      <div class="cb-item"><input type="checkbox"><span><strong>10:15</strong> — Pack freezer bags: ${freezeMeals.length>0?freezeMeals.slice(0,2).map(d=>d.dinner).join(', '):'any leftover portions'}</span></div>
+      <div class="cb-item"><input type="checkbox"><span><strong>10:30</strong> — ✅ Done — fridge restocked!</span></div>
+    </div>`;
+  });
+  html += `<div class="card-sm mt-4 bg-teal-50">
+    <h4 class="font-bold text-sm text-teal-600 mb-2">🏷️ Container Label Template</h4>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+      ${[1,2,3,4].map(i=>`<div class="border-2 border-dashed border-teal-200 rounded-lg p-3 text-center text-xs">
+        <div class="font-bold text-teal-600">MEAL NAME</div>
+        <div class="text-charcoal-400">Date: ____</div>
+        <div class="text-charcoal-400">Servings: 5</div>
+        <div class="text-charcoal-400">Reheat: ____</div>
+        <div class="text-[10px] text-coral-400 mt-1">CHAMILLARD FAMILY</div>
+      </div>`).join('')}
+    </div>
+  </div></div>`;
+  return html;
+}
+
+function renderFreezer() {
+  const plan = buildDailyPlan(currentMonth);
+  const freezerMeals = [];
+  plan.forEach(d => {
+    const r = RECIPE_DB[d.dinner]||genRecipe(d.dinner);
+    if(r.freezer && !freezerMeals.find(f=>f.name===d.dinner)) {
+      freezerMeals.push({name:d.dinner,day:d.day});
+    }
+  });
+  let html = `<div class="card"><h2 class="font-display text-xl font-bold text-teal-500 mb-3">🧊 ${currentMonth} Freezer Guide</h2>
+    <div class="overflow-x-auto"><table class="meal-table"><thead><tr>
+      <th>Meal</th><th>Qty</th><th>Date Frozen</th><th>Use-By (3mo)</th><th>Reheat Method</th>
+    </tr></thead><tbody>`;
+  freezerMeals.forEach(f => {
+    const reheat = /soup|stew|chili/i.test(f.name)?'Stovetop medium 15 min':/meatball|meatloaf|burger/i.test(f.name)?'Oven 350°F 20 min':'Microwave 3–4 min; stir halfway';
+    html += `<tr><td>${f.name}</td><td>5 portions</td><td>Day ${f.day}</td><td>+3 months</td><td>${reheat}</td></tr>`;
+  });
+  html += `</tbody></table></div>
+    <div class="card-sm mt-4 bg-teal-50">
+      <h4 class="font-bold text-sm text-teal-600 mb-2">❄️ Freezer Tips</h4>
+      <ul class="text-xs space-y-1 pl-4" style="list-style:disc;">
+        <li>Cool food fully before freezing to prevent ice crystals</li>
+        <li>Use flat gallon zip bags — stack like files for easy access</li>
+        <li>Label everything with Sharpie: meal name + date + reheat method</li>
+        <li>Squeeze out air before sealing to prevent freezer burn</li>
+        <li>Most meals last 3 months frozen; soups last up to 6 months</li>
+      </ul>
+    </div>
+    <div class="card-sm mt-4">
+      <h4 class="font-bold text-sm text-teal-600 mb-2">✅ Monthly Freezer Audit</h4>
+      <div class="cb-item"><input type="checkbox"><span>Check all labels — discard anything past use-by date</span></div>
+      <div class="cb-item"><input type="checkbox"><span>Rotate older items to front</span></div>
+      <div class="cb-item"><input type="checkbox"><span>Check freezer temperature (0°F / -18°C)</span></div>
+      <div class="cb-item"><input type="checkbox"><span>Wipe down shelves and reorganize</span></div>
+    </div>
+    <div class="card-sm mt-4">
+      <h4 class="font-bold text-sm text-teal-600 mb-2">🏷️ Printable Freezer Labels (cut apart)</h4>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+        ${[1,2,3,4,5,6,7,8].map(()=>`<div class="border-2 border-dashed border-teal-200 rounded-lg p-2 text-center text-[10px]">
+          <div class="font-bold">MEAL: ___________</div>
+          <div>DATE FROZEN: ____</div>
+          <div>REHEAT: _________</div>
+          <div class="text-coral-400 font-bold mt-1">CHAMILLARD FAMILY</div>
+        </div>`).join('')}
+      </div>
+    </div></div>`;
+  return html;
+}
+
+function renderExercise() {
+  const meta = MONTH_META[currentMonth];
+  const phase = meta.phase;
+  const phaseNum = phase.includes('1')?1:phase.includes('2')?2:phase.includes('3')?3:phase.includes('4')?4:5;
+  const phases = {
+    1:{name:'Foundation',duration:'15–20 min',moves:[
+      {emoji:'🦸',name:'Superhero Hold (Plank)',detail:'20s × 3 sets',muscle:'Core — belly muscles',tip:'Keep body straight like a board'},
+      {emoji:'🤖',name:'Robot Sit-Downs (Squats)',detail:'10 × 2 sets',muscle:'Legs — thigh power',tip:'Push butt back like sitting in a chair'},
+      {emoji:'🌟',name:'Star Jumps (Jumping Jacks)',detail:'20 × 2 sets',muscle:'Whole body — cardio',tip:'Land softly on toes'},
+      {emoji:'🐻',name:'Bear Crawls',detail:'10 × 2 sets',muscle:'Arms & core — crawling muscles',tip:'Keep knees off the ground'},
+      {emoji:'🦵',name:'Knee Rockets (High Knees)',detail:'30s × 2 sets',muscle:'Legs — speed muscles',tip:'Drive knees up to hip height'}
+    ],schedule:'Mon/Wed/Fri=Strength · Tue/Thu=Active Play · Sat=Family Walk 30min · Sun=Rest'},
+    2:{name:'Winter Strength',duration:'20–25 min',moves:[
+      {emoji:'🦸',name:'Superhero Hold (Plank)',detail:'25s × 3 sets',muscle:'Core',tip:'Keep body straight'},
+      {emoji:'🤖',name:'Robot Sit-Downs (Squats)',detail:'12 × 3 sets',muscle:'Legs',tip:'Go deeper'},
+      {emoji:'🌟',name:'Star Jumps',detail:'25 × 2 sets',muscle:'Cardio',tip:'Jump higher'},
+      {emoji:'💪',name:'Floor Pushers (Push-Ups)',detail:'8 × 3 sets',muscle:'Chest & arms',tip:'Modified on knees is OK'},
+      {emoji:'🪑',name:'Invisible Chair (Wall Sit)',detail:'20s × 2 sets',muscle:'Thighs — hold strong',tip:'Back flat against wall'},
+      {emoji:'🐻',name:'Bear Crawls',detail:'12 × 2 sets',muscle:'Full body',tip:'Go faster'},
+      {emoji:'🦵',name:'Knee Rockets',detail:'30s × 3 sets',muscle:'Speed',tip:'Pump arms'}
+    ],schedule:'Mon/Wed/Fri=Strength · Tue/Thu=Dance Party Cardio 20min · Sat=Family Walk · Sun=Rest'},
+    3:{name:'Spring Build',duration:'25–30 min',moves:[
+      {emoji:'🦸',name:'Plank',detail:'30s × 3 sets',muscle:'Core',tip:'Add shoulder taps'},
+      {emoji:'🤖',name:'Squats',detail:'15 × 3 sets',muscle:'Legs',tip:'Add a jump at top'},
+      {emoji:'💪',name:'Push-Ups',detail:'10 × 3 sets',muscle:'Chest & arms',tip:'Try full push-ups'},
+      {emoji:'🦘',name:'Kangaroo Jumps (Jump Lunges)',detail:'8 × 2 sets',muscle:'Legs — explosive power',tip:'Land soft, switch legs mid-air'},
+      {emoji:'🚀',name:'Rocket Raises (Calf Raises)',detail:'15 × 3 sets',muscle:'Calves — jumping power',tip:'Rise up on tippy toes slowly'},
+      {emoji:'🌟',name:'Star Jumps',detail:'30 × 2 sets',muscle:'Cardio',tip:'Full extension'},
+      {emoji:'🪑',name:'Wall Sit',detail:'30s × 2 sets',muscle:'Thighs',tip:'Hold steady'}
+    ],schedule:'Mon/Wed/Fri=Strength · Tue/Thu=Cardio Mix · Sat=Outdoor Play · Sun=Stretch'},
+    4:{name:'Summer Power',duration:'30–35 min',moves:[
+      {emoji:'🦸',name:'Plank',detail:'45s × 3 sets',muscle:'Core',tip:'Try side planks'},
+      {emoji:'🤖',name:'Squats',detail:'20 × 3 sets',muscle:'Legs',tip:'Hold weight'},
+      {emoji:'💪',name:'Push-Ups',detail:'12 × 3 sets',muscle:'Chest',tip:'Diamond push-ups'},
+      {emoji:'🦘',name:'Jump Lunges',detail:'10 × 3 sets',muscle:'Explosive legs',tip:'Drive knee up'},
+      {emoji:'🚀',name:'Calf Raises',detail:'20 × 3 sets',muscle:'Calves',tip:'Single leg'},
+      {emoji:'🏀',name:'Outdoor Play',detail:'20 min',muscle:'Full body fun',tip:'Basketball, tag, jump rope'}
+    ],schedule:'Mon/Wed/Fri=Full 3-Round Circuit · Tue/Thu=Outdoor Play · Sat=Family Activity · Sun=Active Recovery'},
+    5:{name:'Fall Endurance',duration:'30–35 min',moves:[
+      {emoji:'🔥',name:'AMRAP Circuit',detail:'20 min',muscle:'Full body endurance',tip:'As Many Rounds As Possible'},
+      {emoji:'🦸',name:'Plank',detail:'60s × 2 sets',muscle:'Core',tip:'Add leg lifts'},
+      {emoji:'🤖',name:'Squats',detail:'20 × 3 sets',muscle:'Legs',tip:'Pause at bottom'},
+      {emoji:'💪',name:'Push-Ups',detail:'15 × 3 sets',muscle:'Chest & arms',tip:'Slow and controlled'},
+      {emoji:'🧘',name:'Cool-Down Yoga',detail:'10 min',muscle:'Flexibility & calm',tip:'Child\'s Pose → Downward Dog → Butterfly'}
+    ],schedule:'Mon/Wed/Fri=AMRAP + Yoga · Tue/Thu=Cardio · Sat=Family Hike · Sun=Rest & Stretch'}
+  };
+  const ph = phases[phaseNum];
+  const storageKey = `exercise_${currentMonth}`;
+  const saved = JSON.parse(localStorage.getItem(storageKey)||'{}');
+  let html = `<div class="card"><h2 class="font-display text-xl font-bold text-teal-500 mb-1">💪 Phase ${phaseNum}: ${ph.name}</h2>
+    <p class="text-xs text-charcoal-300 mb-1">${ph.duration} per session · ${meta.phase}</p>
+    <p class="text-xs text-sage-500 mb-4">📅 ${ph.schedule}</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4">`;
+  ph.moves.forEach(m => {
+    html += `<div class="card-sm border-l-4 border-teal-400">
+      <div class="text-2xl mb-1">${m.emoji}</div>
+      <h4 class="font-bold text-sm text-teal-600">${m.name}</h4>
+      <div class="pill pill-sage mb-1">${m.detail}</div>
+      <div class="text-xs text-charcoal-400">💪 ${m.muscle}</div>
+      <div class="text-xs text-coral-500">💡 ${m.tip}</div>
+    </div>`;
+  });
+  html += `</div>
+    <h3 class="font-display font-bold text-sm mb-2">📅 Weekly Schedule & Daily Log</h3>
+    <div class="overflow-x-auto"><table class="meal-table"><thead><tr>
+      <th>Day</th><th>Activity</th><th>✅ Done</th>
+    </tr></thead><tbody>`;
+  const weekSched = phaseNum<=2?
+    [{d:'Mon',a:'Strength'},{d:'Tue',a:'Active Play'},{d:'Wed',a:'Strength'},{d:'Thu',a:phaseNum===1?'Active Play':'Dance Cardio'},{d:'Fri',a:'Strength'},{d:'Sat',a:'Family Walk 30min'},{d:'Sun',a:'Rest 🛋️'}]:
+    phaseNum===3?
+    [{d:'Mon',a:'Strength'},{d:'Tue',a:'Cardio Mix'},{d:'Wed',a:'Strength'},{d:'Thu',a:'Cardio Mix'},{d:'Fri',a:'Strength'},{d:'Sat',a:'Outdoor Play'},{d:'Sun',a:'Stretch'}]:
+    phaseNum===4?
+    [{d:'Mon',a:'Circuit (3 rounds)'},{d:'Tue',a:'Outdoor Play'},{d:'Wed',a:'Circuit (3 rounds)'},{d:'Thu',a:'Outdoor Play'},{d:'Fri',a:'Circuit (3 rounds)'},{d:'Sat',a:'Family Activity'},{d:'Sun',a:'Active Recovery'}]:
+    [{d:'Mon',a:'AMRAP + Yoga'},{d:'Tue',a:'Cardio'},{d:'Wed',a:'AMRAP + Yoga'},{d:'Thu',a:'Cardio'},{d:'Fri',a:'AMRAP + Yoga'},{d:'Sat',a:'Family Hike'},{d:'Sun',a:'Rest & Stretch'}];
+  const meta2 = MONTH_META[currentMonth];
+  for(let wk=0;wk<4;wk++){
+    weekSched.forEach((ws,di)=>{
+      const dayNum = wk*7+di+1;
+      if(dayNum>meta2.days) return;
+      const key = `d${dayNum}`;
+      html += `<tr><td>${ws.d} (Day ${dayNum})</td><td>${ws.a}</td><td><input type="checkbox" class="exercise-cb" data-key="${key}" ${saved[key]?'checked':''}></td></tr>`;
+    });
+  }
+  html += '</tbody></table></div></div>';
+  return html;
+}
+
+function renderTracker() {
+  const storageKey = `tracker_${currentMonth}`;
+  const saved = JSON.parse(localStorage.getItem(storageKey)||'{"weights":{},"measurements":{},"notes":""}');
+  const members = ['Nick','Megan','Aleene','Kaily','Lilly'];
+  let html = `<div class="card tracker-section"><h2 class="font-display text-xl font-bold text-teal-500 mb-3">📊 ${currentMonth} Health Tracker</h2>
+    <div class="card-sm bg-coral-50 mb-4 border-l-4 border-coral-400">
+      <p class="text-xs text-coral-600 font-semibold">👧 Note: Kids tracked by pediatrician — we focus on energy, strength, and healthy habits!</p>
+    </div>
+    <h3 class="font-display font-bold text-sm mb-2">⚖️ Weekly Weigh-In (lbs)</h3>
+    <div class="overflow-x-auto"><table class="meal-table"><thead><tr><th>Week</th>${members.map(m=>`<th>${m}</th>`).join('')}</tr></thead><tbody>`;
+  for(let w=1;w<=4;w++){
+    html += `<tr><td class="font-semibold">Week ${w}</td>`;
+    members.forEach(m => {
+      const val = saved.weights?.[`${m}_w${w}`]||'';
+      html += `<td><input type="number" class="tracker-weight w-16 text-xs p-1 rounded border border-teal-200" data-member="${m}" data-week="${w}" value="${val}" placeholder="—"></td>`;
+    });
+    html += '</tr>';
+  }
+  html += `</tbody></table></div>
+    <h3 class="font-display font-bold text-sm mt-4 mb-2">📏 Adult Measurements (inches)</h3>
+    <div class="overflow-x-auto"><table class="meal-table"><thead><tr><th>Measurement</th><th>Nick</th><th>Megan</th></tr></thead><tbody>`;
+  ['Waist','Hips','Chest'].forEach(m => {
+    html += `<tr><td>${m}</td>`;
+    ['Nick','Megan'].forEach(p => {
+      const val = saved.measurements?.[`${p}_${m}`]||'';
+      html += `<td><input type="number" class="tracker-measure w-16 text-xs p-1 rounded border border-teal-200" data-person="${p}" data-type="${m}" value="${val}" placeholder="—"></td>`;
+    });
+    html += '</tr>';
+  });
+  html += `</tbody></table></div>
+    <h3 class="font-display font-bold text-sm mt-4 mb-2">📈 Weight Trend (Nick & Megan)</h3>
+    <div class="flex gap-4 items-end h-40 bg-teal-50 rounded-xl p-4 mb-4">`;
+  ['Nick','Megan'].forEach((person,pi) => {
+    for(let w=1;w<=4;w++){
+      const val = saved.weights?.[`${person}_w${w}`]||0;
+      const h = val ? Math.max(20, Math.min(120, (val-100)*1.5)) : 20;
+      const color = pi===0?'bg-teal-400':'bg-coral-400';
+      html += `<div class="flex flex-col items-center flex-1">
+        <div class="text-[9px] text-charcoal-400 mb-1">${val||'—'}</div>
+        <div class="${color} rounded-t-md" style="width:20px;height:${h}px;"></div>
+        <div class="text-[9px] mt-1">${person[0]}W${w}</div>
+      </div>`;
+    }
+  });
+  html += `</div>
+    <h3 class="font-display font-bold text-sm mt-4 mb-2">📝 Monthly Notes & Wins</h3>
+    <textarea class="tracker-notes w-full h-24 text-sm p-3 rounded-xl border border-teal-200 bg-cream-50" placeholder="Celebrate wins, note challenges, track how the family is feeling...">${saved.notes||''}</textarea>
+  </div>`;
+  return html;
+}
+
+function renderBudget() {
+  const mi = MONTHS.indexOf(currentMonth);
+  const storageKey = `budget_${currentMonth}`;
+  const saved = JSON.parse(localStorage.getItem(storageKey)||'{}');
+  const categories = [
+    {name:'Groceries (4 wks × $145)',est:580},
+    {name:'Pantry Restock',est:25},
+    {name:'Batch Supplies (containers, bags)',est:10},
+    {name:'Exercise Equipment',est:0}
+  ];
+  const total = categories.reduce((s,c)=>s+c.est,0);
+  let html = `<div class="card"><h2 class="font-display text-xl font-bold text-teal-500 mb-3">💰 ${currentMonth} Budget</h2>
+    <div class="overflow-x-auto"><table class="meal-table"><thead><tr><th>Category</th><th>Estimated</th><th>Actual</th><th>Notes</th></tr></thead><tbody>`;
+  categories.forEach(c => {
+    html += `<tr><td>${c.name}</td><td>$${c.est}</td>
+      <td><input type="number" class="budget-actual w-20 text-xs p-1 rounded border border-teal-200" data-cat="${c.name}" value="${saved[c.name]||''}" placeholder="$0"></td>
+      <td><input type="text" class="budget-note w-32 text-xs p-1 rounded border border-teal-200" data-cat="${c.name}_note" value="${saved[c.name+'_note']||''}" placeholder="Notes"></td></tr>`;
+  });
+  html += `<tr class="font-bold"><td>TOTAL</td><td>$${total}</td><td id="budget-total">—</td><td></td></tr>`;
+  html += `</tbody></table></div>
+    <div class="card-sm mt-4 bg-sage-50">
+      <h4 class="font-bold text-sm text-sage-600 mb-2">🛒 Pantry Restock Checklist</h4>
+      ${['Olive oil (large bottle)','Rolled oats (bulk 5 lb)','Brown rice (5 lb bag)','Canned beans — black, white, chickpea (12 ct)','Chicken broth (6 cartons)','Spice refills: cumin, garlic powder, cinnamon, Italian seasoning','Almond milk (2 half-gallons)','Almond butter (2 jars)','Chia seeds','Low-sodium soy sauce'].map(i=>`<div class="cb-item"><input type="checkbox"><span class="text-xs">${i}</span></div>`).join('')}
+    </div>
+    <div class="card-sm mt-4 bg-gold-50 border-l-4 border-gold-400">
+      <h4 class="font-bold text-sm text-gold-500 mb-1">💡 Budget Tip of the Month</h4>
+      <p class="text-xs text-charcoal-500">${BUDGET_TIPS[mi]}</p>
+    </div></div>`;
+  return html;
+}
+
+function renderKids() {
+  const meta = MONTH_META[currentMonth];
+  const mission = MISSIONS[currentMonth];
+  const storageKey = `stars_${currentMonth}`;
+  const saved = JSON.parse(localStorage.getItem(storageKey)||'{}');
+  const kids = ['Aleene','Kaily','Lilly'];
+  let html = `<div class="card"><h2 class="font-display text-xl font-bold text-teal-500 mb-1">⭐ Kids Rewards — ${currentMonth}</h2>
+    <div class="card-sm bg-coral-50 border-l-4 border-coral-400 my-3">
+      <p class="text-sm font-bold text-coral-600">🎯 Monthly Mission: ${mission}</p>
+    </div>
+    <div class="card-sm bg-sage-50 mb-4">
+      <h4 class="font-bold text-xs text-sage-600 mb-1">⭐ How to Earn Stars</h4>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-1 text-xs">
+        <span>🍽️ Eat planned meal: +1⭐</span><span>🆕 Try new food: +2⭐</span>
+        <span>💪 Complete exercise: +1⭐</span><span>👩‍🍳 Help cook: +2⭐</span>
+        <span>💧 Water all day: +1⭐</span>
+      </div>
+    </div>
+    <div class="card-sm bg-gold-50 mb-4">
+      <h4 class="font-bold text-xs text-gold-500 mb-1">🏆 Reward Tiers</h4>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-1 text-xs">
+        <span>10⭐ = Extra screen time 30min</span><span>20⭐ = Choose Saturday movie</span>
+        <span>30⭐ = Choose family fun activity</span><span>40⭐ = Chef for a Day</span>
+        <span>50⭐ = Family vote outing</span>
+      </div>
+    </div>
+    <h3 class="font-display font-bold text-sm mb-2">⭐ Star Chart</h3>
+    <div class="overflow-x-auto">`;
+  kids.forEach(kid => {
+    const kidStars = saved[kid]||{};
+    let total = Object.values(kidStars).filter(v=>v).length;
+    html += `<div class="mb-4"><div class="flex items-center gap-2 mb-1">
+      <span class="font-bold text-sm text-coral-500">👧 ${kid}</span>
+      <span class="pill pill-gold kid-total" data-kid="${kid}">${total}⭐</span>
+    </div><div class="flex flex-wrap gap-1">`;
+    for(let d=1;d<=meta.days;d++){
+      const filled = kidStars[d];
+      html += `<div class="star-cell ${filled?'filled':''}" data-kid="${kid}" data-day="${d}">${filled?'⭐':d}</div>`;
+    }
+    html += '</div></div>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+// ═══════════════════════════════════
+// MASTER RENDER
+// ═══════════════════════════════════
+function render() {
+  const content = document.getElementById('content');
+  switch(currentTab) {
+    case 'calendar': content.innerHTML = renderCalendar(); break;
+    case 'meals': content.innerHTML = renderMeals(); break;
+    case 'recipes': content.innerHTML = renderRecipes(); break;
+    case 'grocery': content.innerHTML = renderGrocery(); break;
+    case 'batch': content.innerHTML = renderBatch(); break;
+    case 'freezer': content.innerHTML = renderFreezer(); break;
+    case 'exercise': content.innerHTML = renderExercise(); break;
+    case 'tracker': content.innerHTML = renderTracker(); break;
+    case 'budget': content.innerHTML = renderBudget(); break;
+    case 'kids': content.innerHTML = renderKids(); break;
+  }
+  renderSidebar();
+  bindDynamicEvents();
+  if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
+    lucide.createIcons();
+  }
+}
+
+// ═══════════════════════════════════
+// EVENT BINDING
+// ═══════════════════════════════════
+function bindDynamicEvents() {
+  // Exercise checkboxes
+  document.querySelectorAll('.exercise-cb').forEach(cb => {
+    cb.addEventListener('change', function() {
+      const key = `exercise_${currentMonth}`;
+      const saved = JSON.parse(localStorage.getItem(key)||'{}');
+      saved[this.dataset.key] = this.checked;
+      localStorage.setItem(key, JSON.stringify(saved));
+    });
+  });
+
+  // Tracker weights
+  document.querySelectorAll('.tracker-weight').forEach(inp => {
+    inp.addEventListener('input', function() {
+      const key = `tracker_${currentMonth}`;
+      const saved = JSON.parse(localStorage.getItem(key)||'{"weights":{},"measurements":{},"notes":""}');
+      if(!saved.weights) saved.weights = {};
+      saved.weights[`${this.dataset.member}_w${this.dataset.week}`] = this.value;
+      localStorage.setItem(key, JSON.stringify(saved));
+    });
+  });
+
+  // Tracker measurements
+  document.querySelectorAll('.tracker-measure').forEach(inp => {
+    inp.addEventListener('input', function() {
+      const key = `tracker_${currentMonth}`;
+      const saved = JSON.parse(localStorage.getItem(key)||'{"weights":{},"measurements":{},"notes":""}');
+      if(!saved.measurements) saved.measurements = {};
+      saved.measurements[`${this.dataset.person}_${this.dataset.type}`] = this.value;
+      localStorage.setItem(key, JSON.stringify(saved));
+    });
+  });
+
+  // Tracker notes
+  const notesEl = document.querySelector('.tracker-notes');
+  if(notesEl) {
+    notesEl.addEventListener('input', function() {
+      const key = `tracker_${currentMonth}`;
+      const saved = JSON.parse(localStorage.getItem(key)||'{"weights":{},"measurements":{},"notes":""}');
+      saved.notes = this.value;
+      localStorage.setItem(key, JSON.stringify(saved));
+    });
+  }
+
+  // Budget
+  document.querySelectorAll('.budget-actual, .budget-note').forEach(inp => {
+    inp.addEventListener('input', function() {
+      const key = `budget_${currentMonth}`;
+      const saved = JSON.parse(localStorage.getItem(key)||'{}');
+      saved[this.dataset.cat] = this.value;
+      localStorage.setItem(key, JSON.stringify(saved));
+      // Update total
+      let total = 0;
+      document.querySelectorAll('.budget-actual').forEach(a => { total += parseFloat(a.value)||0; });
+      const el = document.getElementById('budget-total');
+      if(el) el.textContent = '$'+total;
+    });
+  });
+
+  // Star chart
+  document.querySelectorAll('.star-cell').forEach(cell => {
+    cell.addEventListener('click', function() {
+      const kid = this.dataset.kid, day = this.dataset.day;
+      const key = `stars_${currentMonth}`;
+      const saved = JSON.parse(localStorage.getItem(key)||'{}');
+      if(!saved[kid]) saved[kid] = {};
+      saved[kid][day] = !saved[kid][day];
+      localStorage.setItem(key, JSON.stringify(saved));
+      this.classList.toggle('filled');
+      this.textContent = saved[kid][day] ? '⭐' : day;
+      // Update total
+      const total = Object.values(saved[kid]).filter(v=>v).length;
+      const totalEl = document.querySelector(`.kid-total[data-kid="${kid}"]`);
+      if(totalEl) totalEl.textContent = total+'⭐';
+    });
+  });
+
+  // Recipe nav
+  // Calendar view toggle
+  document.querySelectorAll('.cal-view-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      calendarView = this.dataset.calview;
+      document.getElementById('content').innerHTML = renderCalendar();
+      bindDynamicEvents();
+    });
+  });
+
+  // recipe-nav-btn clicks handled via inline onclick="setRecipeCategory()"
+}
+
+// ═══════════════════════════════════
+// INIT (Safari-safe wrapper)
+// ═══════════════════════════════════
+function _init() {
+  try {
+    if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
+      lucide.createIcons();
+    }
+
+    // Month nav
+    var monthNav = document.getElementById('month-nav');
+    if (monthNav) {
+      monthNav.addEventListener('click', function(e) {
+        var btn = e.target.closest('.month-btn');
+        if (!btn) return;
+        currentMonth = btn.dataset.month;
+        calendarView = 'month';
+        render();
+        var sb = document.getElementById('sidebar');
+        if (sb) sb.classList.remove('open');
+      });
+    }
+
+    // Tab nav
+    var tabBar = document.getElementById('tab-bar');
+    if (tabBar) {
+      tabBar.addEventListener('click', function(e) {
+        var btn = e.target.closest('.tab-btn');
+        if (!btn || btn.id === 'print-btn') return;
+        currentTab = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        render();
+      });
+    }
+
+    // Print
+    var printBtn = document.getElementById('print-btn');
+    if (printBtn) {
+      printBtn.addEventListener('click', function() { window.print(); });
+    }
+
+    // Mobile menu
+    var mobileBtn = document.getElementById('mobile-menu-btn');
+    if (mobileBtn) {
+      mobileBtn.addEventListener('click', function() {
+        var sb = document.getElementById('sidebar');
+        if (sb) sb.classList.toggle('open');
+      });
+    }
+
+    // Initial render
+    render();
+
+  } catch(err) {
+    var c = document.getElementById('content');
+    if (c) {
+      c.innerHTML = '<div style="padding:24px;background:#fee2e2;border:2px solid #dc2626;border-radius:12px;color:#991b1b;font-family:monospace;margin:20px;">' +
+        '<strong style="font-size:16px;">&#9888; JavaScript Error (Safari)</strong><br><br>' +
+        '<strong>Message:</strong> ' + (err.message || 'Unknown') + '<br><br>' +
+        '<strong>Stack:</strong><pre style="white-space:pre-wrap;font-size:12px;">' + (err.stack || 'No stack') + '</pre>' +
+        '</div>';
+    }
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _init);
+} else {
+  _init();
+}
+</script>
+</body>
+</html>
