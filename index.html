@@ -52,8 +52,6 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--
 #tab-bar { display:flex; flex-wrap:wrap; gap:4px; padding:8px 16px; background:#fff; border-bottom:1px solid #e6f5f7; position:sticky; top:0; z-index:30; }
 .tab-btn { padding:6px 12px; font-size:12px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:#f0f5f1; color:#2d3748; transition: all .15s; white-space:nowrap; }
 .tab-btn.active { background:#0d6b7c; color:#fff; }
-.recipe-link { color:#0d6b7c; text-decoration:underline; cursor:pointer; font-size:inherit; }
-.recipe-link:hover { color:#e07a5f; }
 .tab-btn:hover:not(.active) { background:#d4e3d8; }
 
 #content { padding:20px; max-width:1200px; margin:0 auto; }
@@ -212,7 +210,7 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--
   <div data-id="26" id="content"></div>
 
   <footer data-id="27" class="py-6 text-center">
-    <p data-id="28" class="text-xs text-charcoal-300">Made by Copilot &mdash; v3.3</p>
+    <p data-id="28" class="text-xs text-charcoal-300">Made by Copilot</p>
   </footer>
 </div>
 
@@ -1423,10 +1421,10 @@ function renderCalendar() {
     plan.forEach(function(p) {
       html += '<div class="cal-cell-sm">';
       html += '<div class="cal-day-num">'+p.day+'</div>';
-      html += '<div class="cal-pill-xs cal-y" title="'+p.breakfast+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.breakfast.length>24?p.breakfast.slice(0,23)+'…':p.breakfast)+'</div>';
-      html += '<div class="cal-pill-xs cal-g" title="'+p.lunch+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.lunch.length>24?p.lunch.slice(0,23)+'…':p.lunch)+'</div>';
-      html += '<div class="cal-pill-xs cal-t" title="'+p.dinner+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.dinner.length>24?p.dinner.slice(0,23)+'…':p.dinner)+'</div>';
-      html += '<div class="cal-pill-xs cal-o" title="'+p.snack+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.snack.length>24?p.snack.slice(0,23)+'…':p.snack)+'</div>';
+      html += '<div class="cal-pill-xs cal-y" title="'+p.breakfast+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.breakfast.length>18?p.breakfast.slice(0,17)+'…':p.breakfast)+'</div>';
+      html += '<div class="cal-pill-xs cal-g" title="'+p.lunch+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.lunch.length>18?p.lunch.slice(0,17)+'…':p.lunch)+'</div>';
+      html += '<div class="cal-pill-xs cal-t" title="'+p.dinner+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.dinner.length>18?p.dinner.slice(0,17)+'…':p.dinner)+'</div>';
+      html += '<div class="cal-pill-xs cal-o" title="'+p.snack+'" style="cursor:pointer" onclick="goToRecipe(this.title)">'+(p.snack.length>18?p.snack.slice(0,17)+'…':p.snack)+'</div>';
       html += '</div>';
     });
     html += '</div></div>';
@@ -1518,7 +1516,7 @@ function renderMeals() {
         <td onclick="goToRecipe('${d.breakfast}')" style="cursor:pointer" title="View recipe">${d.breakfast}</td>
         <td onclick="goToRecipe('${d.lunch}')"     style="cursor:pointer" title="View recipe">${d.lunch}</td>
         <td onclick="goToRecipe('${d.dinner}')"    style="cursor:pointer" title="View recipe">${d.dinner}</td>
-        <td onclick="goToRecipe('${d.snack}')" style="cursor:pointer" title="View recipe">${d.snack}</td>
+        <td>${d.snack}</td>
         <td class="text-center font-semibold" style="color:${_calColor}">~${totalCal}</td>
         <td class="text-center">${prepDisplay}</td></tr>`;
     });
@@ -1604,13 +1602,11 @@ function renderGrocery() {
   const year = parseInt(pts[1]);
   const monthIdx = mn.indexOf(pts[0]);
 
-  // Sat→Fri shopping cycle: each trip covers Sat morning through next Fri night
-  // First week starts on the first day of the month and runs to next Friday (or Sat if first day is Sat)
+  // Sun-Sat week chunking
   const weeks = [];
   let wk = [];
   plan.forEach(function(d) {
-    // Start a new shopping week when we hit Saturday AND already have items
-    if(d.dayName === 'Sat' && wk.length > 0) { weeks.push(wk); wk = []; }
+    if(d.dayName === 'Sun' && wk.length > 0) { weeks.push(wk); wk = []; }
     wk.push(d);
   });
   if(wk.length) weeks.push(wk);
@@ -1798,34 +1794,10 @@ function renderGrocery() {
 
   } else {
     // Weekly lists
-    const prevMonthName = (function(){
-      const mi = MONTHS.indexOf(currentMonth);
-      return mi > 0 ? MONTHS[mi-1] : null;
-    })();
     weeks.forEach(function(wk, wi) {
       const firstDay = wk[0].day;
       const lastDay  = wk[wk.length-1].day;
-      const isSatStart = wk[0].dayName === 'Sat';
-      const shopNote = isSatStart ? '🛒 Shop: Sat '+firstDay+' morning' : '🛒 Shop: Sat (prior month)';
-      const wLabel   = wk[0].dayName+' '+firstDay+' – '+wk[wk.length-1].dayName+' '+lastDay;
-
-      // First partial week that doesn't start Saturday = covered by previous month's last grocery run
-      if (wi === 0 && !isSatStart && prevMonthName) {
-        html += `<div class="mb-5">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="font-display font-bold text-sm text-teal-700">Week 1: ${wLabel}</h3>
-          </div>
-          <div class="rounded-xl p-4 bg-sage-50 border-l-4 border-sage-400 flex items-start gap-3">
-            <span class="text-2xl">&#x2705;</span>
-            <div>
-              <p class="font-bold text-sage-700 text-sm">Already Covered!</p>
-              <p class="text-xs text-charcoal-400 mt-1">These days (${wk[0].dayName} ${firstDay}&ndash;${wk[wk.length-1].dayName} ${lastDay}) are included in <strong>${prevMonthName}</strong>'s final grocery run. No separate shopping needed.</p>
-            </div>
-          </div>
-        </div>`;
-        return;
-      }
-
+      const wLabel   = wk[0].dayName+' '+firstDay+'–'+wk[wk.length-1].dayName+' '+lastDay;
       const items = buildWeeklyList(wk);
       const cats  = groupByCat(items);
       const total = estimateCost(items).toFixed(2);
@@ -1834,7 +1806,6 @@ function renderGrocery() {
       html += `<div class="mb-5">
         <div class="flex items-center justify-between mb-2">
           <h3 class="font-display font-bold text-sm text-teal-700">Week ${wi+1}: ${wLabel}</h3>
-          <div class="text-xs text-teal-600 font-medium">${shopNote}</div>
           <div class="text-xs font-bold px-2 py-1 rounded-full ${overBudget?'bg-coral-100 text-coral-600':'bg-sage-100 text-sage-600'}">
             Est. $${total} / $150
           </div>
@@ -1873,11 +1844,11 @@ function renderBatch() {
   const meta = MONTH_META[currentMonth];
   const plan = buildDailyPlan(currentMonth);
 
-  // Sat→Fri cycle: batch prep aligns with Saturday grocery run
+  // Sun-Sat week chunking
   const weeks = [];
   let week = [];
   plan.forEach(function(d) {
-    if(d.dayName === 'Sat' && week.length > 0) { weeks.push(week); week = []; }
+    if(d.dayName === 'Sun' && week.length > 0) { weeks.push(week); week = []; }
     week.push(d);
   });
   if(week.length) weeks.push(week);
@@ -1951,17 +1922,13 @@ function renderBatch() {
 
   let html = `<div class="card">
     <h2 class="font-display text-xl font-bold text-teal-500 mb-1">🍳 ${currentMonth} Batch Prep</h2>
-    <p class="text-xs text-charcoal-400 mb-3">Prep starts Saturday after grocery run · Covers meals through next Friday · Months overlap — carry-over meals noted below</p>
+    <p class="text-xs text-charcoal-400 mb-3">Saturday night dinner + Sunday morning prep · Specific to this month's meal plan</p>
     <div class="flex gap-2 mb-4 flex-wrap">
       <button class="cal-view-btn ${batchTab==='schedule'?'active':''}" data-batchtab="schedule">📅 Prep Schedule</button>
       <button class="cal-view-btn ${batchTab==='labels'?'active':''}" data-batchtab="labels">🏷️ Container Labels</button>
     </div>`;
 
   if(batchTab === 'schedule') {
-    // Month overlap note for Week 1
-    if(weeks.length > 0 && weeks[0][0].dayName !== 'Sat') {
-      html += '<div class="card-sm bg-gold-50 border-l-4 border-gold-400 mb-3 text-xs text-charcoal-500"><strong class="text-gold-600">↩️ Carry-over from prior month:</strong> The first partial week continues meals prepped last month. No new Saturday grocery run until <strong>' + (weeks[1] ? weeks[1][0].dayName + ' ' + weeks[1][0].day : 'next Saturday') + '</strong>.</div>';
-    }
     weeks.forEach(function(wk, wi) {
       const satDay = (wk.find(function(d){return d.dayName==='Sat';})||wk[wk.length-1]).day;
       const satDate = makeDate(satDay);
@@ -2164,12 +2131,12 @@ function renderFreezer() {
     if(!freezerMeals.length) {
       html += `<div class="card-sm text-xs text-charcoal-400">No freezer-ready dinners this week. Fresh-only meals planned.</div>`;
     } else {
-      html += `<div class="overflow-x-auto"><table class="w-full text-xs border-collapse" style="table-layout:fixed">
+      html += `<div class="overflow-x-auto"><table class="w-full text-xs border-collapse">
         <thead><tr class="bg-teal-100 text-teal-800">
-          <th class="text-left p-2 font-bold" style="width:28%">Meal</th>
-          <th class="text-left p-2 font-bold" style="width:16%;white-space:nowrap">Date Frozen</th>
-          <th class="text-left p-2 font-bold" style="width:16%;white-space:nowrap">Use By</th>
-          <th class="text-left p-2 font-bold" style="width:40%">Reheat Instructions</th>
+          <th class="text-left p-2 font-bold">Meal</th>
+          <th class="text-left p-2 font-bold">Date Frozen</th>
+          <th class="text-left p-2 font-bold">Use By</th>
+          <th class="text-left p-2 font-bold">Reheat Instructions</th>
         </tr></thead><tbody>`;
       freezerMeals.forEach(function(m, idx) {
         const n = m.name.toLowerCase();
@@ -2180,10 +2147,10 @@ function renderFreezer() {
         else if(n.includes('pasta')) { useBy=exp30; freezeType='🍝 Pasta'; }
         const reheat = getReheat(m.name, m.r);
         const rowBg = idx%2===0?'bg-white':'bg-cream-50';
-        html += `<tr class="${rowBg} border-b border-charcoal-100" style="vertical-align:top">
+        html += `<tr class="${rowBg} border-b border-charcoal-100">
           <td class="p-2 font-medium">${m.name}<br><span class="text-[10px] text-charcoal-300">${freezeType}</span></td>
-          <td class="p-2 text-teal-700 font-bold" style="white-space:nowrap">${prepLabel}</td>
-          <td class="p-2 text-coral-600 font-bold" style="white-space:nowrap">${useBy}</td>
+          <td class="p-2 text-teal-700 font-bold">${prepLabel}</td>
+          <td class="p-2 text-coral-600 font-bold">${useBy}</td>
           <td class="p-2 text-charcoal-500">${reheat}</td>
         </tr>`;
       });
@@ -2296,120 +2263,24 @@ function renderExercise() {
   const prog = WEEK_PROGRAMS[mi % WEEK_PROGRAMS.length];
   const DAY_ORDER = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-  // Kid-friendly exercise name dictionary
-  const KID_NAMES = [
-    { kid:'🦁 Lion Push-Up',      real:'Push-Up',             how:'Hands & toes on floor, lower chest to ground, push back up. Roar at the top!' },
-    { kid:'🐸 Frog Jump',         real:'Jump Squat',           how:'Squat low like a frog, then explode up! Land softly with bent knees.' },
-    { kid:'🦩 Flamingo Stand',    real:'Single-Leg Balance',   how:'Stand on one foot, arms out like wings. Hold 20-30 seconds each side.' },
-    { kid:'🐛 Wiggle Worm',       real:'Inchworm',             how:'Bend down, walk hands out to plank, walk feet back in. Keep legs straight!' },
-    { kid:'🦀 Crab Walk',         real:'Reverse Table Walk',   how:'Sit, hands & feet on floor, lift hips, walk sideways like a crab!' },
-    { kid:'🚀 Rocket Launch',     real:'Burpee (modified)',    how:'Jump up with arms overhead, drop to squat, step back to plank, step forward, stand.' },
-    { kid:'🌳 Tree Pose',         real:'Standing Balance',     how:'Stand tall, one foot pressed to inner calf, hands at heart. Sway gently!' },
-    { kid:'🐊 Croc Crawl',        real:'Bear Crawl',           how:'Hands & feet on floor, knees just off ground, crawl forward and back. Stay low!' },
-    { kid:'⚡ Lightning Bolt',    real:'High Knees',           how:'Run in place lifting knees as high as you can. Go fast for 30 seconds!' },
-    { kid:'🌈 Rainbow Reach',     real:'Side Stretch',         how:'Stand tall, reach one arm up and over your head in a big arc. Hold 15s each side.' },
-    { kid:'🎸 Air Guitar',        real:'Arm Circles',          how:'Extend arms wide and circle forward 15x, then backward 15x. Rock on!' },
-    { kid:'🏔️ Mountain Climber',  real:'Mountain Climber',     how:'Plank position, drive knees to chest alternating fast. Like running up a hill!' },
-    { kid:'🐧 Penguin Shuffle',   real:'Lateral Step Squat',   how:'Step sideways in a slight squat, bring feet together, repeat. Waddle waddle!' },
-    { kid:'🎪 Big Top Spin',      real:'Standing Rotation',    how:'Arms wide, twist your body left and right. Like a windmill at the circus!' },
-    { kid:'🦊 Fox Trot',          real:'Brisk Walk Intervals', how:'Walk normal 30s, then speed-walk 30s. Use your fox speed!' },
-    { kid:'🐬 Dolphin Dive',      real:'Pike Push-Up',         how:'Start in downward dog, bend elbows and lower head toward floor, push back up.' },
-    { kid:'🦋 Butterfly Wings',   real:'Glute Bridge',         how:'Lie on back, knees bent, push hips up like butterfly wings opening. Hold 2s at top!' },
-    { kid:'🧲 Magnet Sit-Up',     real:'Dead-Bug',             how:'Lie on back, arms up, legs up bent. Lower opposite arm & leg slowly. Slow = strong!' },
-    { kid:'🎯 Archer Lunge',      real:'Reverse Lunge',        how:'Step one foot back, lower knee near floor, return. Aim like an archer - 10 each side.' },
-    { kid:'🌊 Ocean Wave',        real:'Cat-Cow Stretch',      how:'On hands & knees, arch back up (cat), then dip it down (cow). Breathe with each wave.' },
-    { kid:'🐻 Bear Hug Squat',    real:'Squat to Overhead',    how:'Squat low, stand up, reach both arms overhead like hugging a big bear!' },
-    { kid:'🎈 Balloon Breathing', real:'Deep Breathing',       how:'Breathe in 4 counts, hold 2, out 6. Repeat 5 rounds. Inflate that balloon!' },
-    { kid:'🏄 Surfer Balance',    real:'Side Plank',           how:'On one hand & foot, body straight, other hand points to sky. Hang ten!' },
-    { kid:'🦅 Eagle Soar',        real:'Superman Hold',        how:'Lie face down, lift arms & legs off floor. Hold 5-10 seconds. Soar!' },
-    { kid:'🎻 Fiddle Crunch',     real:'Bicycle Crunch',       how:'Lie on back, pedal legs while twisting elbow to opposite knee. Play that fiddle!' },
-    { kid:'🧊 Freeze Dance',      real:'Active Rest / Dance',  how:'Dance like crazy until the music stops - then FREEZE! Great for cool-downs.' },
-    { kid:'🐝 Bee Cardio',        real:'Jump Rope / Jacks',    how:'Jump rope or jumping jacks for 30-60s. Buzz buzz buzz!' },
-    { kid:'🦚 Peacock Pose',      real:'Warrior I',            how:'Big step forward, back foot angled, arms reach overhead. Spread those tail feathers!' },
-    { kid:'🛡️ Knight Stance',    real:'Wall Sit',             how:'Back flat against wall, slide down until knees are 90 degrees. Hold like a brave knight!' },
-    { kid:'🐙 Octopus Arms',      real:'Tricep Dip',           how:'Hands on chair edge, lower body bending elbows, push back up. Use all your arms!' },
-    // ── New entries for previously unmatched WEEK_PROGRAMS acts ──
-    { kid:'🦕 Dino Stomp',        real:'March in Place',    how:'Lift knees high and stomp in place like a giant dinosaur! 2 minutes non-stop.' },
-    { kid:'🐕 Downward Pup',      real:'Downward Dog',      how:'Hands and feet on floor, push hips up to form an upside-down V shape. Hold 30-60s.' },
-    { kid:'🌙 Sleepy Bunny',      real:"Child's Pose",      how:'Kneel, sit back on heels, stretch arms forward on the floor. Rest and breathe 60s.' },
-    { kid:'💤 Starfish Rest',     real:'Savasana',          how:'Lie flat on back, arms and legs relaxed, eyes closed. Breathe slowly for 5 minutes.' },
-    { kid:'🌅 Sun Dance',         real:'Sun Salutation',    how:'Flow: stand tall, reach up, fold forward, plank, cobra, downward dog, back up. 3 rounds.' },
-    { kid:'🐤 Chick Rise',        real:'Calf Raise',        how:'Stand tall, rise up on your tippy-toes, lower slowly. 3 sets of 15. Feel the burn!' },
-    { kid:'🦍 Gorilla Wall Push', real:'Wall Push-Up',      how:"Stand arm's length from wall, place hands flat, bend elbows in, push back. 2x12." },
-    { kid:'🚣 Row the Boat',      real:'Towel Row',         how:'Loop a towel around a door handle, lean back, pull yourself in with both arms. 3x12.' },
-    { kid:'🪜 Stair Climber',     real:'Stair Step-Up',     how:'Step up one stair with right foot, bring left up, step down. Alternate lead foot. 3x12.' },
-  ];
+  let html = `<div class="card">
+    <h2 class="font-display text-xl font-bold text-teal-500 mb-1">🏃 ${currentMonth} Exercise Plan</h2>
+    <div class="inline-block bg-teal-100 text-teal-700 text-xs font-bold px-3 py-1 rounded-full mb-3">${meta.phase} · ${prog.label}</div>
 
-  // Fast lookup table: each real-name keyword maps to a KID_NAMES entry
-  var kidLookup = KID_NAMES.slice();
+    <!-- Screen-time move rules -->
+    <div class="card-sm bg-purple-50 border border-purple-300 mb-4">
+      <h4 class="font-display font-bold text-sm text-purple-600 mb-2">📱 Screen-Time Move Rules</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <div class="flex items-start gap-2"><span class="text-lg">⏱️</span><div><p class="text-xs font-bold text-purple-700">Every 30 min screen = 5 min move time first</p><p class="text-xs text-charcoal-400">Set a timer — no exceptions!</p></div></div>
+        <div class="flex items-start gap-2"><span class="text-lg">🌙</span><div><p class="text-xs font-bold text-purple-700">No screens 30 min before bed</p><p class="text-xs text-charcoal-400">Wind down with reading or stretching</p></div></div>
+        <div class="flex items-start gap-2"><span class="text-lg">🍽️</span><div><p class="text-xs font-bold text-purple-700">No screens during meals</p><p class="text-xs text-charcoal-400">Family conversation time</p></div></div>
+        <div class="flex items-start gap-2"><span class="text-lg">⭐</span><div><p class="text-xs font-bold text-purple-700">Screen-free hour = +2 bonus stars</p><p class="text-xs text-charcoal-400">Earns extra stars on the kids chart</p></div></div>
+      </div>
+    </div>
 
-  // Returns clickable HTML for a daily-plan act string
-  function kidifyAct(act) {
-    var lower = act.toLowerCase();
-    var best = null;
-    for (var i = 0; i < kidLookup.length; i++) {
-      var kw = kidLookup[i].real.toLowerCase();
-      var words = kw.split(/[\s\/\-\(]+/);
-      for (var j = 0; j < words.length; j++) {
-        if (words[j].length > 2 && lower.indexOf(words[j]) !== -1) {
-          best = kidLookup[i];
-          break;
-        }
-      }
-      if (best) break;
-    }
-    if (!best) return '<span class="text-charcoal-500">' + act + '</span>';
-    var slug = best.kid.replace(/[^a-zA-Z0-9]/g, '_');
-    return '<a href="#" class="kid-act-link inline-flex items-center gap-1 font-semibold text-purple-700 hover:text-purple-900 underline decoration-dotted" data-kidslug="' + slug + '" title="' + act + '">' + best.kid + '</a>';
-  }
-
-  function switchExTab(tab, kidSlug) {
-    localStorage.setItem('exTab_' + currentMonth, tab);
-    if (kidSlug) localStorage.setItem('exHighlight_' + currentMonth, kidSlug);
-    render();
-  }
-
-  const exTab = localStorage.getItem('exTab_'+currentMonth)||'plan';
-
-  let html = '<div class="card">'
-    + '<h2 class="font-display text-xl font-bold text-teal-500 mb-1">🏃 '+currentMonth+' Exercise Plan</h2>'
-    + '<div class="inline-block bg-teal-100 text-teal-700 text-xs font-bold px-3 py-1 rounded-full mb-3">'+meta.phase+' · '+prog.label+'</div>'
-    + '<div class="flex gap-2 mb-4 flex-wrap">'
-    + '<button class="cal-view-btn '+(exTab==='plan'?'active':'')+'" data-extab="plan">📅 Daily Plan</button>'
-    + '<button class="cal-view-btn '+(exTab==='dictionary'?'active':'')+'" data-extab="dictionary">📖 Exercise Dictionary</button>'
-    + '</div>';
-
-  if(exTab === 'dictionary') {
-    html += '<div class="card-sm bg-purple-50 border border-purple-300 mb-4">'
-      + '<h4 class="font-display font-bold text-sm text-purple-600 mb-1">🦁 Kid Exercise Dictionary</h4>'
-      + '<p class="text-xs text-charcoal-400">Fun names your kids will love — each one maps to a real exercise move!</p>'
-      + '</div>'
-      + '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">';
-    var exHighlight = localStorage.getItem('exHighlight_'+currentMonth)||'';
-    if(exHighlight) { localStorage.removeItem('exHighlight_'+currentMonth); }
-    KID_NAMES.forEach(function(e) {
-      var slug = e.kid.replace(/[^a-zA-Z0-9]/g,'_');
-      var isHL = (slug === exHighlight);
-      html += '<div class="ex-dict-card card-sm border-l-4 '+(isHL?'border-purple-600 bg-purple-50':'border-purple-300')+'" id="excard_'+slug+'" data-kidname="'+slug+'">'
-        + '<p class="font-bold text-sm '+(isHL?'text-purple-900':'text-purple-700')+'">'+(isHL?'<span class="mr-1">👉</span>':'')+e.kid+'</p>'
-        + '<p class="text-xs text-teal-600 font-medium">= '+e.real+'</p>'
-        + '<p class="text-xs text-charcoal-400 mt-1">'+e.how+'</p>'
-        + '</div>';
-    });
-    html += '</div>';
-  } else {
-  // Plan tab — screen-time rules + daily plan
-  html += '<div class="card-sm bg-purple-50 border border-purple-300 mb-4">'
-    + '<h4 class="font-display font-bold text-sm text-purple-600 mb-2">📱 Screen-Time Move Rules</h4>'
-    + '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">'
-    + '<div class="flex items-start gap-2"><span class="text-lg">⏱️</span><div><p class="text-xs font-bold text-purple-700">Every 30 min screen = 5 min MOVE</p><p class="text-xs text-charcoal-400">Set a timer — when it goes off, everyone moves!</p></div></div>'
-    + '<div class="flex items-start gap-2"><span class="text-lg">🌙</span><div><p class="text-xs font-bold text-purple-700">No screens 1 hr before bed</p><p class="text-xs text-charcoal-400">Wind down with stretching or reading instead</p></div></div>'
-    + '<div class="flex items-start gap-2"><span class="text-lg">🍽️</span><div><p class="text-xs font-bold text-purple-700">No screens during meals</p><p class="text-xs text-charcoal-400">Family connection time — talk about your day!</p></div></div>'
-    + '<div class="flex items-start gap-2"><span class="text-lg">⭐</span><div><p class="text-xs font-bold text-purple-700">Screen-free hour = +2 bonus stars</p><p class="text-xs text-charcoal-400">Earns extra stars on the kids chart</p></div></div>'
-    + '</div></div>'
-    + '<h3 class="font-display font-bold text-sm mb-1">📅 This Month&#39;s Daily Plan</h3>'
-    + '<p class="text-xs text-charcoal-400 mb-3">Exercises use 🦁 kid names — tap <strong>Exercise Dictionary</strong> tab for real names & how-to!</p>'
-    + '<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">';
+    <!-- Daily breakdown -->
+    <h3 class="font-display font-bold text-sm mb-3">📅 This Month's Daily Plan</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">`;
 
   DAY_ORDER.forEach(function(day) {
     const d = prog.days[day];
@@ -2425,7 +2296,7 @@ function renderExercise() {
       </div>
       <ul class="space-y-1">`;
     d.acts.forEach(function(act) {
-      html += '<li class="text-xs text-charcoal-500 flex gap-2"><span class="text-teal-400 flex-shrink-0">▸</span>' + kidifyAct(act) + '</li>';
+      html += `<li class="text-xs text-charcoal-500 flex gap-2"><span class="text-teal-400 flex-shrink-0">▸</span>${act}</li>`;
     });
     html += `</ul></div>`;
   });
@@ -2446,7 +2317,6 @@ function renderExercise() {
       <p class="text-xs text-charcoal-400 mt-2">Check off each day as you complete it — saved automatically!</p>
     </div>
   </div>`;
-  } // end else (plan tab)
 
   return html;
 }
@@ -2520,13 +2390,7 @@ function renderTracker() {
 function renderBudget() {
   const mi = MONTHS.indexOf(currentMonth);
   const storageKey = `team_${currentMonth}`;
-  let saved = {};
-  try {
-    const _raw = localStorage.getItem(storageKey);
-    // Guard: if the stored value is not valid JSON (e.g. raw string "w1" from old version), wipe it
-    saved = _raw ? JSON.parse(_raw) : {};
-    if (typeof saved !== 'object' || saved === null) { saved = {}; localStorage.removeItem(storageKey); }
-  } catch(e) { localStorage.removeItem(storageKey); saved = {}; }
+  const saved = JSON.parse(localStorage.getItem(storageKey)||'{}');
   const plan  = buildDailyPlan(currentMonth);
   // Build Sun→Sat week list
   const weeks = []; let _wk = [];
@@ -2536,8 +2400,8 @@ function renderBudget() {
   });
   if(_wk.length>0) weeks.push(_wk);
 
-  // Active week tab — stored as plain string, not JSON
-  const teamTab = localStorage.getItem('teamTab_'+currentMonth)||'mission';
+  // Active week tab
+  const teamTab = saved._teamTab||'mission';
 
   let html = `<div class="card"><h2 class="font-display text-xl font-bold text-teal-500 mb-1">🏠 ${currentMonth} — Chamillard Family Team</h2>
     <p class="text-xs text-charcoal-300 mb-4">Family first · Support each other · Celebrate every win</p>`;
@@ -2558,7 +2422,7 @@ function renderBudget() {
       {icon:'🍽️', title:'We Eat Together', desc:'Shared meals = shared stories. We put down phones and connect.'},
       {icon:'💪', title:'We Move Together', desc:'Exercise is more fun as a team. We celebrate every active minute.'},
       {icon:'🗣️', title:'We Talk It Out', desc:'Wins, struggles, feelings — all welcome at the family table.'},
-      {icon:'🙏', title:'We Show Gratitude', desc:"Each week we name one thing we're thankful for about each family member."}
+      {icon:'🙏', title:'We Show Gratitude', desc:'Each week we name one thing we're thankful for about each family member.'}
     ];
     html += `<div class="card-sm bg-coral-50 border-l-4 border-coral-400 mb-4">
       <p class="text-sm font-bold text-coral-600">🎯 ${MISSIONS[currentMonth]}</p>
@@ -2582,8 +2446,7 @@ function renderBudget() {
     const wIdx = parseInt(teamTab.replace('w','')) - 1;
     const wk = weeks[wIdx] || [];
     const wKey = `${currentMonth}_w${wIdx+1}`;
-    let wSaved = {};
-    try { const _tw = localStorage.getItem('teamweek_'+wKey); wSaved = _tw ? JSON.parse(_tw) : {}; if(typeof wSaved!=='object'||wSaved===null){wSaved={};} } catch(e) { wSaved={}; }
+    const wSaved = JSON.parse(localStorage.getItem('teamweek_'+wKey)||'{}');
     const members = ['Nick','Megan','Aleene','Kaily','Lilly'];
     html += `<h3 class="font-display font-bold text-sm mb-3">🏆 Week ${wIdx+1} — Wins & Goals</h3>`;
     members.forEach(function(m){
@@ -2657,8 +2520,8 @@ function renderKids() {
     </div><div class="flex flex-wrap gap-1">`;
     for(let d=1;d<=60;d++){
       const filled = kidStars[d];
-      // All 60 stars use identical styling — no visual distinction between month days and future days
-      html += '<div class="star-cell ' + (filled?'filled':'') + '" data-kid="' + kid + '" data-day="' + d + '">' + (filled?'⭐':d) + '</div>';
+      const isThisMonth = d <= meta.days;
+      html += '<div class="star-cell ' + (filled?'filled':'') + (isThisMonth?'':' opacity-30') + '" data-kid="' + kid + '" data-day="' + d + '">' + (filled?'⭐':d) + '</div>';
     }
     html += '</div></div>';
   });
@@ -2774,7 +2637,6 @@ function bindDynamicEvents() {
   // Calendar view toggle
   document.querySelectorAll('.cal-view-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      if (!this.dataset.calview) return; // not a calendar view button (e.g. Family Team tab btn)
       calendarView = this.dataset.calview;
       document.getElementById('content').innerHTML = renderCalendar();
       bindDynamicEvents();
@@ -2793,36 +2655,24 @@ function bindDynamicEvents() {
     });
   });
 
-  // Family Team Plan — sub-tab switching (plain string, NOT JSON)
+  // Family Team Plan — sub-tab switching
   document.querySelectorAll('[data-teamtab]').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      localStorage.setItem('teamTab_' + currentMonth, this.dataset.teamtab);
+      localStorage.setItem('team_' + currentMonth, this.dataset.teamtab);
       render();
     });
   });
 
   // Family Team Plan — win/goal/notes textareas
-  document.querySelectorAll('.team-win').forEach(function(el) {
+  document.querySelectorAll('.team-win, .team-goal, .team-notes').forEach(function(el) {
     el.addEventListener('input', function() {
-      var key = 'teamweek_' + currentMonth + '_w' + this.dataset.week;
-      var saved = JSON.parse(localStorage.getItem(key)||'{}');
-      saved[this.dataset.member + '_win'] = this.value;
-      localStorage.setItem(key, JSON.stringify(saved));
-    });
-  });
-  document.querySelectorAll('.team-goal').forEach(function(el) {
-    el.addEventListener('input', function() {
-      var key = 'teamweek_' + currentMonth + '_w' + this.dataset.week;
-      var saved = JSON.parse(localStorage.getItem(key)||'{}');
-      saved[this.dataset.member + '_goal'] = this.value;
-      localStorage.setItem(key, JSON.stringify(saved));
-    });
-  });
-  document.querySelectorAll('.team-notes').forEach(function(el) {
-    el.addEventListener('input', function() {
-      var key = 'teamweek_' + currentMonth + '_w' + this.dataset.week;
-      var saved = JSON.parse(localStorage.getItem(key)||'{}');
-      saved['family_notes'] = this.value;
+      const wn = this.dataset.week;
+      const field = this.dataset.field;
+      const member = this.dataset.member || 'family';
+      const key = 'teamweek_' + currentMonth + '_w' + wn;
+      const saved = JSON.parse(localStorage.getItem(key)||'{}');
+      if(!saved[member]) saved[member] = {};
+      saved[member][field] = this.value;
       localStorage.setItem(key, JSON.stringify(saved));
     });
   });
@@ -2842,109 +2692,48 @@ function bindDynamicEvents() {
       render();
     });
   });
-
-  // Kid-act link clicks → switch to dictionary and highlight that card
-  document.querySelectorAll('.kid-act-link').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      var slug = this.dataset.kidslug;
-      switchExTab('dictionary', slug);
-      // After render, scroll to the highlighted card
-      setTimeout(function() {
-        var card = document.getElementById('excard_' + slug);
-        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 120);
-    });
-  });
-
-  // Exercise tab switching (plan vs dictionary)
-  document.querySelectorAll('[data-extab]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      localStorage.setItem('exTab_' + currentMonth, this.dataset.extab);
-      render();
-    });
-  });
 }
 
 // ═══════════════════════════════════
-// INIT — defensive wrapper for Safari/iOS
+// INIT
 // ═══════════════════════════════════
-window.onerror = function(msg, src, line, col, err) {
-  var c = document.getElementById('content');
-  if (c) {
-    c.innerHTML = '<div style="padding:24px;background:#c53030;color:#fff;font-family:monospace;border-radius:8px;margin:20px;">'
-      + '<b>App Error (line ' + line + '):</b><br>' + msg
-      + (err ? '<br><br>' + err.stack : '') + '</div>';
-  }
-};
-
-function _initApp() {
-  // Lucide icons (loaded with defer — may or may not be ready)
-  if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
-    try { lucide.createIcons(); } catch(e) {}
-  }
-
-  // Month nav
-  var monthNav = document.getElementById('month-nav');
-  if (monthNav) {
-    monthNav.addEventListener('click', function(e) {
-      var btn = e.target.closest('.month-btn');
-      if (!btn) return;
-      currentMonth = btn.dataset.month;
-      calendarView = 'month';
-      render();
-      var sb = document.getElementById('sidebar');
-      if (sb) sb.classList.remove('open');
-    });
-  }
-
-  // Tab nav
-  var tabBar = document.getElementById('tab-bar');
-  if (tabBar) {
-    tabBar.addEventListener('click', function(e) {
-      var btn = e.target.closest('.tab-btn');
-      if (!btn || btn.id === 'print-btn') return;
-      currentTab = btn.dataset.tab;
-      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      render();
-    });
-  }
-
-  // Print button
-  var printBtn = document.getElementById('print-btn');
-  if (printBtn) {
-    printBtn.addEventListener('click', function() { window.print(); });
-  }
-
-  // Mobile menu toggle
-  var mobileBtn = document.getElementById('mobile-menu-btn');
-  if (mobileBtn) {
-    mobileBtn.addEventListener('click', function() {
-      var sb = document.getElementById('sidebar');
-      if (sb) sb.classList.toggle('open');
-    });
-  }
-
-  // Initial render — wrapped so errors display visibly instead of silently crashing
-  try {
-    render();
-  } catch(e) {
-    var c = document.getElementById('content');
-    if (c) {
-      c.innerHTML = '<div style="padding:24px;background:#c53030;color:#fff;font-family:monospace;border-radius:8px;margin:20px;">'
-        + '<b>Render Error:</b><br>' + e.message
-        + '<br><br>' + (e.stack || '') + '</div>';
-    }
-  }
+if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
+  lucide.createIcons();
 }
 
-// Ensure DOM is ready regardless of script position or browser quirks
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', _initApp);
-} else {
-  _initApp();
-}
+// Month nav
+document.getElementById('month-nav').addEventListener('click', function(e) {
+  const btn = e.target.closest('.month-btn');
+  if(!btn) return;
+  currentMonth = btn.dataset.month;
+  calendarView = 'month';
+  render();
+  // Close mobile sidebar
+  document.getElementById('sidebar').classList.remove('open');
+});
+
+// Tab nav
+document.getElementById('tab-bar').addEventListener('click', function(e) {
+  const btn = e.target.closest('.tab-btn');
+  if(!btn || btn.id === 'print-btn') return;
+  currentTab = btn.dataset.tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+});
+
+// Print
+document.getElementById('print-btn').addEventListener('click', function() {
+  window.print();
+});
+
+// Mobile menu
+document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+  document.getElementById('sidebar').classList.toggle('open');
+});
+
+// Initial render
+render();
 </script>
 </body>
 </html>
