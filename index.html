@@ -96,7 +96,6 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--
 
 /* Star chart */
 .star-cell { width:28px; height:28px; display:flex; align-items:center; justify-content:center; cursor:pointer; border-radius:6px; font-size:16px; transition:all .15s; border:1px solid #e6f5f7; }
-.star-cell.future-star { background:#f5f5f5; color:#8a9098; border-color:#e0e0e0; }
 .star-cell:hover { background:#fef9e7; }
 .star-cell.filled { background:#fef9e7; }
 
@@ -2456,7 +2455,13 @@ function renderTracker() {
 function renderBudget() {
   const mi = MONTHS.indexOf(currentMonth);
   const storageKey = `team_${currentMonth}`;
-  const saved = JSON.parse(localStorage.getItem(storageKey)||'{}');
+  let saved = {};
+  try {
+    const _raw = localStorage.getItem(storageKey);
+    // Guard: if the stored value is not valid JSON (e.g. raw string "w1" from old version), wipe it
+    saved = _raw ? JSON.parse(_raw) : {};
+    if (typeof saved !== 'object' || saved === null) { saved = {}; localStorage.removeItem(storageKey); }
+  } catch(e) { localStorage.removeItem(storageKey); saved = {}; }
   const plan  = buildDailyPlan(currentMonth);
   // Build Sun→Sat week list
   const weeks = []; let _wk = [];
@@ -2586,8 +2591,8 @@ function renderKids() {
     </div><div class="flex flex-wrap gap-1">`;
     for(let d=1;d<=60;d++){
       const filled = kidStars[d];
-      const isThisMonth = d <= meta.days;
-      html += '<div class="star-cell ' + (filled?'filled':'') + (isThisMonth?'':' future-star') + '" data-kid="' + kid + '" data-day="' + d + '">' + (filled?'⭐':d) + '</div>';
+      // All 60 stars use identical styling — no visual distinction between month days and future days
+      html += '<div class="star-cell ' + (filled?'filled':'') + '" data-kid="' + kid + '" data-day="' + d + '">' + (filled?'⭐':d) + '</div>';
     }
     html += '</div></div>';
   });
