@@ -2695,45 +2695,84 @@ function bindDynamicEvents() {
 }
 
 // ═══════════════════════════════════
-// INIT
+// INIT — defensive wrapper for Safari/iOS
 // ═══════════════════════════════════
-if (typeof lucide !== "undefined" && typeof lucide.createIcons === "function") {
-  lucide.createIcons();
+window.onerror = function(msg, src, line, col, err) {
+  var c = document.getElementById('content');
+  if (c) {
+    c.innerHTML = '<div style="padding:24px;background:#c53030;color:#fff;font-family:monospace;border-radius:8px;margin:20px;">'
+      + '<b>App Error (line ' + line + '):</b><br>' + msg
+      + (err ? '<br><br>' + err.stack : '') + '</div>';
+  }
+};
+
+function _initApp() {
+  // Lucide icons (loaded with defer — may or may not be ready)
+  if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
+    try { lucide.createIcons(); } catch(e) {}
+  }
+
+  // Month nav
+  var monthNav = document.getElementById('month-nav');
+  if (monthNav) {
+    monthNav.addEventListener('click', function(e) {
+      var btn = e.target.closest('.month-btn');
+      if (!btn) return;
+      currentMonth = btn.dataset.month;
+      calendarView = 'month';
+      render();
+      var sb = document.getElementById('sidebar');
+      if (sb) sb.classList.remove('open');
+    });
+  }
+
+  // Tab nav
+  var tabBar = document.getElementById('tab-bar');
+  if (tabBar) {
+    tabBar.addEventListener('click', function(e) {
+      var btn = e.target.closest('.tab-btn');
+      if (!btn || btn.id === 'print-btn') return;
+      currentTab = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      render();
+    });
+  }
+
+  // Print button
+  var printBtn = document.getElementById('print-btn');
+  if (printBtn) {
+    printBtn.addEventListener('click', function() { window.print(); });
+  }
+
+  // Mobile menu toggle
+  var mobileBtn = document.getElementById('mobile-menu-btn');
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', function() {
+      var sb = document.getElementById('sidebar');
+      if (sb) sb.classList.toggle('open');
+    });
+  }
+
+  // Initial render — wrapped so errors display visibly instead of silently crashing
+  try {
+    render();
+  } catch(e) {
+    var c = document.getElementById('content');
+    if (c) {
+      c.innerHTML = '<div style="padding:24px;background:#c53030;color:#fff;font-family:monospace;border-radius:8px;margin:20px;">'
+        + '<b>Render Error:</b><br>' + e.message
+        + '<br><br>' + (e.stack || '') + '</div>';
+    }
+  }
 }
 
-// Month nav
-document.getElementById('month-nav').addEventListener('click', function(e) {
-  const btn = e.target.closest('.month-btn');
-  if(!btn) return;
-  currentMonth = btn.dataset.month;
-  calendarView = 'month';
-  render();
-  // Close mobile sidebar
-  document.getElementById('sidebar').classList.remove('open');
-});
-
-// Tab nav
-document.getElementById('tab-bar').addEventListener('click', function(e) {
-  const btn = e.target.closest('.tab-btn');
-  if(!btn || btn.id === 'print-btn') return;
-  currentTab = btn.dataset.tab;
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  render();
-});
-
-// Print
-document.getElementById('print-btn').addEventListener('click', function() {
-  window.print();
-});
-
-// Mobile menu
-document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-  document.getElementById('sidebar').classList.toggle('open');
-});
-
-// Initial render
-render();
+// Ensure DOM is ready regardless of script position or browser quirks
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _initApp);
+} else {
+  _initApp();
+}
 </script>
 </body>
 </html>
