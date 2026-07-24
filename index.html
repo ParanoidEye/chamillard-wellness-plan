@@ -2397,7 +2397,7 @@ function renderExercise() {
   var exWeeks = [];
   var _ewk = [];
   buildDailyPlan(currentMonth).forEach(function(d) {
-    if(d.dayName === 'Sat' && _ewk.length > 0) { exWeeks.push(_ewk); _ewk = []; }
+    if(d.dayName === 'Sun' && _ewk.length > 0) { exWeeks.push(_ewk); _ewk = []; }
     _ewk.push(d);
   });
   if(_ewk.length > 0) exWeeks.push(_ewk);
