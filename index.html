@@ -2397,7 +2397,7 @@ function renderExercise() {
   var exWeeks = [];
   var _ewk = [];
   buildDailyPlan(currentMonth).forEach(function(d) {
-    if(d.dayName === 'Sun' && _ewk.length > 0) { exWeeks.push(_ewk); _ewk = []; }
+    if(d.dayName === 'Sat' && _ewk.length > 0) { exWeeks.push(_ewk); _ewk = []; }
     _ewk.push(d);
   });
   if(_ewk.length > 0) exWeeks.push(_ewk);
@@ -2498,36 +2498,6 @@ function renderTracker() {
       </div>`;
     }
   });
-  // Exercise weekly log section
-  html += '<h3 class="font-display font-bold text-sm mt-4 mb-2">🏃 Weekly Exercise Log</h3>';
-  html += '<p class="text-xs text-charcoal-400 mb-3">Check off each day you completed the workout. Missed days stay unchecked so you always know exactly which one was skipped.</p>';
-  html += '<div class="space-y-3">';
-  weekLabels.forEach(function(wk, wi) {
-    var exKey = 'excheck_' + currentMonth + '_w' + (wi+1);
-    var exSaved = {};
-    try { exSaved = JSON.parse(localStorage.getItem(exKey)||'{}'); } catch(e) { exSaved = {}; }
-    var doneCount = wk.filter(function(d){ return exSaved[d.dayName+'_'+d.day]; }).length;
-    html += '<div class="card-sm border border-teal-200 bg-teal-50">';
-    html += '<div class="flex items-center justify-between mb-2">';
-    html += '<span class="font-display font-bold text-xs text-teal-700">Week ' + (wi+1) + ' &nbsp;&middot;&nbsp; ' + wk[0].dayName + ' ' + wk[0].day + ' – ' + wk[wk.length-1].dayName + ' ' + wk[wk.length-1].day + '</span>';
-    html += '<span class="exdone-' + (wi+1) + ' text-xs text-charcoal-400">' + doneCount + '/' + wk.length + ' done</span>';
-    html += '</div><div class="flex flex-wrap gap-2">';
-    wk.forEach(function(d) {
-      var dayKey = d.dayName + '_' + d.day;
-      var isChecked = exSaved[dayKey] ? ' checked' : '';
-      var isRest = (d.dayName === 'Sun');
-      var bg = isRest ? 'bg-sage-100 border-sage-300' : 'bg-white border-teal-300';
-      var label = isRest ? '<span class="text-[9px] text-sage-500">rest</span>' : '';
-      html += '<label class="flex flex-col items-center gap-0.5 cursor-pointer px-2 py-1 rounded-lg border ' + bg + '">';
-      html += '<span class="text-xs font-bold text-charcoal-500">' + d.dayName + '</span>';
-      html += '<span class="text-xs text-charcoal-400">' + d.day + '</span>';
-      html += label;
-      html += '<input type="checkbox" class="ex-tracker-check mt-0.5" data-wk="' + (wi+1) + '" data-daykey="' + dayKey + '"' + isChecked + '>';
-      html += '</label>';
-    });
-    html += '</div></div>';
-  });
-  html += '</div>';
 
   html += `
     <h3 class="font-display font-bold text-sm mt-4 mb-2">📝 Monthly Notes & Wins</h3>
@@ -2884,30 +2854,6 @@ function bindDynamicEvents() {
   });
 
   // Tracker exercise day checkboxes
-  document.querySelectorAll('.ex-tracker-check').forEach(function(cb) {
-    cb.addEventListener('change', function() {
-      var wk = this.dataset.wk;
-      var dayKey = this.dataset.daykey;
-      var exKey = 'excheck_' + currentMonth + '_w' + wk;
-      var saved = {};
-      try { saved = JSON.parse(localStorage.getItem(exKey)||'{}'); } catch(e) { saved = {}; }
-      if(this.checked) { saved[dayKey] = true; } else { delete saved[dayKey]; }
-      localStorage.setItem(exKey, JSON.stringify(saved));
-      // Update the "X/N done" counter without full re-render
-      var card = this.closest('.card-sm');
-      if(card) {
-        var total = card.querySelectorAll('.ex-tracker-check').length;
-        var done = card.querySelectorAll('.ex-tracker-check:checked').length;
-        var spans = card.querySelectorAll('span');
-        for(var s=0; s<spans.length; s++) {
-          if(spans[s].textContent.indexOf('/ done') !== -1 || spans[s].textContent.match(/\d+\/\d+ done/)) {
-            spans[s].textContent = done + '/' + total + ' done'; break;
-          }
-        }
-      }
-    });
-  });
-
   // Exercise tab switching (plan vs dictionary)
   document.querySelectorAll('[data-extab]').forEach(function(btn) {
     btn.addEventListener('click', function() {
