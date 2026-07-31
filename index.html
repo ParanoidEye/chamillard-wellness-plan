@@ -535,38 +535,17 @@ const RECIPE_DB = {};
 
 function addRecipe(name,cat,data){RECIPE_DB[name]={category:cat,...data};}
 
-addRecipe('Banana Oat Pancakes','breakfast',{prep:'10min',cook:'20min',serves:5,freezer:true,
-  ingredients:['3 ripe bananas','2 cups rolled oats','4 large eggs','1 tsp cinnamon','1 tsp vanilla extract','1 tsp baking powder','pinch of salt','1 tsp olive oil or cooking spray'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Add rolled oats to a blender and blend on high 30-45 seconds until they become a fine flour. Pour into a large bowl.',
-    'Peel bananas and mash in a separate bowl with a fork until almost completely smooth.',
-    'Add mashed banana, eggs, cinnamon, vanilla extract, baking powder, and salt to the oat flour. Stir until a smooth batter forms.',
-    'Let batter rest 5 min — this allows the oat flour to absorb the liquid and thicken slightly.',
-    'Heat a nonstick skillet or griddle over medium heat. Add a tiny drizzle of olive oil or spray with cooking spray.',
-    'Pour about 1/4 cup of batter per pancake onto the hot skillet.',
-    'Cook 2-3 min until bubbles form across the surface and the edges look set and dry.',
-    'Flip carefully with a spatula and cook 1-2 more min on the second side until golden brown.',
-    'Transfer to a plate and repeat with remaining batter, spraying pan between batches.',
-    'Serve warm with a drizzle of maple syrup, or cool and freeze in a zip-top bag between parchment sheets.'
-  ],
-  kids:{aleene:'Blend rolled oats into flour and mash bananas in a bowl',kaily:'Whisk all batter ingredients together and let it rest 5 min',lilly:'Watch for bubbles on the pancakes and tell a parent when it is time to flip!'},
-  nutrition:{cal:310,protein:'11g',fat:'8g',carbs:'48g',sugar:'12g'}});
+addRecipe('Banana Oat Pancakes','breakfast',{prep:'10min',cook:'15min',serves:5,freezer:true,
+  ingredients:['2 ripe bananas','2 cups rolled oats (blended)','4 eggs','1 tsp cinnamon','1 tsp vanilla','½ cup oat milk','pinch salt'],
+  steps:['Mash bananas.','Blend oats to flour.','Mix all to batter.','Cook ¼-cup portions on nonstick pan 2–3 min per side.','Serve with fruit.'],
+  kids:{aleene:'Mash bananas',kaily:'Blend oats',lilly:'Sprinkle cinnamon'},
+  nutrition:{cal:210,protein:'8g',fat:'5g',carbs:'35g',sugar:'8g'}});
 
-addRecipe('Overnight Oats & Berries','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','2.5 cups unsweetened oat milk','1 tbsp chia seeds','1.5 cups frozen mixed berries','1 tbsp pure maple syrup','1 tsp vanilla extract','1 tsp cinnamon','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter — this is a prep-the-night-before recipe!',
-    'In a large bowl, stir together rolled oats, oat milk, chia seeds, maple syrup, vanilla extract, cinnamon, and a pinch of salt until fully combined.',
-    'Stir in frozen berries — no need to thaw them.',
-    'Divide the mixture evenly among 5 jars or containers with tight-fitting lids.',
-    'Seal and refrigerate overnight — at least 6 hours. The oats will absorb the oat milk and soften; the berries will thaw and release their juices.',
-    'In the morning: take jars from the fridge. The mixture should be thick, creamy, and streaked pink or purple from the berries.',
-    'Give each jar a good stir. Add a splash of oat milk if you prefer a thinner consistency.',
-    'Enjoy cold straight from the jar — no cooking needed!'
-  ],
-  kids:{aleene:'Stir together all base ingredients in the large bowl until fully combined',kaily:'Pour mixture evenly into each jar using a ladle',lilly:'Add frozen berries to the bowl and stir gently before pouring into jars'},
-  nutrition:{cal:210,protein:'5g',fat:'4g',carbs:'39g',sugar:'10g'}});
+addRecipe('Overnight Oats & Berries','breakfast',{prep:'10min',cook:'0',serves:5,freezer:false,
+  ingredients:['2 cups rolled oats','2.5 cups oat milk','1 tbsp chia seeds','1 cup frozen berries','1 tsp cinnamon','1 tsp vanilla','1 tbsp honey'],
+  steps:['Mix oats, milk, chia, cinnamon, vanilla.','Divide into 5 jars.','Top with berries.','Refrigerate 8+ hr.','Drizzle honey; eat cold or microwave 90s.'],
+  kids:{aleene:'Divide into jars',kaily:'Stir mixture',lilly:'Add berries'},
+  nutrition:{cal:240,protein:'8g',fat:'5g',carbs:'40g',sugar:'7g'}});
 
 addRecipe('White Chicken Chili','dinner',{prep:'10min',cook:'6–8hr',serves:5,freezer:true,
   ingredients:['1.5 lbs chicken breast','2 cans white beans (drained)','1 can green chiles','4 cups low-sodium chicken broth','1 tsp cumin','1 tsp garlic powder','1 tsp onion powder'],
@@ -658,788 +637,11 @@ addRecipe('Lentil Vegetable Stew','dinner',{prep:'10min',cook:'30min',serves:5,f
   kids:{aleene:'Chop celery',kaily:'Rinse lentils',lilly:'Measure & stir spices'},
   nutrition:{cal:260,protein:'16g',fat:'1g',carbs:'42g',sugar:'4g'}});
 
-addRecipe('Pumpkin Oatmeal','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','4 cups water','1 cup canned pure pumpkin puree','1 tsp cinnamon','0.5 tsp nutmeg','0.25 tsp ginger','1 tbsp pure maple syrup','1 tsp vanilla extract','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'In a small bowl, stir together cinnamon, nutmeg, and ginger. Set aside.',
-    'Bring 4 cups of water to a boil in a medium saucepan over high heat.',
-    'Add a pinch of salt and stir in rolled oats. Reduce heat to medium.',
-    'Cook 5 min, stirring often, until oats are thick and creamy.',
-    'Add pumpkin puree and the spice blend. Stir vigorously until fully mixed into the oats.',
-    'Cook 2 more min, stirring constantly, until everything is heated through and the oats are deep orange.',
-    'Remove from heat. Stir in maple syrup and vanilla extract.',
-    'Divide into 5 bowls and serve hot!'
-  ],
-  kids:{aleene:'Mix all three spices together in a small bowl before cooking',kaily:'Stir the oats as they cook and watch the timer',lilly:'Scoop pumpkin puree into the pot and help stir it in'},
-  nutrition:{cal:195,protein:'5g',fat:'2g',carbs:'38g',sugar:'7g'}});
-
-// ============================================================
-// BREAKFAST RECIPES – Pass 1 (recipes 1-11)
-// ============================================================
-
-addRecipe('Avocado Egg Toast','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['6 large eggs','5 slices whole wheat bread','2 ripe avocados','1 tbsp white vinegar (for poaching)','salt & freshly ground black pepper'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Cut avocados in half, remove the pits, and scoop the flesh into a bowl.',
-    'Mash avocados with a fork until smooth; season with a pinch of salt and pepper. Set aside.',
-    'Fill a medium saucepan with 3 inches of water and bring to a gentle simmer — small bubbles, not a rolling boil.',
-    'Add 1 tbsp white vinegar to the water — this helps egg whites hold their shape.',
-    'Crack each egg individually into a small cup or ramekin first — never directly into the hot water.',
-    'Toast the whole wheat bread slices until golden brown.',
-    'Stir the simmering water gently in a circle, then slide one egg from the cup into the center.',
-    'Poach 2.5–3 min for a runny yolk, or 4 min for a firm yolk. Remove with a slotted spoon and drain on a paper towel.',
-    'Repeat poaching for remaining eggs.',
-    'Spread mashed avocado onto each toast slice, then top each with a poached egg.',
-    'Season with salt and pepper and serve immediately!'
-  ],
-  kids:{aleene:'Mash avocados and season with salt and pepper',kaily:'Crack eggs one at a time into a small cup',lilly:'Pop the toast up when it is golden and call out when ready'},
-  nutrition:{cal:250,protein:'12g',fat:'12g',carbs:'22g',sugar:'1g'}});
-
-addRecipe('Veggie Egg White Scramble','breakfast',{prep:'10min',cook:'10min',serves:5,freezer:false,
-  ingredients:['10 egg whites (from 10 large eggs)','1 cup baby spinach, roughly chopped','1 cup diced bell pepper (any color)','½ yellow onion, diced','1 tsp olive oil','½ tsp garlic powder','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Dice the bell pepper and onion into small, even pieces.',
-    'Separate egg whites from yolks — crack each egg and pour the white into a bowl, discard yolks or save for another use.',
-    'Whisk the egg whites with garlic powder, salt, and pepper until frothy.',
-    'Heat olive oil in a large nonstick skillet over medium heat.',
-    'Add onion and bell pepper; cook 4–5 min, stirring often, until softened and slightly golden.',
-    'Add baby spinach and stir for 1 min until wilted.',
-    'Pour the egg whites over the vegetables and let set for 30 seconds, then gently fold and stir.',
-    'Cook 2–3 more min, folding occasionally, until egg whites are fully set — no clear or wet spots remain.',
-    'Taste and adjust seasoning, then plate and serve hot!'
-  ],
-  kids:{aleene:'Separate egg whites into a bowl (carefully!)',kaily:'Dice bell pepper with a safe knife',lilly:'Whisk the egg whites with the seasoning'},
-  nutrition:{cal:110,protein:'14g',fat:'2g',carbs:'7g',sugar:'3g'}});
-
-addRecipe('Whole Wheat Toast & Poached Egg','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['5 large eggs','5 slices whole wheat bread','1 tbsp white vinegar (for poaching)','1 tsp olive oil','salt & freshly ground black pepper','1 cup baby spinach (optional side)'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Fill a medium saucepan with 3 inches of water; bring to a gentle simmer over medium heat.',
-    'Add 1 tbsp white vinegar to the simmering water.',
-    'Crack each egg one at a time into a small cup or ramekin.',
-    'Toast the whole wheat bread slices in the toaster until golden.',
-    'Stir the water gently in a slow circle, then slide one egg from the cup into the center of the vortex.',
-    'Poach for 3 min for a slightly runny yolk, or 4 min for fully set. Lift out with a slotted spoon and let drain briefly.',
-    'Repeat for each remaining egg.',
-    'Place toast on plates, top each with a poached egg.',
-    'If using spinach, toss with a tiny drizzle of olive oil and place on the side.',
-    'Season with salt and pepper and serve immediately!'
-  ],
-  kids:{aleene:'Crack eggs into the small cup before poaching',kaily:'Watch the timer and tell a parent when 3 minutes is up',lilly:'Pop the toast up when golden and place on plates'},
-  nutrition:{cal:180,protein:'10g',fat:'5g',carbs:'22g',sugar:'2g'}});
-
-addRecipe('Egg & Avocado Wrap','breakfast',{prep:'10min',cook:'8min',serves:5,freezer:false,
-  ingredients:['6 large eggs','5 whole wheat tortillas (8-inch)','2 ripe avocados','1 cup baby spinach','½ tsp garlic powder','salt & pepper to taste','1 tsp olive oil'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Cut avocados in half, remove pits, and scoop flesh into a bowl. Mash with a fork and season with salt and pepper.',
-    'Crack eggs into a bowl; add garlic powder, salt, and pepper. Whisk until combined.',
-    'Heat olive oil in a nonstick skillet over medium-low heat.',
-    'Pour in eggs and let sit for 15 seconds, then gently fold and stir with a spatula until softly scrambled — remove from heat just before fully set; residual heat will finish them.',
-    'Warm tortillas one at a time in a dry pan for 20–30 seconds per side, or wrap in a damp paper towel and microwave 30 seconds.',
-    'Spread a spoonful of mashed avocado down the center of each tortilla.',
-    'Add a layer of baby spinach, then spoon scrambled eggs on top.',
-    'Fold the sides of the tortilla in, then roll from the bottom up to form a wrap.',
-    'Slice in half and serve immediately, or wrap tightly in foil for an on-the-go breakfast!'
-  ],
-  kids:{aleene:'Mash avocado and spread onto tortillas',kaily:'Whisk eggs in a bowl with seasoning',lilly:'Add spinach leaves to each tortilla'},
-  nutrition:{cal:300,protein:'13g',fat:'14g',carbs:'30g',sugar:'1g'}});
-
-addRecipe('Zucchini & Egg Scramble','breakfast',{prep:'10min',cook:'15min',serves:5,freezer:false,
-  ingredients:['6 large eggs','2 medium zucchini, sliced into half-moons','1 cup diced bell pepper (any color)','1 yellow onion, diced','2 tbsp olive oil','1 tsp garlic powder','1 tsp cumin','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Dice the onion and bell pepper. Slice zucchini into thin half-moons, all roughly the same size for even cooking.',
-    'Crack eggs into a bowl, add garlic powder, cumin, salt, and pepper, and whisk until fully combined.',
-    'Heat olive oil in a large skillet over medium heat until shimmering.',
-    'Add onion and bell pepper; cook 4–5 min, stirring often, until softened.',
-    'Add zucchini to the skillet and cook 4–5 more min, stirring, until zucchini is tender and lightly golden at the edges.',
-    'Spread vegetables evenly across the pan. Pour the beaten eggs over the top.',
-    'Let the eggs set for 30 seconds on the bottom, then gently fold and stir everything together.',
-    'Continue cooking 2–3 min, folding gently, until eggs are fully cooked — no wet or runny spots.',
-    'Taste and adjust seasoning, then plate and serve hot!'
-  ],
-  kids:{aleene:'Crack eggs into a bowl and whisk with seasoning',kaily:'Dice bell pepper with a safe knife (adult supervises)',lilly:'Stir the vegetables in the pan with a wooden spoon (supervised)'},
-  nutrition:{cal:175,protein:'10g',fat:'10g',carbs:'10g',sugar:'5g'}});
-
-addRecipe('Savory Oat Bowl with Fried Egg','breakfast',{prep:'5min',cook:'15min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','4 cups water','1 tsp low-sodium soy sauce','5 large eggs','1 cup baby spinach','1 tsp olive oil','½ tsp garlic powder','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Bring 4 cups of water to a boil in a medium saucepan over high heat.',
-    'Stir in rolled oats, reduce heat to medium, and cook 5 min, stirring occasionally, until thick and creamy.',
-    'Stir in soy sauce and garlic powder. Divide oats evenly among 5 bowls.',
-    'Add baby spinach to each bowl and stir gently — the hot oats will wilt the spinach.',
-    'Heat olive oil in a nonstick skillet over medium heat.',
-    'Crack eggs one at a time into the skillet; fry 2–3 min for a runny yolk, or cover with a lid for 1 more min for a firm yolk.',
-    'Season fried eggs with salt and pepper.',
-    'Place one fried egg on top of each oat bowl.',
-    'Serve immediately!'
-  ],
-  kids:{aleene:'Stir the oats as they cook so they don't stick',kaily:'Add spinach to each bowl and stir gently',lilly:'Set out 5 bowls on the counter and spoon in the oats'},
-  nutrition:{cal:230,protein:'12g',fat:'7g',carbs:'28g',sugar:'1g'}});
-
-addRecipe('Spinach & Egg Scramble','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['6 large eggs','2 cups baby spinach','½ yellow onion, finely diced','2 garlic cloves, minced','1 tsp olive oil','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Dice the onion finely and mince the garlic.',
-    'Crack eggs into a bowl, season with salt and pepper, and whisk until combined.',
-    'Heat olive oil in a nonstick skillet over medium heat.',
-    'Add onion and cook 3 min, stirring, until softened.',
-    'Add garlic and cook 30 more seconds, stirring constantly — don't let it brown.',
-    'Add baby spinach to the pan and stir for 1 min until wilted.',
-    'Spread the veggies evenly across the pan and pour in the whisked eggs.',
-    'Let eggs set on the bottom for 20 seconds, then gently fold and stir.',
-    'Cook 2–3 more min until eggs are fully set with no wet spots.',
-    'Taste, adjust seasoning, plate, and serve hot!'
-  ],
-  kids:{aleene:'Crack eggs into a bowl and whisk with salt and pepper',kaily:'Measure and add the baby spinach to the pan',lilly:'Set out plates and help spoon the scramble onto each plate'},
-  nutrition:{cal:135,protein:'10g',fat:'8g',carbs:'3g',sugar:'1g'}});
-
-addRecipe('Egg & Kale Scramble','breakfast',{prep:'8min',cook:'10min',serves:5,freezer:false,
-  ingredients:['6 large eggs','2 cups kale, stems removed, leaves roughly chopped','½ yellow onion, diced','1 tsp olive oil','½ tsp garlic powder','pinch of red pepper flakes (optional)','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Strip kale leaves from stems and roughly chop into bite-sized pieces.',
-    'Dice the onion.',
-    'Crack eggs into a bowl, add garlic powder, salt, and pepper, and whisk until fully combined.',
-    'Heat olive oil in a large nonstick skillet over medium heat.',
-    'Add onion and cook 3 min, stirring, until softened.',
-    'Add kale to the pan and stir for 2–3 min until wilted and tender.',
-    'Spread kale and onion evenly across the pan.',
-    'Pour whisked eggs over the vegetables and let set 20 seconds on the bottom.',
-    'Gently fold and stir, cooking 2–3 more min until eggs are fully cooked.',
-    'If using, add a small pinch of red pepper flakes for mild heat.',
-    'Plate and serve hot!'
-  ],
-  kids:{aleene:'Tear kale leaves off the stems and tear into smaller pieces',kaily:'Crack eggs into a bowl and whisk with seasoning',lilly:'Set out plates and help sprinkle a tiny pinch of red pepper flakes'},
-  nutrition:{cal:130,protein:'10g',fat:'7g',carbs:'5g',sugar:'1g'}});
-
-addRecipe('Sweet Potato Egg Muffins','breakfast',{prep:'15min',cook:'25min',serves:5,freezer:true,
-  ingredients:['6 large eggs','1 cup sweet potato, peeled and finely diced (about 1 medium)','1 cup diced bell pepper','½ yellow onion, finely diced','1 cup baby spinach, chopped','1 tsp garlic powder','½ tsp smoked paprika','salt & pepper to taste','cooking spray or olive oil for the muffin tin'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Preheat oven to 375°F (190°C).',
-    'Peel and finely dice the sweet potato into very small pieces — about ¼ inch — so they cook fully in the oven.',
-    'Dice bell pepper and onion. Chop spinach.',
-    'Spray a 12-cup muffin tin generously with cooking spray.',
-    'In a bowl, whisk eggs with garlic powder, smoked paprika, salt, and pepper until combined.',
-    'Divide sweet potato, bell pepper, onion, and spinach evenly among the muffin cups.',
-    'Pour the egg mixture over the vegetables in each cup, filling about ¾ full.',
-    'Bake 22–25 min until muffins are puffed, golden at the edges, and a toothpick inserted in the center comes out clean.',
-    'Let cool 5 min before removing. Run a butter knife around the edge of each muffin to loosen.',
-    'Serve warm, or cool completely and store in an airtight container in the fridge for up to 5 days. Freeze for longer storage.'
-  ],
-  kids:{aleene:'Whisk eggs and seasoning together in a bowl',kaily:'Divide diced vegetables among the muffin cups',lilly:'Help spray the muffin tin with cooking spray'},
-  nutrition:{cal:140,protein:'9g',fat:'5g',carbs:'13g',sugar:'4g'}});
-
-addRecipe('Egg & Sweet Potato Hash','breakfast',{prep:'10min',cook:'20min',serves:5,freezer:false,
-  ingredients:['5 large eggs','2 medium sweet potatoes, peeled and diced into ½-inch cubes','1 cup diced bell pepper','½ yellow onion, diced','1 tbsp olive oil','1 tsp garlic powder','½ tsp smoked paprika','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Peel sweet potatoes and dice into ½-inch cubes. Dice bell pepper and onion.',
-    'Heat olive oil in a large skillet over medium-high heat.',
-    'Add sweet potato cubes to the pan in a single layer. Cook without stirring for 4 min to let them brown on the bottom.',
-    'Stir the sweet potatoes and cook 4–5 more min, stirring every minute or two, until tender and golden all over.',
-    'Add bell pepper and onion; cook 3–4 min until softened.',
-    'Season with garlic powder, smoked paprika, salt, and pepper. Stir to coat evenly.',
-    'Spread the hash into an even layer. Make 5 small wells in the mixture with a spoon.',
-    'Crack one egg into each well.',
-    'Cover the pan with a lid and cook 4–5 min until egg whites are set but yolks are still slightly runny, or 6–7 min for fully cooked yolks.',
-    'Scoop hash and eggs onto plates and serve immediately!'
-  ],
-  kids:{aleene:'Season the hash with spices and stir to coat',kaily:'Dice bell pepper with a safe knife (adult supervises)',lilly:'Help make the wells in the hash with the back of a spoon'},
-  nutrition:{cal:220,protein:'10g',fat:'8g',carbs:'27g',sugar:'7g'}});
-
-addRecipe('Veggie Egg Muffin Cups','breakfast',{prep:'15min',cook:'22min',serves:5,freezer:true,
-  ingredients:['6 large eggs','1 cup zucchini, finely diced','1 cup bell pepper, finely diced','1 cup baby spinach, chopped','½ yellow onion, finely diced','1 tsp Italian seasoning','½ tsp garlic powder','salt & pepper to taste','cooking spray or olive oil for the muffin tin'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Preheat oven to 375°F (190°C).',
-    'Finely dice zucchini, bell pepper, and onion. Chop spinach into small pieces.',
-    'Spray a 12-cup muffin tin well with cooking spray.',
-    'In a large bowl, whisk eggs with Italian seasoning, garlic powder, salt, and pepper until frothy.',
-    'Stir all the diced vegetables into the egg mixture.',
-    'Ladle the egg-vegetable mixture evenly into the muffin cups, filling each about ¾ full.',
-    'Bake 20–22 min until muffins are puffed, lightly golden on top, and fully set in the center.',
-    'Let cool in the pan for 5 min. Run a knife around the edge of each cup to loosen before removing.',
-    'Serve warm. To store, refrigerate up to 5 days or freeze up to 2 months — reheat in microwave 60–90 seconds.'
-  ],
-  kids:{aleene:'Whisk eggs in a bowl with all the seasoning',kaily:'Stir the diced vegetables into the egg mixture',lilly:'Help spray the muffin tin and ladle in the mixture'},
-  nutrition:{cal:120,protein:'9g',fat:'5g',carbs:'7g',sugar:'3g'}});
-
-
-
-// ============================================================
-// BREAKFAST RECIPES – Pass 2 (recipes 2, 13-23)
-// ============================================================
-
-addRecipe('Egg Muffin Cups','breakfast',{prep:'10min',cook:'22min',serves:5,freezer:true,
-  ingredients:['6 large eggs','½ cup baby spinach, chopped','½ cup diced bell pepper','½ yellow onion, finely diced','½ tsp garlic powder','½ tsp smoked paprika','salt & pepper to taste','cooking spray for muffin tin'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Preheat oven to 375°F (190°C).',
-    'Finely dice bell pepper and onion. Chop spinach into small pieces.',
-    'Spray a 12-cup muffin tin generously with cooking spray — coat the sides and bottom of each cup well.',
-    'In a large bowl, whisk eggs with garlic powder, smoked paprika, salt, and pepper until fully combined.',
-    'Stir diced bell pepper, onion, and spinach into the egg mixture.',
-    'Using a ladle or large spoon, carefully pour the egg-veggie mixture into the muffin cups, filling each about ¾ full.',
-    'Bake 20–22 min until muffins are puffed, lightly golden on top, and fully set — a toothpick inserted in the center should come out clean.',
-    'Let cool in the pan 5 min. Run a thin butter knife around the edge of each cup to loosen, then remove.',
-    'Serve warm, or refrigerate up to 5 days. Freeze in a zip-top bag up to 2 months; reheat in microwave 60–90 seconds.'
-  ],
-  kids:{aleene:'Whisk all eggs and seasoning in a bowl until frothy',kaily:'Stir diced vegetables into the egg mixture',lilly:'Help spray each muffin cup and announce when the timer goes off'},
-  nutrition:{cal:110,protein:'9g',fat:'6g',carbs:'4g',sugar:'2g'}});
-
-addRecipe('Sweet Potato Hash & Eggs','breakfast',{prep:'12min',cook:'22min',serves:5,freezer:false,
-  ingredients:['5 large eggs','2 medium sweet potatoes, peeled and diced into ½-inch cubes','1 cup diced bell pepper','1 cup diced zucchini','½ yellow onion, diced','1 tbsp olive oil','1 tsp garlic powder','½ tsp smoked paprika','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Peel sweet potatoes and dice into ½-inch cubes. Dice bell pepper, zucchini, and onion.',
-    'Heat olive oil in a large oven-safe skillet over medium-high heat.',
-    'Add sweet potato cubes in a single layer. Cook without stirring 4–5 min to develop a golden crust on the bottom.',
-    'Stir sweet potatoes and cook 4 more min, stirring occasionally, until mostly tender.',
-    'Add bell pepper, zucchini, and onion; cook 4–5 min, stirring often, until softened.',
-    'Season everything with garlic powder, smoked paprika, salt, and pepper. Stir well.',
-    'Spread hash into an even layer. Use the back of a spoon to make 5 small wells in the hash.',
-    'Crack one egg into each well, being careful not to break the yolk.',
-    'Cover the pan with a tight-fitting lid and cook over medium-low heat 5–6 min, until egg whites are fully set but yolks are still slightly runny. Cook 2 more min for firm yolks.',
-    'Bring the pan to the table and serve directly, scooping hash and an egg onto each plate.'
-  ],
-  kids:{aleene:'Season the hash and stir to coat all vegetables evenly',kaily:'Dice bell pepper and zucchini with a safe knife (adult supervises)',lilly:'Make the wells in the hash with the back of a spoon'},
-  nutrition:{cal:215,protein:'9g',fat:'8g',carbs:'26g',sugar:'7g'}});
-
-addRecipe('Tofu Scramble & Veggies','breakfast',{prep:'10min',cook:'15min',serves:5,freezer:false,
-  ingredients:['1 block (14 oz) firm tofu, drained','1 cup diced bell pepper','1 cup baby spinach','½ yellow onion, diced','1 tbsp olive oil','1 tsp turmeric','1 tsp garlic powder','1 tsp cumin','1 tbsp low-sodium soy sauce','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Drain tofu: remove from package, place on a plate lined with paper towels, lay another paper towel on top, and press firmly for 5 min to remove excess water.',
-    'Dice bell pepper and onion.',
-    'Heat olive oil in a large nonstick skillet over medium-high heat.',
-    'Add onion and bell pepper; cook 4–5 min, stirring often, until softened.',
-    'Add spinach and stir for 1 min until wilted.',
-    'Crumble the drained tofu directly into the skillet using your hands or a fork — aim for large, irregular crumbles like scrambled eggs.',
-    'Add turmeric, garlic powder, cumin, and soy sauce. Stir everything together well.',
-    'Cook 5–6 more min, stirring occasionally, until tofu is golden at the edges and all the liquid has evaporated.',
-    'Taste and adjust seasoning with salt and pepper.',
-    'Plate and serve hot!'
-  ],
-  kids:{aleene:'Press tofu dry with paper towels and crumble it into the pan',kaily:'Measure and mix all the spices together in a small bowl first',lilly:'Stir the scramble in the pan with a wooden spoon (supervised)'},
-  nutrition:{cal:155,protein:'12g',fat:'8g',carbs:'8g',sugar:'3g'}});
-
-addRecipe('Tofu & Sweet Potato Scramble','breakfast',{prep:'10min',cook:'20min',serves:5,freezer:false,
-  ingredients:['1 block (14 oz) firm tofu, drained','1 medium sweet potato, peeled and finely diced','1 cup baby spinach','½ yellow onion, diced','1 tbsp olive oil','1 tsp turmeric','1 tsp garlic powder','½ tsp smoked paprika','1 tbsp low-sodium soy sauce','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Drain tofu: press between paper towels for 5 min to remove excess moisture.',
-    'Peel and finely dice sweet potato into very small cubes (about ¼ inch) so they cook quickly.',
-    'Dice onion.',
-    'Heat olive oil in a large skillet over medium-high heat.',
-    'Add sweet potato and cook 6–8 min, stirring every minute or two, until tender and golden at the edges.',
-    'Add onion and cook 3 more min, stirring, until softened.',
-    'Add spinach and stir for 1 min until wilted.',
-    'Crumble tofu into the skillet in large chunks. Add turmeric, garlic powder, smoked paprika, and soy sauce.',
-    'Stir everything together and cook 5 more min until tofu is heated through and lightly golden.',
-    'Taste and adjust seasoning, plate, and serve hot!'
-  ],
-  kids:{aleene:'Press and crumble the tofu into the skillet',kaily:'Stir all the spices together in a small bowl before adding',lilly:'Add the spinach to the pan and stir with a wooden spoon (supervised)'},
-  nutrition:{cal:175,protein:'11g',fat:'8g',carbs:'15g',sugar:'4g'}});
-
-addRecipe('Tofu & Kale Scramble','breakfast',{prep:'10min',cook:'15min',serves:5,freezer:false,
-  ingredients:['1 block (14 oz) firm tofu, drained','2 cups kale, stems removed, leaves roughly chopped','½ yellow onion, diced','2 garlic cloves, minced','1 tbsp olive oil','1 tsp turmeric','½ tsp cumin','1 tbsp low-sodium soy sauce','pinch of red pepper flakes (optional)','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Drain tofu by pressing with paper towels for 5 min.',
-    'Remove kale stems and roughly chop the leaves into bite-sized pieces.',
-    'Dice onion and mince garlic.',
-    'Heat olive oil in a large nonstick skillet over medium heat.',
-    'Add onion and cook 3 min, stirring, until softened.',
-    'Add garlic and cook 30 seconds, stirring constantly.',
-    'Add kale and stir 2–3 min until wilted and tender.',
-    'Crumble tofu into the skillet in large, irregular pieces.',
-    'Add turmeric, cumin, soy sauce, and a pinch of red pepper flakes if using. Stir well.',
-    'Cook 5–6 min until tofu is golden at edges and the mixture is heated through.',
-    'Season with salt and pepper, plate, and serve hot!'
-  ],
-  kids:{aleene:'Tear kale off stems and break into pieces',kaily:'Press tofu dry and crumble it into a bowl',lilly:'Measure spices and add them to the pan when a parent says go'},
-  nutrition:{cal:145,protein:'11g',fat:'8g',carbs:'7g',sugar:'1g'}});
-
-addRecipe('Savory Tofu Breakfast Bowl','breakfast',{prep:'10min',cook:'20min',serves:5,freezer:false,
-  ingredients:['1 block (14 oz) firm tofu, drained','2 cups cooked brown rice (prepare night before)','2 cups baby spinach','1 cup shredded carrots','1 tbsp olive oil','1 tsp sesame oil','1 tbsp low-sodium soy sauce','1 tsp garlic powder','1 tsp ginger powder','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'If cooking rice fresh: rinse 1 cup dry brown rice, combine with 2 cups water in a saucepan, bring to a boil, reduce heat to low, cover, and cook 35–40 min. (Best done the night before.)',
-    'Drain tofu and press with paper towels for 5 min to remove excess moisture. Crumble into bite-sized pieces.',
-    'Heat olive oil in a large skillet over medium-high heat.',
-    'Add crumbled tofu in a single layer. Cook without stirring 4 min to brown on the bottom.',
-    'Stir tofu and add garlic powder, ginger powder, and soy sauce. Toss to coat and cook 3–4 more min until golden.',
-    'Push tofu to the side of the pan. Add spinach and carrots to the empty side; stir 2 min until spinach wilts.',
-    'Stir everything together and mix well.',
-    'Divide cooked brown rice among 5 bowls.',
-    'Spoon the tofu-veggie mixture over the rice.',
-    'Drizzle ½ tsp sesame oil over each bowl and serve immediately!'
-  ],
-  kids:{aleene:'Press and crumble tofu, and help measure soy sauce and spices',kaily:'Shred carrots using a box grater (adult supervises)',lilly:'Spoon rice into bowls and drizzle sesame oil on top'},
-  nutrition:{cal:255,protein:'13g',fat:'10g',carbs:'28g',sugar:'2g'}});
-
-addRecipe('Apple Cinnamon Oatmeal','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','4 cups water','2 medium apples, peeled, cored, and diced','1 tsp cinnamon','¼ tsp nutmeg','1 tbsp pure maple syrup','1 tsp vanilla extract','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Peel, core, and dice the apples into small cubes.',
-    'Bring 4 cups of water to a boil in a medium saucepan over high heat.',
-    'Add a pinch of salt, then stir in rolled oats.',
-    'Reduce heat to medium and cook 5 min, stirring often, until oats are thick and creamy.',
-    'Stir in diced apples, cinnamon, and nutmeg. Cook 2 more min, stirring, until apples soften slightly.',
-    'Remove from heat and stir in vanilla extract and maple syrup.',
-    'Divide evenly among 5 bowls and serve immediately. Offer a light drizzle of extra maple syrup at the table if desired.'
-  ],
-  kids:{aleene:'Peel and core apples, then dice into small cubes (adult supervises the coring)',kaily:'Stir the oatmeal as it cooks so it doesn't stick to the bottom',lilly:'Measure and add the cinnamon, nutmeg, and vanilla to the pot'},
-  nutrition:{cal:195,protein:'5g',fat:'2g',carbs:'40g',sugar:'12g'}});
-
-addRecipe('Chia Pudding & Mango','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['½ cup chia seeds','2½ cups unsweetened oat milk','1 tbsp pure maple syrup','1 tsp vanilla extract','2 ripe mangoes, peeled and diced'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'The night before: In a large bowl, whisk oat milk, maple syrup, and vanilla extract together.',
-    'Add chia seeds and whisk vigorously for 1 min to evenly distribute seeds — this prevents clumping.',
-    'Wait 5 min, then whisk again. This second whisk is important to break up any clusters.',
-    'Divide the mixture evenly among 5 jars or containers with lids.',
-    'Cover and refrigerate overnight, or at least 4 hours, until thick and pudding-like.',
-    'In the morning: peel mangoes, slice the flesh away from the pit, and dice into small cubes.',
-    'Take pudding cups from the fridge. The texture should be thick and gel-like — give each a quick stir.',
-    'Spoon diced mango on top of each pudding cup.',
-    'Serve cold and enjoy!'
-  ],
-  kids:{aleene:'Whisk the oat milk, maple syrup, and vanilla together',kaily:'Add chia seeds and do the 2-step whisking (1 min, then again after 5 min)',lilly:'Spoon mango chunks on top of each pudding cup in the morning'},
-  nutrition:{cal:190,protein:'5g',fat:'7g',carbs:'28g',sugar:'16g'}});
-
-addRecipe('Berry Overnight Oats','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','2½ cups unsweetened oat milk','1 tbsp pure maple syrup','1 tsp vanilla extract','1 tsp cinnamon','1½ cups mixed frozen berries (blueberries, strawberries, raspberries)'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter — this is a prep-the-night-before recipe!',
-    'In a large bowl, stir together rolled oats, oat milk, maple syrup, vanilla extract, and cinnamon until fully combined.',
-    'Divide the oat mixture evenly among 5 jars or containers with lids.',
-    'Measure frozen berries and divide evenly over the top of each container — no need to thaw.',
-    'Stir berries gently into each jar so they mix through the oats.',
-    'Seal containers and refrigerate overnight — at least 6 hours.',
-    'In the morning: take jars out of the fridge. The oats will have absorbed the milk and the berries will be thawed and juicy.',
-    'Give each jar a good stir to mix in the berries.',
-    'Serve cold straight from the jar, or add a splash more oat milk to loosen if you prefer a thinner consistency.'
-  ],
-  kids:{aleene:'Stir together oats, oat milk, maple syrup, vanilla, and cinnamon in a large bowl',kaily:'Pour the oat mixture into each jar evenly',lilly:'Spoon frozen berries onto the top of each jar'},
-  nutrition:{cal:215,protein:'5g',fat:'4g',carbs:'40g',sugar:'10g'}});
-
-addRecipe('Almond Butter Toast & Banana','breakfast',{prep:'5min',cook:'3min',serves:5,freezer:false,
-  ingredients:['5 slices whole wheat bread','5 tbsp natural almond butter (no added sugar)','3 ripe bananas','1 tsp cinnamon','1 tsp honey (optional drizzle)'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Place bread slices in the toaster and toast to your desired level of golden-ness.',
-    'While toast is in the toaster, peel bananas and slice into rounds about ¼-inch thick.',
-    'When toast pops up, place each slice on a plate.',
-    'Spread 1 tbsp almond butter over each slice of toast, all the way to the edges.',
-    'Lay banana slices in a single layer on top of the almond butter.',
-    'Sprinkle a pinch of cinnamon over each piece of toast.',
-    'If using, drizzle a tiny bit of honey over the top.',
-    'Serve immediately and enjoy!'
-  ],
-  kids:{aleene:'Spread almond butter evenly on each piece of toast',kaily:'Peel bananas and slice into rounds (adult can supervise knife use)',lilly:'Sprinkle cinnamon on each piece and call everyone to breakfast'},
-  nutrition:{cal:255,protein:'7g',fat:'10g',carbs:'36g',sugar:'12g'}});
-
-
-
-// ============================================================
-// BREAKFAST RECIPES – Pass 3 (MB items 24-27, 29-36)
-// ============================================================
-
-addRecipe('Pear & Oat Breakfast Bowl','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','4 cups water','3 ripe pears, peeled, cored, and diced','1 tsp cinnamon','¼ tsp ginger','1 tbsp pure maple syrup','1 tsp vanilla extract','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Peel, core, and dice the pears into small bite-sized cubes.',
-    'Bring 4 cups of water to a boil in a medium saucepan over high heat.',
-    'Add a pinch of salt, then stir in rolled oats. Reduce heat to medium.',
-    'Cook oats 5 min, stirring often so they don't stick to the bottom.',
-    'Add diced pears, cinnamon, and ginger. Stir well and cook 2–3 more min until pears soften slightly.',
-    'Remove from heat and stir in vanilla extract and maple syrup.',
-    'Divide into 5 bowls. Add a light drizzle of extra maple syrup at the table if desired.',
-    'Serve immediately while hot!'
-  ],
-  kids:{aleene:'Peel and core pears, then dice into cubes (adult supervises)',kaily:'Stir the oats as they cook and watch the timer',lilly:'Measure and add the cinnamon, ginger, and vanilla to the pot'},
-  nutrition:{cal:200,protein:'5g',fat:'2g',carbs:'42g',sugar:'14g'}});
-
-addRecipe('Apple Walnut Overnight Oats','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','2½ cups unsweetened oat milk','2 medium apples, peeled, cored, and diced','⅓ cup raw walnut halves, roughly chopped','1 tsp cinnamon','1 tbsp pure maple syrup','1 tsp vanilla extract'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter — this is a prep-the-night-before recipe!',
-    'Peel, core, and dice apples into small cubes. Roughly chop walnuts.',
-    'In a large bowl, stir together rolled oats, oat milk, cinnamon, maple syrup, and vanilla until fully combined.',
-    'Stir in diced apples and chopped walnuts.',
-    'Divide the mixture evenly among 5 jars or containers with tight-fitting lids.',
-    'Seal and refrigerate overnight — at least 6 hours.',
-    'In the morning: remove jars from the fridge. Oats will be thick and creamy.',
-    'Give each jar a stir. Add a splash of oat milk to loosen if you prefer a thinner texture.',
-    'Enjoy cold, or microwave in a microwave-safe bowl for 60–90 seconds for a warm version.'
-  ],
-  kids:{aleene:'Peel and core apples, then dice into small cubes (adult supervises)',kaily:'Stir together all the base ingredients in the large bowl',lilly:'Pour mixture into each jar and help put on the lids'},
-  nutrition:{cal:270,protein:'6g',fat:'9g',carbs:'42g',sugar:'14g'}});
-
-addRecipe('Banana Nut Oatmeal','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','4 cups water','3 ripe bananas','⅓ cup raw walnut halves, roughly chopped','1 tsp cinnamon','1 tbsp pure maple syrup','1 tsp vanilla extract','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Peel bananas. Slice 2 bananas into rounds. Mash the third banana in a small bowl with a fork until smooth.',
-    'Roughly chop walnut halves into smaller pieces.',
-    'Bring 4 cups of water to a boil in a medium saucepan over high heat.',
-    'Add a pinch of salt, then stir in rolled oats. Reduce heat to medium.',
-    'Cook 5 min, stirring often, until oats are thick and creamy.',
-    'Stir in the mashed banana, cinnamon, and maple syrup. Cook 1 more min.',
-    'Remove from heat and stir in vanilla extract.',
-    'Divide into 5 bowls. Top each bowl with banana slices and a sprinkle of chopped walnuts.',
-    'Serve immediately!'
-  ],
-  kids:{aleene:'Mash one banana in a bowl with a fork until smooth',kaily:'Slice the other bananas into rounds (adult supervises knife)',lilly:'Sprinkle chopped walnuts on top of each bowl'},
-  nutrition:{cal:270,protein:'6g',fat:'8g',carbs:'44g',sugar:'14g'}});
-
-addRecipe('Warm Spiced Oatmeal','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','4 cups water','1 tsp cinnamon','½ tsp nutmeg','¼ tsp ginger','¼ tsp allspice','1 tbsp pure maple syrup','1 tsp vanilla extract','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'In a small bowl, mix together cinnamon, nutmeg, ginger, and allspice. Set aside.',
-    'Bring 4 cups of water to a boil in a medium saucepan over high heat.',
-    'Add a pinch of salt, then stir in rolled oats. Reduce heat to medium.',
-    'Cook 5 min, stirring often, until oats are thick and creamy.',
-    'Add the spice blend and maple syrup. Stir until everything is well combined.',
-    'Remove from heat and stir in vanilla extract.',
-    'Divide into 5 bowls and serve immediately. Offer a light drizzle of extra maple syrup at the table.'
-  ],
-  kids:{aleene:'Mix all the spices together in a small bowl before cooking starts',kaily:'Stir the oats as they cook and watch the timer',lilly:'Pour the spice blend and maple syrup into the pot and stir'},
-  nutrition:{cal:175,protein:'5g',fat:'3g',carbs:'33g',sugar:'5g'}});
-
-addRecipe('Chia Pudding & Banana','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['½ cup chia seeds','2½ cups unsweetened oat milk','1 tbsp pure maple syrup','1 tsp vanilla extract','5 ripe bananas','1 tsp cinnamon (for topping)'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter — this is a prep-the-night-before recipe!',
-    'In a large bowl, whisk oat milk, maple syrup, and vanilla extract together until combined.',
-    'Add chia seeds and whisk vigorously for 1 full minute to distribute seeds evenly and prevent clumping.',
-    'Wait 5 minutes, then whisk again — this second whisk breaks up any clusters that have formed.',
-    'Divide the chia mixture evenly among 5 jars or containers with lids.',
-    'Seal and refrigerate overnight, or at least 4 hours, until thick and pudding-like.',
-    'In the morning: take pudding cups from the fridge and give each a quick stir.',
-    'Peel bananas and slice into rounds.',
-    'Lay banana slices on top of each pudding cup.',
-    'Dust with a pinch of cinnamon and serve cold!'
-  ],
-  kids:{aleene:'Do the two-step chia seed whisking (1 min, wait 5 min, whisk again)',kaily:'Pour mixture evenly into each jar',lilly:'Peel bananas and lay slices on top of each pudding cup'},
-  nutrition:{cal:200,protein:'5g',fat:'7g',carbs:'30g',sugar:'14g'}});
-
-addRecipe('Cranberry Oatmeal','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','4 cups water','½ cup dried cranberries (no added sugar or low-sugar variety)','1 tsp cinnamon','1 tbsp pure maple syrup','1 tsp vanilla extract','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Bring 4 cups of water to a boil in a medium saucepan over high heat.',
-    'Add a pinch of salt, then stir in rolled oats. Reduce heat to medium.',
-    'Cook 5 min, stirring often, until oats are thick and creamy.',
-    'Stir in dried cranberries and cinnamon. Cook 1 more min — the cranberries will soften slightly in the hot oats.',
-    'Remove from heat. Stir in maple syrup and vanilla extract.',
-    'Divide into 5 bowls.',
-    'Serve immediately while hot!'
-  ],
-  kids:{aleene:'Stir the oats as they cook so they don't stick to the bottom',kaily:'Measure and add the cranberries and cinnamon to the pot',lilly:'Stir in the maple syrup and vanilla when it comes off the heat'},
-  nutrition:{cal:210,protein:'5g',fat:'2g',carbs:'44g',sugar:'12g'}});
-
-addRecipe('Pumpkin Spice Oatmeal','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','4 cups water','1 cup canned pure pumpkin puree (not pumpkin pie filling)','1 tsp cinnamon','½ tsp nutmeg','¼ tsp ginger','1 tbsp pure maple syrup','1 tsp vanilla extract','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'In a small bowl, stir together cinnamon, nutmeg, and ginger. Set aside.',
-    'Bring 4 cups of water to a boil in a medium saucepan over high heat.',
-    'Add a pinch of salt, then stir in rolled oats. Reduce heat to medium.',
-    'Cook 5 min, stirring often, until oats are thick and creamy.',
-    'Stir in pumpkin puree and the spice blend. Mix until fully combined and heated through, about 1 more min.',
-    'Remove from heat. Stir in maple syrup and vanilla extract.',
-    'Divide into 5 bowls and serve hot!'
-  ],
-  kids:{aleene:'Mix spices together in a small bowl before cooking starts',kaily:'Stir oats as they cook and watch the timer',lilly:'Scoop pumpkin puree into the pot and help stir it in'},
-  nutrition:{cal:195,protein:'5g',fat:'2g',carbs:'38g',sugar:'7g'}});
-
-addRecipe('Chia Pudding & Apple','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['½ cup chia seeds','2½ cups unsweetened oat milk','1 tbsp pure maple syrup','1 tsp vanilla extract','1 tsp cinnamon','3 medium apples, peeled, cored, and diced'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter — this is a prep-the-night-before recipe!',
-    'In a large bowl, whisk oat milk, maple syrup, vanilla extract, and cinnamon until combined.',
-    'Add chia seeds and whisk vigorously for 1 min.',
-    'Wait 5 min then whisk again to break up any clumps.',
-    'Divide the mixture evenly among 5 jars or containers with lids.',
-    'Seal and refrigerate overnight (or at least 4 hours).',
-    'In the morning: peel, core, and dice apples into small cubes.',
-    'Take pudding cups from the fridge and give each a stir.',
-    'Spoon diced apple on top of each pudding cup.',
-    'Serve cold and enjoy!'
-  ],
-  kids:{aleene:'Do the two-step chia whisking and pour mixture into jars',kaily:'Peel and core apples (adult supervises), then dice into cubes',lilly:'Spoon apple chunks on top of each pudding cup in the morning'},
-  nutrition:{cal:195,protein:'5g',fat:'7g',carbs:'30g',sugar:'14g'}});
-
-addRecipe('Pear Overnight Oats','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','2½ cups unsweetened oat milk','3 ripe pears, peeled, cored, and diced','1 tsp cinnamon','¼ tsp ginger','1 tbsp pure maple syrup','1 tsp vanilla extract'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter — this is a prep-the-night-before recipe!',
-    'Peel, core, and dice pears into small cubes.',
-    'In a large bowl, stir together rolled oats, oat milk, cinnamon, ginger, maple syrup, and vanilla until well combined.',
-    'Stir in diced pears.',
-    'Divide the mixture evenly among 5 jars or containers with lids.',
-    'Seal and refrigerate overnight — at least 6 hours.',
-    'In the morning: take jars from the fridge. The oats will have absorbed the milk and softened.',
-    'Give each jar a good stir. Add a splash of oat milk if you prefer a thinner texture.',
-    'Enjoy cold, or microwave uncovered in a bowl for 60–90 seconds for a warm version.'
-  ],
-  kids:{aleene:'Stir together all the base ingredients in the large bowl',kaily:'Peel and core pears (adult supervises), then dice into cubes',lilly:'Pour mixture into each jar and help put on the lids'},
-  nutrition:{cal:210,protein:'5g',fat:'3g',carbs:'43g',sugar:'15g'}});
-
-addRecipe('Overnight Oats & Cinnamon Apple','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','2½ cups unsweetened oat milk','3 medium apples, peeled, cored, and diced','1½ tsp cinnamon','1 tbsp pure maple syrup','1 tsp vanilla extract','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter — this is a prep-the-night-before recipe!',
-    'Peel, core, and dice apples into very small cubes.',
-    'In a large bowl, stir together rolled oats, oat milk, cinnamon, maple syrup, vanilla, and a pinch of salt.',
-    'Stir in diced apples until evenly distributed.',
-    'Divide mixture evenly among 5 jars or containers with lids.',
-    'Seal and refrigerate overnight — at least 6 hours.',
-    'In the morning: take jars from the fridge. Oats should be soft and creamy with tender apple pieces throughout.',
-    'Give each jar a stir and add a splash of oat milk if needed to reach your preferred consistency.',
-    'Enjoy cold, or microwave in a bowl for 60–90 seconds for a warm apple cinnamon breakfast!'
-  ],
-  kids:{aleene:'Stir all oat base ingredients together in the large bowl',kaily:'Peel and core apples (adult supervises), then dice into small cubes',lilly:'Stir apples into the oat mixture and help pour into jars'},
-  nutrition:{cal:200,protein:'5g',fat:'3g',carbs:'40g',sugar:'13g'}});
-
-addRecipe('Overnight Oats & Cranberry','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','2½ cups unsweetened oat milk','½ cup dried cranberries (low-sugar)','1 tsp cinnamon','1 tbsp pure maple syrup','1 tsp vanilla extract','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter — this is a prep-the-night-before recipe!',
-    'In a large bowl, stir together rolled oats, oat milk, cinnamon, maple syrup, vanilla, and a pinch of salt.',
-    'Stir in dried cranberries — they will plump up and soften overnight in the milk.',
-    'Divide mixture evenly among 5 jars or containers with tight-fitting lids.',
-    'Seal and refrigerate overnight — at least 6 hours.',
-    'In the morning: take jars from the fridge. The cranberries will be soft and slightly sweet.',
-    'Give each jar a stir. Add a splash of oat milk if you prefer a thinner consistency.',
-    'Enjoy cold directly from the jar!'
-  ],
-  kids:{aleene:'Stir together all oat base ingredients in the large bowl',kaily:'Measure and add cranberries to the bowl, then stir well',lilly:'Help pour the oat mixture into each jar and put on the lids'},
-  nutrition:{cal:205,protein:'5g',fat:'3g',carbs:'41g',sugar:'11g'}});
-
-addRecipe('Banana Almond Pancakes','breakfast',{prep:'10min',cook:'20min',serves:5,freezer:true,
-  ingredients:['2 cups whole wheat flour','2 tsp baking powder','½ tsp cinnamon','pinch of salt','2 large eggs','1½ cups unsweetened oat milk','3 ripe bananas','3 tbsp natural almond butter','1 tsp vanilla extract','1 tsp olive oil or cooking spray (for pan)'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Peel bananas and mash in a large bowl with a fork until almost completely smooth.',
-    'Add eggs, oat milk, almond butter, and vanilla extract to the mashed banana. Whisk until well combined.',
-    'In a separate bowl, whisk together whole wheat flour, baking powder, cinnamon, and salt.',
-    'Pour the dry ingredients into the wet ingredients. Stir gently with a wooden spoon until just combined — a few lumps are fine. Do not overmix.',
-    'Heat a nonstick griddle or skillet over medium heat. Add a tiny drizzle of olive oil or spray with cooking spray.',
-    'Once hot, pour about ¼ cup batter per pancake onto the griddle.',
-    'Cook 2–3 min until bubbles form across the surface and edges look set. Flip with a spatula.',
-    'Cook 1–2 more min on the second side until golden. Adjust heat if they are browning too quickly.',
-    'Repeat with remaining batter. Serve immediately with a drizzle of maple syrup, or cool and freeze in a zip-top bag between layers of parchment.'
-  ],
-  kids:{aleene:'Mash bananas and whisk wet ingredients together in the large bowl',kaily:'Whisk dry ingredients in a separate bowl then pour into wet mixture',lilly:'Watch for bubbles on the pancakes and tell a parent when it's time to flip!'},
-  nutrition:{cal:320,protein:'10g',fat:'9g',carbs:'50g',sugar:'12g'}});
-
-
-
-// ============================================================
-// BREAKFAST RECIPES – Pass 4 (MB items 37-47)
-// ============================================================
-
-addRecipe('Cinnamon Sweet Potato Oatmeal','breakfast',{prep:'10min',cook:'15min',serves:5,freezer:false,
-  ingredients:['2 cups rolled oats','4 cups water','1 medium sweet potato, peeled and finely grated (about 1 cup)','1½ tsp cinnamon','¼ tsp nutmeg','1 tbsp pure maple syrup','1 tsp vanilla extract','pinch of salt'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Peel the sweet potato. Using the large holes of a box grater, grate the sweet potato into a bowl.',
-    'Bring 4 cups of water to a boil in a medium saucepan over high heat.',
-    'Add a pinch of salt and the grated sweet potato to the boiling water. Stir and cook 2 min.',
-    'Stir in rolled oats. Reduce heat to medium.',
-    'Cook 5–7 min, stirring often, until oats are thick and creamy and sweet potato is fully cooked.',
-    'Stir in cinnamon, nutmeg, and maple syrup. Cook 1 more min.',
-    'Remove from heat. Stir in vanilla extract.',
-    'Divide into 5 bowls and serve immediately!'
-  ],
-  kids:{aleene:'Grate sweet potato using a box grater (adult holds the grater steady)',kaily:'Stir the oats as they cook so they don't stick to the bottom',lilly:'Measure and add the cinnamon, nutmeg, and vanilla to the pot'},
-  nutrition:{cal:200,protein:'5g',fat:'2g',carbs:'41g',sugar:'9g'}});
-
-addRecipe('Blueberry Oat Muffins (dairy-free)','breakfast',{prep:'15min',cook:'22min',serves:5,freezer:true,
-  ingredients:['1½ cups whole wheat flour','1 cup rolled oats','2 tsp baking powder','½ tsp cinnamon','pinch of salt','2 large eggs','¾ cup unsweetened oat milk','3 tbsp pure maple syrup','¼ cup unsweetened applesauce','1 tsp vanilla extract','1½ cups fresh or frozen blueberries','cooking spray or olive oil for muffin tin'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Preheat oven to 375°F (190°C).',
-    'Spray a 12-cup muffin tin with cooking spray.',
-    'In a large bowl, whisk together whole wheat flour, rolled oats, baking powder, cinnamon, and salt.',
-    'In a separate medium bowl, whisk together eggs, oat milk, maple syrup, applesauce, and vanilla extract until smooth.',
-    'Pour the wet ingredients into the dry ingredients. Stir gently with a wooden spoon until just combined — a few small lumps are fine. Do not overmix or muffins will be dense.',
-    'Gently fold in blueberries, being careful not to crush them.',
-    'Spoon batter evenly into the 12 muffin cups, filling each about ¾ full.',
-    'Bake 20–22 min until tops are golden and a toothpick inserted in the center comes out clean.',
-    'Let cool in the pan 5 min, then transfer to a wire rack.',
-    'Serve warm. To freeze, let cool completely, then place in a zip-top bag. Reheat in microwave 45–60 seconds.'
-  ],
-  kids:{aleene:'Whisk together all wet ingredients in a medium bowl',kaily:'Whisk together all dry ingredients in the large bowl',lilly:'Gently fold in blueberries and help spoon batter into muffin cups'},
-  nutrition:{cal:240,protein:'7g',fat:'4g',carbs:'45g',sugar:'13g'}});
-
-addRecipe('Mango Smoothie Bowl','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['3 cups frozen mango chunks','1½ cups unsweetened oat milk','1 ripe banana','1 tsp vanilla extract','toppings: ½ cup rolled oats, 1 cup fresh or frozen berries, 1 tbsp chia seeds'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Take frozen mango from freezer and let sit on the counter 3–4 min to slightly soften.',
-    'Peel the banana and break into chunks.',
-    'Place frozen mango, banana chunks, oat milk, and vanilla extract in a blender.',
-    'Blend on high 60–90 seconds until completely smooth and thick. The mixture should be thick like soft-serve ice cream — add 1–2 tbsp more oat milk only if blender is struggling.',
-    'Divide the blended mixture evenly among 5 bowls.',
-    'Top each bowl with a small handful of rolled oats, a few berries, and a sprinkle of chia seeds.',
-    'Serve immediately — smoothie bowls get watery if they sit too long!'
-  ],
-  kids:{aleene:'Add all the smoothie ingredients to the blender and run it (adult supervises blender start)',kaily:'Arrange toppings in small bowls on the counter so everyone can top their own',lilly:'Spoon the smoothie mixture into bowls and call everyone to the table'},
-  nutrition:{cal:200,protein:'4g',fat:'3g',carbs:'42g',sugar:'22g'}});
-
-addRecipe('Banana Almond Smoothie','breakfast',{prep:'5min',cook:'0min',serves:5,freezer:false,
-  ingredients:['5 ripe bananas (fresh or frozen)','5 tbsp natural almond butter','2½ cups unsweetened oat milk','1 tsp cinnamon','1 tsp vanilla extract','5 cups ice cubes'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Peel bananas and break into chunks. (If using fresh bananas, add more ice for a thicker texture.)',
-    'Place banana chunks, almond butter, oat milk, cinnamon, vanilla extract, and ice in a blender.',
-    'Blend on high 60–90 seconds until completely smooth and creamy.',
-    'Taste and add a drizzle of maple syrup if more sweetness is desired.',
-    'Pour evenly into 5 glasses and serve immediately!'
-  ],
-  kids:{aleene:'Peel and break bananas into chunks, then add all ingredients to blender',kaily:'Measure almond butter with a tablespoon and add to blender',lilly:'Pour the finished smoothie into glasses (adult holds the blender)'},
-  nutrition:{cal:255,protein:'6g',fat:'10g',carbs:'38g',sugar:'18g'}});
-
-addRecipe('Green Smoothie Bowl','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['3 ripe bananas','3 cups fresh baby spinach','1½ cups unsweetened oat milk','1 cup frozen mango or frozen pineapple chunks','toppings: ½ cup rolled oats, 1 tbsp chia seeds, ½ cup sliced banana or berries'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Peel bananas and break into chunks.',
-    'Add baby spinach, oat milk, and frozen mango to blender first (this helps it blend smoothly).',
-    'Add banana chunks on top.',
-    'Blend on high 60–90 seconds until completely smooth and thick. The spinach will turn the smoothie bright green — that's perfect!',
-    'The mixture should be thick like soft-serve. Add 1–2 tbsp more oat milk only if the blender struggles.',
-    'Divide evenly among 5 bowls.',
-    'Top each bowl with a sprinkle of rolled oats, chia seeds, and a few slices of banana or berries.',
-    'Serve immediately!'
-  ],
-  kids:{aleene:'Add spinach and liquids to blender first, then add bananas and run blender',kaily:'Arrange toppings in small bowls so everyone can add their own',lilly:'Spoon smoothie into bowls and sprinkle on the toppings'},
-  nutrition:{cal:195,protein:'4g',fat:'3g',carbs:'41g',sugar:'20g'}});
-
-addRecipe('Smoothie Bowl (oat milk)','breakfast',{prep:'10min',cook:'0min',serves:5,freezer:false,
-  ingredients:['3 cups frozen mixed berries','2 ripe bananas','1½ cups unsweetened oat milk','1 tsp vanilla extract','toppings: ½ cup rolled oats, 1 tbsp chia seeds, fresh banana slices'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Let frozen berries sit at room temperature 3–4 min to slightly soften.',
-    'Peel bananas and break into chunks.',
-    'Place berries, banana chunks, oat milk, and vanilla in the blender.',
-    'Blend on high 60–90 seconds until thick and smooth. It should be thick like soft-serve — this is what makes it a "bowl" instead of a drink.',
-    'If too thick to blend, add 1 tbsp of oat milk at a time and pulse again.',
-    'Divide evenly among 5 bowls.',
-    'Top each bowl with a sprinkle of rolled oats, a pinch of chia seeds, and a few banana slices.',
-    'Serve immediately — smoothie bowls melt fast!'
-  ],
-  kids:{aleene:'Load the blender and run it on high (adult supervises blender start)',kaily:'Arrange toppings in small cups so everyone can build their own bowl',lilly:'Scoop smoothie into bowls with a large spoon'},
-  nutrition:{cal:185,protein:'3g',fat:'2g',carbs:'40g',sugar:'20g'}});
-
-addRecipe('Chickpea Breakfast Scramble','breakfast',{prep:'10min',cook:'15min',serves:5,freezer:false,
-  ingredients:['2 cans (15 oz each) chickpeas, drained and rinsed','1 cup baby spinach','1 cup diced bell pepper','½ yellow onion, diced','2 garlic cloves, minced','1 tbsp olive oil','1 tsp turmeric','1 tsp cumin','1 tsp garlic powder','1 tbsp low-sodium soy sauce','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Open chickpea cans, pour into a colander, and rinse with cold water. Drain well and pat dry with paper towels.',
-    'Dice bell pepper and onion. Mince garlic.',
-    'In a small bowl, stir together turmeric, cumin, and garlic powder.',
-    'Heat olive oil in a large nonstick skillet over medium-high heat.',
-    'Add onion and bell pepper; cook 4–5 min, stirring often, until softened.',
-    'Add garlic and cook 30 more seconds.',
-    'Add drained chickpeas to the skillet. Spread in a single layer and cook without stirring 2–3 min to let them crisp on one side.',
-    'Sprinkle in the spice blend and add soy sauce. Stir everything well.',
-    'Add baby spinach and stir until wilted, about 1 min.',
-    'Cook 2–3 more min, stirring occasionally, until chickpeas are golden and crispy in spots.',
-    'Taste and adjust seasoning, then plate and serve hot!'
-  ],
-  kids:{aleene:'Drain and rinse chickpeas, then pat dry with paper towels',kaily:'Mix spices together in a small bowl',lilly:'Add spinach to the pan and stir with a wooden spoon (supervised)'},
-  nutrition:{cal:220,protein:'10g',fat:'5g',carbs:'32g',sugar:'5g'}});
-
-addRecipe('Black Bean Breakfast Bowl','breakfast',{prep:'10min',cook:'15min',serves:5,freezer:false,
-  ingredients:['2 cups cooked brown rice (prepare night before)','2 cans (15 oz each) black beans, drained and rinsed','1 cup baby spinach','1 cup diced bell pepper','½ yellow onion, diced','1 tbsp olive oil','1 tsp cumin','1 tsp garlic powder','½ tsp smoked paprika','1 tbsp low-sodium soy sauce','salt & pepper to taste'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'If cooking rice fresh: rinse 1 cup dry brown rice, combine with 2 cups water, bring to boil, reduce heat, cover, and cook 35–40 min. Best done the night before.',
-    'Drain and rinse black beans in a colander with cold water.',
-    'Dice bell pepper and onion.',
-    'In a small bowl, stir together cumin, garlic powder, and smoked paprika.',
-    'Heat olive oil in a large skillet over medium-high heat.',
-    'Add onion and bell pepper; cook 4–5 min, stirring, until softened.',
-    'Add black beans, spice blend, and soy sauce. Stir well to coat.',
-    'Cook 4–5 min, stirring occasionally, until beans are heated through and slightly crispy at the edges.',
-    'Add spinach and stir for 1 min until wilted.',
-    'Divide cooked brown rice among 5 bowls and spoon the black bean mixture on top.',
-    'Serve immediately!'
-  ],
-  kids:{aleene:'Drain and rinse black beans and mix together the spice blend',kaily:'Dice bell pepper with a safe knife (adult supervises)',lilly:'Spoon rice into bowls and help set out bowls on the table'},
-  nutrition:{cal:295,protein:'13g',fat:'4g',carbs:'52g',sugar:'2g'}});
-
-addRecipe('Sweet Potato Toast & Avocado','breakfast',{prep:'10min',cook:'15min',serves:5,freezer:false,
-  ingredients:['2 large sweet potatoes, scrubbed and sliced lengthwise into ½-inch planks','2 ripe avocados','1 tbsp lemon juice','½ tsp garlic powder','salt & pepper to taste','1 tbsp olive oil (for brushing)','optional: pinch of red pepper flakes'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Wash and scrub sweet potatoes. Slice each lengthwise into ½-inch thick planks — these are your "toasts."',
-    'Brush each sweet potato plank lightly with olive oil on both sides.',
-    'Toast sweet potato planks: use a toaster (lay flat, may need 2–3 cycles), a toaster oven at 400°F for 12–15 min flipping halfway, or a dry skillet over medium-high heat 5–6 min per side until tender and lightly charred.',
-    'While sweet potato toasts cook, cut avocados in half, remove pits, and scoop flesh into a bowl.',
-    'Add lemon juice, garlic powder, salt, and pepper to the avocado. Mash with a fork until smooth but slightly chunky.',
-    'Once sweet potato toasts are tender and golden, transfer to plates.',
-    'Spoon mashed avocado generously over each plank.',
-    'Add a pinch of red pepper flakes on top if desired.',
-    'Serve immediately!'
-  ],
-  kids:{aleene:'Mash avocado in a bowl with lemon juice and seasoning',kaily:'Brush sweet potato planks with olive oil on both sides',lilly:'Spoon avocado onto each sweet potato toast and spread it out'},
-  nutrition:{cal:205,protein:'3g',fat:'12g',carbs:'25g',sugar:'6g'}});
-
-addRecipe('Avocado Toast & Poached Egg','breakfast',{prep:'5min',cook:'10min',serves:5,freezer:false,
-  ingredients:['5 slices whole wheat bread','2 ripe avocados','5 large eggs','1 tbsp white vinegar (for poaching)','1 tbsp lemon juice','½ tsp garlic powder','salt & freshly ground black pepper'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'Cut avocados in half, remove pits, and scoop flesh into a bowl.',
-    'Add lemon juice, garlic powder, salt, and pepper to the avocado. Mash with a fork until smooth but slightly chunky. Set aside.',
-    'Fill a medium saucepan with 3 inches of water and bring to a gentle simmer — small bubbles, not a rolling boil.',
-    'Add white vinegar to the water — this helps egg whites hold together.',
-    'Toast the whole wheat bread slices in the toaster until golden.',
-    'Crack each egg one at a time into a small cup or ramekin — never directly into the hot water.',
-    'Stir the simmering water gently in a circle, then slide one egg from the cup into the center.',
-    'Poach for 3 min for a slightly runny yolk, or 4 min for a fully set yolk. Remove with a slotted spoon and drain on a paper towel.',
-    'Repeat for remaining eggs.',
-    'Spread mashed avocado over each slice of toast.',
-    'Top each toast with a poached egg. Season with salt and pepper and serve immediately!'
-  ],
-  kids:{aleene:'Mash avocado with lemon juice and seasoning until smooth',kaily:'Crack eggs one at a time into a small cup before poaching',lilly:'Pop toast up when golden and place each slice on a plate'},
-  nutrition:{cal:265,protein:'12g',fat:'13g',carbs:'25g',sugar:'2g'}});
-
-addRecipe('French Toast (dairy-free)','breakfast',{prep:'10min',cook:'20min',serves:5,freezer:true,
-  ingredients:['10 slices whole wheat bread','4 large eggs','1 cup unsweetened oat milk','1 tsp cinnamon','1 tsp vanilla extract','1 tsp pure maple syrup (plus more for serving)','pinch of salt','1 tsp olive oil or cooking spray (for pan)'],
-  steps:[
-    'Wash your hands and gather all ingredients on the counter.',
-    'In a wide, shallow bowl, whisk together eggs, oat milk, cinnamon, vanilla extract, maple syrup, and a pinch of salt until fully combined.',
-    'Heat a large nonstick skillet or griddle over medium heat. Add a tiny drizzle of olive oil or spray with cooking spray.',
-    'Dip one slice of bread into the egg mixture, letting it soak 10–15 seconds on each side — bread should absorb the mixture without falling apart.',
-    'Let excess egg mixture drip off, then place the soaked bread in the hot pan.',
-    'Cook 2–3 min on the first side until deep golden brown. Flip and cook 2 more min on the second side.',
-    'Transfer to a plate and repeat with remaining bread slices, adding a small spray of oil between batches as needed.',
-    'Serve immediately with a drizzle of maple syrup.',
-    'To freeze: cool completely, then place in a zip-top bag between layers of parchment. Reheat in toaster or oven at 350°F for 5–8 min.'
-  ],
-  kids:{aleene:'Whisk together all the egg dip ingredients in the shallow bowl',kaily:'Dip each bread slice in the egg mixture and let it soak (adult manages the pan)',lilly:'Watch the timer and tell a parent when 2–3 minutes is up for flipping'},
-  nutrition:{cal:290,protein:'12g',fat:'7g',carbs:'43g',sugar:'8g'}});
-
-
+addRecipe('Pumpkin Oatmeal','breakfast',{prep:'2min',cook:'8min',serves:5,freezer:false,
+  ingredients:['2 cups rolled oats','3 cups oat milk','1 cup canned pure pumpkin','1 tsp cinnamon','½ tsp nutmeg','1 tbsp maple syrup','2 tbsp pumpkin seeds'],
+  steps:['Bring oat milk to simmer.','Stir in oats; cook 5 min.','Add pumpkin, cinnamon, nutmeg.','Cook 2 more min.','Top with pumpkin seeds & syrup.'],
+  kids:{aleene:'Stir oatmeal',kaily:'Measure spices',lilly:'Sprinkle seeds'},
+  nutrition:{cal:230,protein:'7g',fat:'5g',carbs:'38g',sugar:'5g'}});
 
 // Generate remaining recipes automatically
 // ── SEASONAL RECIPE CARDS ──
@@ -3296,6 +2498,37 @@ function renderTracker() {
       </div>`;
     }
   });
+  // Exercise weekly log section
+  html += '</div>'; // close weight trend chart flex container
+  html += '<h3 class="font-display font-bold text-sm mt-4 mb-2">🏃 Weekly Exercise Log</h3>';
+  html += '<p class="text-xs text-charcoal-400 mb-3">Check off each day you completed the workout. Missed days stay unchecked so you always know exactly which one was skipped.</p>';
+  html += '<div class="space-y-3">';
+  weekLabels.forEach(function(wk, wi) {
+    var exKey = 'excheck_' + currentMonth + '_w' + (wi+1);
+    var exSaved = {};
+    try { exSaved = JSON.parse(localStorage.getItem(exKey)||'{}'); } catch(e) { exSaved = {}; }
+    var doneCount = wk.filter(function(d){ return exSaved[d.dayName+'_'+d.day]; }).length;
+    html += '<div class="card-sm border border-teal-200 bg-teal-50">';
+    html += '<div class="flex items-center justify-between mb-2">';
+    html += '<span class="font-display font-bold text-xs text-teal-700">Week ' + (wi+1) + ' &nbsp;&middot;&nbsp; ' + wk[0].dayName + ' ' + wk[0].day + ' – ' + wk[wk.length-1].dayName + ' ' + wk[wk.length-1].day + '</span>';
+    html += '<span class="exdone-' + (wi+1) + ' text-xs text-charcoal-400">' + doneCount + '/' + wk.length + ' done</span>';
+    html += '</div><div class="flex flex-wrap gap-2">';
+    wk.forEach(function(d) {
+      var dayKey = d.dayName + '_' + d.day;
+      var isChecked = exSaved[dayKey] ? ' checked' : '';
+      var isRest = (d.dayName === 'Sun');
+      var bg = isRest ? 'bg-sage-100 border-sage-300' : 'bg-white border-teal-300';
+      var label = isRest ? '<span class="text-[9px] text-sage-500">rest</span>' : '';
+      html += '<label class="flex flex-col items-center gap-0.5 cursor-pointer px-2 py-1 rounded-lg border ' + bg + '">';
+      html += '<span class="text-xs font-bold text-charcoal-500">' + d.dayName + '</span>';
+      html += '<span class="text-xs text-charcoal-400">' + d.day + '</span>';
+      html += label;
+      html += '<input type="checkbox" class="ex-tracker-check mt-0.5" data-wk="' + (wi+1) + '" data-daykey="' + dayKey + '"' + isChecked + '>';
+      html += '</label>';
+    });
+    html += '</div></div>';
+  });
+  html += '</div>';
 
   html += `
     <h3 class="font-display font-bold text-sm mt-4 mb-2">📝 Monthly Notes & Wins</h3>
@@ -3652,6 +2885,30 @@ function bindDynamicEvents() {
   });
 
   // Tracker exercise day checkboxes
+  document.querySelectorAll('.ex-tracker-check').forEach(function(cb) {
+    cb.addEventListener('change', function() {
+      var wk = this.dataset.wk;
+      var dayKey = this.dataset.daykey;
+      var exKey = 'excheck_' + currentMonth + '_w' + wk;
+      var saved = {};
+      try { saved = JSON.parse(localStorage.getItem(exKey)||'{}'); } catch(e) { saved = {}; }
+      if(this.checked) { saved[dayKey] = true; } else { delete saved[dayKey]; }
+      localStorage.setItem(exKey, JSON.stringify(saved));
+      // Update the "X/N done" counter without full re-render
+      var card = this.closest('.card-sm');
+      if(card) {
+        var total = card.querySelectorAll('.ex-tracker-check').length;
+        var done = card.querySelectorAll('.ex-tracker-check:checked').length;
+        var spans = card.querySelectorAll('span');
+        for(var s=0; s<spans.length; s++) {
+          if(spans[s].textContent.indexOf('/ done') !== -1 || spans[s].textContent.match(/\d+\/\d+ done/)) {
+            spans[s].textContent = done + '/' + total + ' done'; break;
+          }
+        }
+      }
+    });
+  });
+
   // Exercise tab switching (plan vs dictionary)
   document.querySelectorAll('[data-extab]').forEach(function(btn) {
     btn.addEventListener('click', function() {
