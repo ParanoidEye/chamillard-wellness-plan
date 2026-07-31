@@ -2527,7 +2527,7 @@ function renderGrocery() {
 
     // Dairy-free / condiments
     items.push(ksItem('Dairy-free yogurt (almond or coconut)', 4, '5.3 oz cup', 5.56, 'Dairy/Alt'));
-    items.push(ksItem('Salsa (mild, no-sugar)', 1, '16 oz jar', 3.49, 'Condiments'));
+    items.push(ksItem('Guacamole (fresh, store-bought)', 1, '8 oz tub', 3.49, 'Produce'));
     items.push(ksItem('Hot sauce (e.g. Cholula)', 1, '5 oz bottle', 2.99, 'Condiments'));
     items.push(ksItem('Tahini', 1, '11 oz jar', 5.49, 'Condiments'));
     items.push(ksItem('Dijon mustard', 1, '12 oz jar', 2.99, 'Condiments'));
@@ -2696,11 +2696,12 @@ function renderBatch() {
     const tasks = [];
     const breakfasts = [...new Set(wk.map(function(d){return d.breakfast;}))];
     tasks.push({label:'🌅 Morning meal prep', detail:'Prep breakfasts for Mon–Fri morning rush'});
+    var addedOat = false, addedSmoothie = false, addedEgg = false;
     breakfasts.slice(0,3).forEach(function(name) {
       const n = name.toLowerCase();
-      if(n.includes('overnight')||n.includes('oat')) tasks.push({label:'🥣 Overnight oats (batch)', detail:'Make 5 jars with oats, almond milk, fruit — refrigerate for Mon–Fri'});
-      else if(n.includes('smoothie')) tasks.push({label:'🥤 Smoothie packs', detail:'Portion frozen fruit + spinach into 5 zip bags — grab-and-blend each morning'});
-      else if(n.includes('egg')||n.includes('muffin')) tasks.push({label:'🥚 Egg muffins', detail:'Bake 12-count muffin tin of veggie egg muffins — refrigerate up to 5 days'});
+      if(!addedOat && (n.includes('overnight')||n.includes('oat'))) { tasks.push({label:'🥣 Overnight oats (batch)', detail:'Make 5 jars with oats, almond milk, fruit — refrigerate for Mon–Fri'}); addedOat = true; }
+      else if(!addedSmoothie && n.includes('smoothie')) { tasks.push({label:'🥤 Smoothie packs', detail:'Portion frozen fruit + spinach into 5 zip bags — grab-and-blend each morning'}); addedSmoothie = true; }
+      else if(!addedEgg && (n.includes('egg')||n.includes('muffin'))) { tasks.push({label:'🥚 Egg muffins', detail:'Bake 12-count muffin tin of veggie egg muffins — refrigerate up to 5 days'}); addedEgg = true; }
     });
     // Sunday standard tasks
     tasks.push({label:'🥬 Wash & chop produce', detail:'All vegetables for the week — store in airtight containers with paper towels'});
