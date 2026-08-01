@@ -4848,150 +4848,91 @@ function renderRecipes() {
 
 function renderGrocery() {
   const plan = buildDailyPlan(currentMonth);
-  const mn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const pts = currentMonth.split(' ');
-  const year = parseInt(pts[1]);
-  const monthIdx = mn.indexOf(pts[0]);
 
-  // Sat→Fri shopping cycle: each trip covers Sat morning through next Fri night
-  // First week starts on the first day of the month and runs to next Friday (or Sat if first day is Sat)
+  // Split plan into Sat→Fri shopping weeks
   const weeks = [];
   let wk = [];
   plan.forEach(function(d) {
-    // Start a new shopping week when we hit Saturday AND already have items
     if(d.dayName === 'Sat' && wk.length > 0) { weeks.push(wk); wk = []; }
     wk.push(d);
   });
   if(wk.length) weeks.push(wk);
 
-  // King Soopers real-packaging quantities and prices (Colorado Springs 2026)
-  // Returns {item, qty, unit, price, category}
-  function ksItem(item, qty, unit, price, cat) {
-    return {item:item, qty:qty, unit:unit, price:price, cat:cat};
+  // Category emoji map for grouping ingredient strings
+  const CAT_EMOJI = {
+    'Produce':'\uD83E\uDD66','Protein':'\uD83E\uDED8','Eggs':'\uD83E\uDD5A','Dairy Alt':'\uD83E\uDD5B',
+    'Frozen':'❄️','Snacks':'\uD83C\uDF4E','Bakery':'\uD83C\uDF5E','Grains':'\uD83C\uDF3E',
+    'Beans & Legumes':'\uD83E\uDED8','Condiments & Oils':'\uD83E\uDDF4','Pantry':'\uD83E\uDD6B',
+    'Spices & Herbs':'\uD83C\uDF3F','Sweeteners':'\uD83C\uDF6F','Nut Butters & Nuts':'\uD83E\uDD5C',
+    'Canned Goods':'\uD83E\uDD6B','Beverages':'\uD83E\uDD64','Other':'\uD83D\uDCE6'
+  };
+
+  // Categorize an ingredient string by keyword detection
+  function categorize(ing) {
+    const s = ing.toLowerCase();
+    if(/\begg(s)?\b/.test(s)) return 'Eggs';
+    if(/\boat milk|almond milk|coconut milk|oat cream\b/.test(s)) return 'Dairy Alt';
+    if(/\bspinach|kale|lettuce|arugula|broccoli|cauliflower|zucchini|cucumber|carrot|onion|garlic|ginger|bell pepper|mushroom|celery|corn|edamame|peas|sweet potato|potato|tomato|avocado|banana|apple|berry|berries|mango|lemon|lime|orange|peach|pear|grape|fig|date|scallion|green onion|jalapen|cilantro|parsley|basil|herb\b/.test(s)) return 'Produce';
+    if(/\bchicken|turkey|ground beef|beef|pork|tofu|tempeh|lentil|protein powder\b/.test(s)) return 'Protein';
+    if(/\bblack bean|kidney bean|chickpea|pinto bean|navy bean|cannellini|white bean|garbanzo\b/.test(s)) return 'Beans & Legumes';
+    if(/\brice|quinoa|oat|pasta|noodle|bread|tortilla|flour|panko|breadcrumb\b/.test(s)) return 'Grains';
+    if(/\bfrozen\b/.test(s)) return 'Frozen';
+    if(/\bcanola oil|olive oil|coconut oil|sesame oil|avocado oil|oil\b|vinegar|soy sauce|tamari|fish sauce|hot sauce|sriracha|salsa|mustard|ketchup|tahini\b/.test(s)) return 'Condiments & Oils';
+    if(/\bcan(ned)?|broth|stock|tomato paste|tomato sauce|crushed tomato|diced tomato\b/.test(s)) return 'Canned Goods';
+    if(/\bsalt|pepper|cumin|paprika|turmeric|oregano|thyme|rosemary|chili powder|cayenne|cinnamon|nutmeg|cardamom|coriander|curry|garam|seasoning|spice\b/.test(s)) return 'Spices & Herbs';
+    if(/\bmaple syrup|honey|sugar|agave|stevia\b/.test(s)) return 'Sweeteners';
+    if(/\bbaking soda|baking powder|cornstarch|vanilla|yeast|cocoa|chocolate\b/.test(s)) return 'Pantry';
+    if(/\balmond butter|peanut butter|cashew butter|nut butter|almond|cashew|walnut|pecan|pistachio|mixed nut|sunflower seed|pumpkin seed|chia|flax|hemp seed\b/.test(s)) return 'Nut Butters & Nuts';
+    if(/\bwater|coffee|tea|juice\b/.test(s)) return 'Beverages';
+    if(/\bhummus|rice cake|cracker|granola|protein bar|trail mix\b/.test(s)) return 'Snacks';
+    return 'Other';
   }
 
-  // Categorized pantry vs weekly items
-  const PANTRY_MONTHLY = [
-    ksItem('Olive oil (store brand)', 1, '16 oz bottle', 4.99, 'Oils & Vinegar'),
-    ksItem('Coconut oil', 1, '14 oz jar', 5.49, 'Oils & Vinegar'),
-    ksItem('Apple cider vinegar', 1, '32 oz bottle', 3.29, 'Oils & Vinegar'),
-    ksItem('Low-sodium soy sauce', 1, '10 oz bottle', 2.79, 'Pantry'),
-    ksItem('Kosher salt', 1, '3 lb box', 3.49, 'Pantry'),
-    ksItem('Black pepper (ground)', 1, '3.12 oz jar', 3.99, 'Spices'),
-    ksItem('Garlic powder', 1, '3.12 oz jar', 3.29, 'Spices'),
-    ksItem('Onion powder', 1, '2.69 oz jar', 2.99, 'Spices'),
-    ksItem('Cumin (ground)', 1, '2.1 oz jar', 3.29, 'Spices'),
-    ksItem('Chili powder', 1, '2.5 oz jar', 2.99, 'Spices'),
-    ksItem('Smoked paprika', 1, '2.12 oz jar', 3.29, 'Spices'),
-    ksItem('Dried oregano', 1, '0.75 oz jar', 2.49, 'Spices'),
-    ksItem('Dried thyme', 1, '0.75 oz jar', 2.49, 'Spices'),
-    ksItem('Cinnamon (ground)', 1, '2.37 oz jar', 3.29, 'Spices'),
-    ksItem('Nutritional yeast', 1, '4.5 oz bag', 5.49, 'Pantry'),
-    ksItem('Cornstarch', 1, '16 oz box', 1.99, 'Pantry'),
-    ksItem('Baking soda', 1, '16 oz box', 1.29, 'Pantry'),
-    ksItem('Baking powder', 1, '8.1 oz can', 2.49, 'Pantry'),
-    ksItem('Vanilla extract', 1, '2 oz bottle', 4.49, 'Pantry'),
-    ksItem('Maple syrup (pure)', 1, '12.5 oz bottle', 6.99, 'Sweeteners'),
-    ksItem('Honey (raw)', 1, '12 oz bear', 5.99, 'Sweeteners'),
-    ksItem('Almond butter', 1, '16 oz jar', 7.49, 'Nut Butters'),
-    ksItem('Oats (old-fashioned)', 1, '42 oz canister', 5.49, 'Grains'),
-    ksItem('Brown rice (dry)', 1, '5 lb bag', 5.99, 'Grains'),
-    ksItem('Quinoa (dry)', 1, '16 oz bag', 4.99, 'Grains'),
-    ksItem('Black beans (canned 4-pack)', 2, '15 oz can × 4', 5.98, 'Beans'),
-    ksItem('Chickpeas (canned)', 2, '15 oz can × 4', 5.98, 'Beans'),
-    ksItem('Kidney beans (canned)', 1, '15 oz can × 4', 2.99, 'Beans'),
-    ksItem('Vegetable broth (32 oz)', 2, '32 oz carton', 3.98, 'Pantry'),
-    ksItem('Coconut milk (light)', 2, '13.5 oz can', 3.98, 'Pantry'),
-    ksItem('Diced green chiles (canned)', 2, '4 oz can', 2.38, 'Pantry'),
-  ];
-
-  // Per-week items — generated from plan meals
-  // Returns array of weekly grocery items based on dinners/lunches/breakfasts in the week
-  function buildWeeklyList(wk) {
-    const items = [];
-    const dinners = wk.map(function(d){return d.dinner;});
-    const lunches  = wk.map(function(d){return d.lunch;});
-    const breakfasts = wk.map(function(d){return d.breakfast;});
-
-    // Check if tofu is needed (max once per week)
-    const hasTofuDinner = dinners.some(function(n){return n&&n.toLowerCase().includes('tofu');});
-    const hasTofuLunch  = lunches.some(function(n){return n&&n.toLowerCase().includes('tofu');});
-    if(hasTofuDinner || hasTofuLunch) {
-      items.push(ksItem('Extra-firm tofu', 1, '14 oz block', 2.49, 'Protein'));
-    }
-
-    // Proteins & beans from dinners
-    const allMeals = [...dinners,...lunches].join(' ').toLowerCase();
-    if(allMeals.includes('lentil')) items.push(ksItem('Green or red lentils (dry)', 1, '16 oz bag', 2.49, 'Protein'));
-    if(allMeals.includes('chicken')) items.push(ksItem('Chicken breast (boneless)', 2, '1 lb pack', 7.98, 'Protein'));
-    if(allMeals.includes('turkey')) items.push(ksItem('Ground turkey (93% lean)', 1, '1 lb pack', 4.99, 'Protein'));
-    if(allMeals.includes('egg')) items.push(ksItem('Eggs (large)', 1, '1 dozen', 3.49, 'Dairy/Eggs'));
-
-    // Always-on weekly produce
-    items.push(ksItem('Bananas', 1, 'bunch (~6)', 1.29, 'Produce'));
-    items.push(ksItem('Avocados (ripe)', 3, 'each', 3.00, 'Produce'));
-    items.push(ksItem('Spinach (baby)', 1, '5 oz bag', 3.49, 'Produce'));
-    items.push(ksItem('Romaine lettuce', 1, '3-pack hearts', 3.29, 'Produce'));
-    items.push(ksItem('Broccoli', 2, 'head (~1 lb ea)', 3.98, 'Produce'));
-    items.push(ksItem('Bell peppers (assorted)', 1, '3-pack', 4.49, 'Produce'));
-    items.push(ksItem('Zucchini', 2, 'each', 1.98, 'Produce'));
-    items.push(ksItem('Cucumber', 2, 'each', 1.98, 'Produce'));
-    items.push(ksItem('Carrots (whole)', 1, '2 lb bag', 2.49, 'Produce'));
-    items.push(ksItem('Yellow onions', 1, '3 lb bag', 3.29, 'Produce'));
-    items.push(ksItem('Garlic (fresh)', 1, '3-head bag', 1.99, 'Produce'));
-    items.push(ksItem('Ginger root (fresh)', 1, 'knob (~4 oz)', 1.29, 'Produce'));
-    items.push(ksItem('Lime', 4, 'each', 2.00, 'Produce'));
-    items.push(ksItem('Lemon', 3, 'each', 1.50, 'Produce'));
-    items.push(ksItem('Apples', 1, '3 lb bag', 3.99, 'Produce'));
-    items.push(ksItem('Strawberries or blueberries (seasonal)', 1, '1 pint', 3.49, 'Produce'));
-    items.push(ksItem('Celery', 1, 'bunch', 1.79, 'Produce'));
-
-    // Breakfast staples
-    const bkfastStr = breakfasts.join(' ').toLowerCase();
-    if(bkfastStr.includes('oat')||bkfastStr.includes('overnight')) items.push(ksItem('Almond milk (unsweetened)', 1, '64 oz carton', 3.79, 'Dairy/Alt'));
-    if(bkfastStr.includes('smoothie')) {
-      items.push(ksItem('Frozen mango chunks', 1, '12 oz bag', 3.49, 'Frozen'));
-      items.push(ksItem('Frozen mixed berries', 1, '12 oz bag', 3.99, 'Frozen'));
-      items.push(ksItem('Almond milk (unsweetened)', 1, '64 oz carton', 3.79, 'Dairy/Alt'));
-    }
-    if(bkfastStr.includes('toast')||bkfastStr.includes('bread')) items.push(ksItem('Dave\'s Killer Bread (whole grain)', 1, 'loaf', 5.99, 'Bakery'));
-    if(bkfastStr.includes('egg')||bkfastStr.includes('muffin')) items.push(ksItem('Eggs (large)', 1, '1 dozen', 3.49, 'Dairy/Eggs'));
-
-    // Frozen backup stock
-    items.push(ksItem('Frozen corn', 1, '12 oz bag', 1.89, 'Frozen'));
-    items.push(ksItem('Frozen edamame (shelled)', 1, '10 oz bag', 2.99, 'Frozen'));
-    items.push(ksItem('Frozen peas', 1, '12 oz bag', 1.89, 'Frozen'));
-
-    // Snack staples
-    items.push(ksItem('Hummus (store brand)', 1, '17 oz tub', 3.99, 'Snacks'));
-    items.push(ksItem('Sugar snap peas', 1, '8 oz bag', 2.49, 'Produce'));
-    items.push(ksItem('Mini bell peppers (snacking)', 1, '1 lb bag', 3.49, 'Produce'));
-    items.push(ksItem('Almond butter single-serve packs', 1, '10-ct box', 6.99, 'Snacks'));
-    items.push(ksItem('Rice cakes (plain or lightly salted)', 1, '4.5 oz bag', 2.99, 'Snacks'));
-    items.push(ksItem('Mixed nuts (unsalted)', 1, '10 oz bag', 6.49, 'Snacks'));
-    items.push(ksItem('Medjool dates', 1, '8 oz bag', 4.99, 'Snacks'));
-    items.push(ksItem('Dried mango (unsweetened)', 1, '3 oz bag', 3.29, 'Snacks'));
-
-    // Lunch wraps/grains
-    if(allMeals.includes('wrap')||allMeals.includes('burrito')) items.push(ksItem('Whole wheat tortillas (8")', 1, '10-ct bag', 3.49, 'Bakery'));
-    if(allMeals.includes('salad')) items.push(ksItem('Mixed salad greens', 1, '5 oz box', 3.29, 'Produce'));
-
-    // Dairy-free / condiments
-    items.push(ksItem('Dairy-free yogurt (almond or coconut)', 4, '5.3 oz cup', 5.56, 'Dairy/Alt'));
-    items.push(ksItem('Guacamole (fresh, store-bought)', 1, '8 oz tub', 3.49, 'Produce'));
-    items.push(ksItem('Hot sauce (e.g. Cholula)', 1, '5 oz bottle', 2.99, 'Condiments'));
-    items.push(ksItem('Tahini', 1, '11 oz jar', 5.49, 'Condiments'));
-    items.push(ksItem('Dijon mustard', 1, '12 oz jar', 2.99, 'Condiments'));
-
-    return items;
+  // Parse a single ingredient string to extract a canonical name key (for dedup/merge)
+  function makeKey(ing) {
+    return ing.toLowerCase()
+      .replace(/[\d\/\.\-]+\s*(cups?|tbsp|tsp|oz|lb|lbs|g|kg|ml|l|cans?|bunch|cloves?|heads?|stalks?|slices?|pieces?|pinch|dash|pkg|package|block|bunch|bag|jar|bottle|can|carton|box)\b/g,'')
+      .replace(/\b(large|medium|small|extra|firm|fresh|frozen|dried|raw|organic|whole|boneless|skinless|ripe|baby|mini|ground|minced|chopped|diced|sliced|shredded|grated|cooked|uncooked|unsweetened|low-sodium|lean|93%|99%)\b/g,'')
+      .replace(/\s+/g,' ').trim()
+      .replace(/^,|,$/, '').trim();
   }
 
-  // Estimate week cost
-  function estimateCost(items) {
-    return items.reduce(function(sum, i){ return sum + (i.price||0); }, 0);
+  // Extract ingredients from a recipe entry in RECIPE_DB
+  function getIngredients(mealName) {
+    if(!mealName) return [];
+    const r = RECIPE_DB[mealName];
+    if(!r || !r.ingredients) return [];
+    return r.ingredients;
   }
 
-  // Group items by category
+  // Build a merged ingredient list for a week
+  function buildWeekIngredients(wk) {
+    const ingMap = {}; // key → {display, count, cat}
+
+    wk.forEach(function(day) {
+      ['breakfast','lunch','dinner','snack'].forEach(function(meal) {
+        const ings = getIngredients(day[meal]);
+        ings.forEach(function(ing) {
+          const key = makeKey(ing);
+          if(!key || key.length < 2) return;
+          if(!ingMap[key]) {
+            ingMap[key] = {display: ing, count: 1, cat: categorize(ing)};
+          } else {
+            ingMap[key].count++;
+          }
+        });
+      });
+    });
+
+    // Sort: category first, then display name
+    return Object.values(ingMap).sort(function(a,b){
+      if(a.cat < b.cat) return -1;
+      if(a.cat > b.cat) return 1;
+      return a.display.localeCompare(b.display);
+    });
+  }
+
+  // Group by category
   function groupByCat(items) {
     const cats = {};
     items.forEach(function(i) {
@@ -5001,99 +4942,90 @@ function renderGrocery() {
     return cats;
   }
 
-  // Category emoji map
-  const CAT_EMOJI = {
-    'Produce':'🥦', 'Protein':'🫘', 'Dairy/Eggs':'🥚', 'Dairy/Alt':'🥛',
-    'Frozen':'❄️', 'Snacks':'🍎', 'Bakery':'🍞', 'Grains':'🌾',
-    'Beans':'🫘', 'Condiments':'🧴', 'Pantry':'🥫', 'Oils & Vinegar':'🫙',
-    'Spices':'🌿', 'Sweeteners':'🍯', 'Nut Butters':'🥜'
-  };
-
-  const grocTab = localStorage.getItem('grocTab_'+currentMonth)||'weekly';
-
   let html = `<div class="card">
-    <h2 class="font-display text-xl font-bold text-teal-500 mb-1">🛒 ${currentMonth} Grocery List</h2>
-    <p class="text-xs text-charcoal-400 mb-3">King Soopers, Colorado Springs · Target: <strong class="text-teal-700">$150/week</strong> · Prices before Fuel Rewards & digital coupons</p>
-    <div class="card-sm bg-teal-50 border border-teal-200 mb-4 text-xs">
-      💡 <strong>Save more:</strong> Download the King Soopers app for digital coupons · Check weekly ad Wednesday · Fuel Rewards save up to $1/gal · Private Selection store brand = same quality, lower cost
-    </div>
-    <div class="flex gap-2 mb-4 flex-wrap">
-      <button class="cal-view-btn ${grocTab==='weekly'?'active':''}" data-groctab="weekly">🗓️ Weekly Lists</button>
-      <button class="cal-view-btn ${grocTab==='pantry'?'active':''}" data-groctab="pantry">🥫 Monthly Pantry</button>
+    <h2 class="font-display text-xl font-bold text-teal-500 mb-1">\uD83D\uDED2 ${currentMonth} Grocery List</h2>
+    <p class="text-xs text-charcoal-400 mb-3">Ingredients pulled directly from this month's meal plan recipes · King Soopers, Colorado Springs</p>
+    <div class="flex gap-2 mb-4 flex-wrap items-center">
+      <button onclick="clearGrocChecks()" class="ml-auto text-xs px-3 py-1.5 rounded-lg bg-coral-50 text-coral-600 border border-coral-200 hover:bg-coral-100 font-medium">✓ Clear Checked</button>
     </div>`;
 
-  if(grocTab === 'pantry') {
-    const pantCats = groupByCat(PANTRY_MONTHLY);
-    const totalPantry = estimateCost(PANTRY_MONTHLY).toFixed(2);
-    html += `<div class="card-sm bg-sage-50 border border-sage-200 mb-4">
-      <p class="text-xs text-charcoal-500">These items last the <strong>whole month</strong> — buy once, stock your pantry. Not included in weekly $150 budget.</p>
-      <p class="text-xs text-charcoal-400 mt-1">Estimated monthly pantry spend: <strong class="text-teal-700">~$${totalPantry}</strong></p>
-    </div>`;
-    Object.keys(pantCats).forEach(function(cat) {
-      const emoji = CAT_EMOJI[cat]||'📦';
-      html += `<div class="mb-3">
-        <h4 class="font-bold text-xs text-teal-700 mb-1">${emoji} ${cat}</h4>
-        <table class="w-full text-xs border-collapse">`;
-      pantCats[cat].forEach(function(item, idx) {
-        const bg = idx%2===0?'bg-white':'bg-cream-50';
-        html += `<tr class="${bg}">
-          <td class="p-1.5 font-medium w-1/2">${item.item}</td>
-          <td class="p-1.5 text-charcoal-400">${item.qty} × ${item.unit}</td>
-          <td class="p-1.5 text-right text-teal-700 font-bold">$${item.price.toFixed(2)}</td>
-        </tr>`;
-      });
-      html += `</table></div>`;
-    });
+  weeks.forEach(function(wkDays, wi) {
+    const firstDay = wkDays[0].day;
+    const lastDay  = wkDays[wkDays.length-1].day;
+    const isSatStart = wkDays[0].dayName === 'Sat';
+    const shopNote = isSatStart ? '\uD83D\uDED2 Shop: Sat ' + firstDay + ' morning' : '\uD83D\uDED2 Shop: Saturday (start of week)';
+    const wLabel = wkDays[0].dayName + ' ' + firstDay + ' – ' + wkDays[wkDays.length-1].dayName + ' ' + lastDay;
 
-  } else {
-    // Weekly lists
-    weeks.forEach(function(wk, wi) {
-      const firstDay = wk[0].day;
-      const lastDay  = wk[wk.length-1].day;
-      const isSatStart = wk[0].dayName === 'Sat';
-      const shopNote = isSatStart ? '🛒 Shop: Sat '+firstDay+' morning' : '🛒 Shop: Sat (prior month)';
-      const wLabel   = wk[0].dayName+' '+firstDay+' – '+wk[wk.length-1].dayName+' '+lastDay;
-      const items = buildWeeklyList(wk);
-      const cats  = groupByCat(items);
-      const total = estimateCost(items).toFixed(2);
-      const overBudget = parseFloat(total) > 150;
+    const items = buildWeekIngredients(wkDays);
+    const cats  = groupByCat(items);
+    const totalItems = items.length;
 
-      html += `<div class="mb-5">
-        <div class="flex items-center justify-between mb-2">
-          <h3 class="font-display font-bold text-sm text-teal-700">Week ${wi+1}: ${wLabel}</h3>
-          <div class="text-xs text-teal-600 font-medium">${shopNote}</div>
-          <div class="text-xs font-bold px-2 py-1 rounded-full ${overBudget?'bg-coral-100 text-coral-600':'bg-sage-100 text-sage-600'}">
-            Est. $${total} / $150
-          </div>
-        </div>`;
+    html += `<div class="mb-6">
+      <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+        <h3 class="font-display font-bold text-sm text-teal-700">Week ${wi+1}: ${wLabel}</h3>
+        <div class="text-xs text-teal-600 font-medium">${shopNote}</div>
+        <div class="text-xs font-bold px-2 py-1 rounded-full bg-sage-100 text-sage-600">${totalItems} ingredients</div>
+      </div>`;
 
-      // Check tofu in this week
-      const hasTofuThisWeek = items.some(function(i){return i.item.toLowerCase().includes('tofu');});
-      if(hasTofuThisWeek) {
-        html += `<div class="text-xs text-teal-600 bg-teal-50 rounded px-2 py-1 mb-2">🟨 Tofu week — 1 block (14 oz) included for this week\'s rotation</div>`;
-      }
-
+    if(totalItems === 0) {
+      html += `<p class="text-xs text-charcoal-400 italic">No recipe data available for this week.</p>`;
+    } else {
       Object.keys(cats).forEach(function(cat) {
-        const emoji = CAT_EMOJI[cat]||'📦';
-        html += `<div class="mb-2">
-          <h4 class="font-bold text-xs text-charcoal-400 mb-1">${emoji} ${cat}</h4>
+        const emoji = CAT_EMOJI[cat]||'\uD83D\uDCE6';
+        html += `<div class="mb-3">
+          <h4 class="font-bold text-xs text-teal-700 mb-1">${emoji} ${cat}</h4>
           <table class="w-full text-xs border-collapse">`;
         cats[cat].forEach(function(item, idx) {
           const bg = idx%2===0?'bg-white':'bg-cream-50';
-          html += `<tr class="${bg} border-b border-charcoal-50">
-            <td class="p-1.5 font-medium">${item.item}</td>
-            <td class="p-1.5 text-charcoal-400">${item.qty} × ${item.unit}</td>
-            <td class="p-1.5 text-right text-teal-700 font-bold w-16">$${item.price.toFixed(2)}</td>
+          const ck = currentMonth+'|w'+wi+'|'+item.display;
+          const chk = localStorage.getItem('groc_'+ck)==='1';
+          const countBadge = item.count > 1 ? ` <span class="text-teal-500 font-bold">(×${item.count})</span>` : '';
+          html += `<tr class="${bg} border-b border-charcoal-50 ${chk?'opacity-50':''}" id="grow-${encodeURIComponent(ck)}">
+            <td class="p-1.5 w-8"><input type="checkbox" class="groc-cb w-4 h-4 accent-teal-600 cursor-pointer" data-ck="${ck}" ${chk?'checked':''} title="Mark as already have"></td>
+            <td class="p-1.5 font-medium ${chk?'line-through text-charcoal-400':''}">${item.display}${countBadge}</td>
           </tr>`;
         });
         html += `</table></div>`;
       });
-      html += `<div class="text-right text-xs font-bold text-teal-700 mt-1">Week total: ~$${total}</div></div>`;
-    });
-  }
+    }
+
+    html += `</div>`;
+  });
 
   html += `</div>`;
+
+  // Checkbox event delegation
+  setTimeout(function() {
+    var area = document.getElementById('content');
+    if (!area) return;
+    area.querySelectorAll('.groc-cb').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var ck = cb.getAttribute('data-ck');
+        localStorage.setItem('groc_'+ck, cb.checked?'1':'0');
+        var row = document.getElementById('grow-'+encodeURIComponent(ck));
+        if (row) {
+          row.classList.toggle('opacity-50', cb.checked);
+          var nameTd = row.querySelectorAll('td')[1];
+          if (nameTd) {
+            nameTd.classList.toggle('line-through', cb.checked);
+            nameTd.classList.toggle('text-charcoal-400', cb.checked);
+          }
+        }
+      });
+    });
+  }, 50);
+
   return html;
+}
+
+function clearGrocChecks() {
+  var keys = [];
+  for (var i=0; i<localStorage.length; i++) {
+    var k = localStorage.key(i);
+    if (k && k.startsWith('groc_')) keys.push(k);
+  }
+  keys.forEach(function(k){ localStorage.removeItem(k); });
+  render();
 }
 
 function renderBatch() {
@@ -5436,7 +5368,7 @@ function renderExercise() {
     { // Program A — Foundation Strength
       label:'💪 Foundation Strength',
       days:{
-        Sun:{label:'🌟 Active Rest',acts:['10 min family walk','5 min gentle stretching','Gratitude circle with family']},
+        Sun:{label:'🌟 Active Rest',acts:['Family walk: 10 min easy pace','Gentle full-body stretching: 5 min','Gratitude circle with family: 5 min']},
         Mon:{label:'💪 Upper Body',acts:['Push-ups: 3×8 (modify on knees if needed)','Arm circles: 30s forward + 30s back','Tricep dips on chair: 3×10','Shoulder rolls: 10 each direction','Wall push-ups cool-down: 2×12']},
         Tue:{label:'🦵 Lower Body',acts:['Squats: 3×12','Calf raises: 3×15','Reverse lunges: 3×10 each leg','Glute bridges: 3×15','Seated leg raises: 2×12']},
         Wed:{label:'🧘 Core + Stretch',acts:['Dead-bug: 3×8 each side','Bird-dog: 3×10 each side','Cat-cow stretch: 10 reps','Child\'s pose: 60s hold','Side plank: 20s each side']},
@@ -5448,7 +5380,7 @@ function renderExercise() {
     { // Program B — Cardio Focus
       label:'🏃 Cardio & Endurance',
       days:{
-        Sun:{label:'🌟 Active Rest',acts:['Gentle yoga flow: 15 min','Family nature walk','Deep breathing: 5 min']},
+        Sun:{label:'🌟 Active Rest',acts:['Gentle yoga flow: 15 min','Family nature walk: 20 min easy','Deep breathing: 5 min']},
         Mon:{label:'🚶 Walk/Jog Intervals',acts:['Warm-up walk: 3 min','Jog 1 min / Walk 2 min: repeat 5×','Cool-down walk: 3 min','Calf stretch: 30s each leg','Hip flexor stretch: 30s each']},
         Tue:{label:'💃 Dance Cardio',acts:['Dance warm-up: 3 min','Freestyle dance: 3×4 min','Rest 60s between sets','Full-body stretch: 5 min','Kids join in for last set!']},
         Wed:{label:'🧘 Yoga + Balance',acts:['Sun salutation: 3 rounds','Warrior I: 30s each side','Tree pose: 30s each side','Downward dog: 60s','Child\'s pose cool-down: 90s']},
@@ -5460,7 +5392,7 @@ function renderExercise() {
     { // Program C — Strength Building
       label:'💪 Strength Building',
       days:{
-        Sun:{label:'🌟 Active Rest',acts:['Foam roll or gentle stretching: 15 min','Short family walk','Light mobility exercises']},
+        Sun:{label:'🌟 Active Rest',acts:['Foam roll or gentle stretching: 15 min','Short family walk: 15 min','Light mobility exercises: 10 min']},
         Mon:{label:'🏋️ Push Day',acts:['Push-ups: 4×10 (progress from knees)','Pike push-ups: 3×8','Wall push-ups wide: 2×15','Chest stretch: 30s hold','Shoulder circles: 10 each way']},
         Tue:{label:'🦵 Leg Power',acts:['Jump squats (low impact): 3×10','Lateral lunges: 3×10 each','Single-leg deadlift: 3×8 each','Wall sit: 3×30s','Standing quad stretch: 30s each']},
         Wed:{label:'🧘 Stretch & Recover',acts:['Full-body yoga: 20 min','Hip opening sequence: 10 min','Spine twists: 10 each side','Neck rolls: 5 each direction','Savasana: 5 min']},
@@ -5472,7 +5404,7 @@ function renderExercise() {
     { // Program D — Flexibility & Mindfulness
       label:'🧘 Flex & Mindfulness',
       days:{
-        Sun:{label:'🌟 Family Yoga',acts:['Partner yoga poses with kids','Sun salutation: 3 rounds together','Breathing exercises: box breathing 4 min','Gratitude meditation: 5 min']},
+        Sun:{label:'🌟 Family Yoga',acts:['Partner yoga poses with kids: 10 min','Sun salutation: 3 rounds together','Breathing exercises: box breathing 4 min','Gratitude meditation: 5 min']},
         Mon:{label:'🤸 Dynamic Stretch',acts:['Leg swings: 15 each direction','Arm circles: 30s','Hip circles: 10 each way','Walking lunges: 3×10','Inchworm walk-out: 3×8']},
         Tue:{label:'🏃 Cardio + Core',acts:['Jump rope or jumping jacks: 5 min','Mountain climbers: 3×15','Plank: 3×30s','Flutter kicks: 3×20','Cool-down walk: 3 min']},
         Wed:{label:'🧘 Deep Stretch',acts:['Pigeon pose: 60s each side','Seated forward fold: 60s','Spinal twist: 45s each side','Figure-four stretch: 45s each side','Legs up wall: 3 min']},
@@ -5484,7 +5416,7 @@ function renderExercise() {
     { // Program E — HIIT & Power
       label:'⚡ HIIT & Power',
       days:{
-        Sun:{label:'🌟 Active Rest',acts:['Light walk: 20 min','Hip flexor stretch: 30s each','Thoracic rotation: 10 each side','Deep breathing: 5 min']},
+        Sun:{label:'🌟 Active Rest',acts:['Light walk: 20 min','Hip flexor stretch: 30s each side','Thoracic rotation: 10 each side','Deep breathing: 5 min']},
         Mon:{label:'⚡ HIIT Circuit',acts:['20s on / 10s rest × 6 rounds:','• Jumping jacks (mod: step jacks)','• Push-ups','• High knees','• Squat jumps (mod: squats)','• Mountain climbers','• Plank hold','Total: ~8 min. Rest 2 min. Repeat 2×']},
         Tue:{label:'🦵 Plyometric Legs',acts:['Jump squats: 3×8 (mod: regular squats)','Lateral bounds: 3×8 each','Step-ups on stairs: 3×12 each','Speed skaters: 3×10 each','Single-leg balance: 30s each side']},
         Wed:{label:'🧘 Recovery & Core',acts:['Foam roll: 5 min','Dead-bug: 3×8 each side','Bird-dog: 3×10 each side','Plank: 3×30s','Yoga cool-down: 10 min']},
@@ -5496,7 +5428,7 @@ function renderExercise() {
     { // Program F — Holiday Active
       label:'🎄 Holiday Active',
       days:{
-        Sun:{label:'🌟 Gentle Start',acts:['Family walk: 20 min','Light stretching: 10 min','Set intentions for the week together']},
+        Sun:{label:'🌟 Gentle Start',acts:['Family walk: 20 min','Light stretching: 10 min','Set weekly intentions together: 5 min']},
         Mon:{label:'🏃 Brisk Walk',acts:['Brisk neighborhood walk: 30 min','Arm swings while walking','Calf raises at every corner','Post-walk stretch: 5 min']},
         Tue:{label:'💪 Bodyweight Strength',acts:['Squats: 3×15','Push-ups: 3×10','Glute bridges: 3×15','Side plank: 20s each','Bicycle crunches: 3×15']},
         Wed:{label:'🧘 Yoga Flow',acts:['Sun salutation: 4 rounds','Warrior sequence: 5 min','Balance poses: 5 min','Savasana: 5 min']},
@@ -5508,7 +5440,7 @@ function renderExercise() {
     { // Program G — Maintenance
       label:'✅ Maintenance & Habits',
       days:{
-        Sun:{label:'🌟 Rest & Reflect',acts:['Gentle walk: 15 min','Journal: what movement felt good this week?','Plan active moments for the week ahead']},
+        Sun:{label:'🌟 Rest & Reflect',acts:['Gentle walk: 15 min','Movement journal reflection: 5 min','Plan active moments for the week: 5 min']},
         Mon:{label:'💪 Full-Body Strength',acts:['Circuit 3×: 10 push-ups, 15 squats, 12 lunges each, 10 tricep dips','Rest 90s between rounds','Cool-down: full body stretch 5 min']},
         Tue:{label:'🏃 Cardio Choice',acts:['Choose: 30 min walk, 20 min jog intervals, or dance party','Aim for moderate intensity (can hold a conversation)','Finish with 5 min stretching']},
         Wed:{label:'🧘 Core & Mobility',acts:['Plank: 3×30s','Dead-bug: 3×10 each','Bird-dog: 3×10 each','Hip circles: 10 each way','Spine twist: 8 each side']},
@@ -5579,16 +5511,17 @@ function renderExercise() {
   function kidifyAct(act) {
     var lower = act.toLowerCase();
     var best = null;
+    var bestScore = 0;
     for (var i = 0; i < kidLookup.length; i++) {
       var kw = kidLookup[i].real.toLowerCase();
-      var words = kw.split(/[\s\/\-\(]+/);
-      for (var j = 0; j < words.length; j++) {
-        if (words[j].length > 2 && lower.indexOf(words[j]) !== -1) {
-          best = kidLookup[i];
-          break;
-        }
+      var sigWords = kw.split(/[\s\/\-\(]+/).filter(function(w){ return w.length > 2; });
+      if (sigWords.length === 0) continue;
+      // ALL significant words must appear in act text for a match
+      var allMatch = sigWords.every(function(w){ return lower.indexOf(w) !== -1; });
+      if (allMatch && sigWords.length > bestScore) {
+        best = kidLookup[i];
+        bestScore = sigWords.length;
       }
-      if (best) break;
     }
     // Show reps/detail that appears after colon
     var colonIdx = act.indexOf(':');
@@ -5674,9 +5607,15 @@ function renderExercise() {
     html += '<div class="card-sm border-l-4 ' + (day==='Sat'?'border-gold-400':day==='Sun'?'border-sage-400':'border-teal-300') + '">'
       + '<h4 class="font-bold text-sm text-teal-700 mb-1">' + day + ' — ' + d.label + '</h4>'
       + '<ul class="space-y-1">';
+    var seenKidNames = {};
     d.acts.forEach(function(act) {
       var scaledAct = scaleAct(act, phaseNum);
-      html += '<li class="text-xs text-charcoal-500 flex gap-2"><span class="text-teal-400 flex-shrink-0">▸</span>' + kidifyAct(scaledAct) + '</li>';
+      var rendered = kidifyAct(scaledAct);
+      var slugMatch = rendered.match(/data-kidslug="([^"]+)"/);
+      var deupKey = slugMatch ? slugMatch[1] : ('__raw__' + act.slice(0,30));
+      if (seenKidNames[deupKey]) return;
+      seenKidNames[deupKey] = true;
+      html += '<li class="text-xs text-charcoal-500 flex gap-2"><span class="text-teal-400 flex-shrink-0">▸</span>' + rendered + '</li>';
     });
     html += '</ul></div>';
   });
@@ -6131,14 +6070,6 @@ function bindDynamicEvents() {
   document.querySelectorAll('[data-batchtab]').forEach(function(btn) {
     btn.addEventListener('click', function() {
       localStorage.setItem('batchTab_' + currentMonth, this.dataset.batchtab);
-      render();
-    });
-  });
-
-  // Grocery sub-tab switching
-  document.querySelectorAll('[data-groctab]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      localStorage.setItem('grocTab_' + currentMonth, this.dataset.groctab);
       render();
     });
   });
