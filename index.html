@@ -4931,8 +4931,8 @@ function renderGrocery() {
       .replace(/\([^)]*\)/g, ' ')
       // Remove cooking-method prep words
       .replace(/\b(drained|rinsed|rinsed and drained|chopped|diced|minced|sliced|peeled|shredded|grated|julienned|cubed|halved|quartered|trimmed|cored|seeded|crushed|pressed|roughly|finely|thinly|freshly|coarsely|lightly|gently|toasted|roasted|cooked|uncooked|thawed|softened|melted|beaten|whisked|separated|pitted|deveined|deboned|scrambled|steamed|boiled|baked|saut\u00e9ed|mashed|spiralized|zested|squeezed)\b/gi, ' ')
-      // Remove descriptor words
-      .replace(/\b(large|medium|small|extra|firm|soft|silken|fresh|frozen|dried|raw|organic|whole|boneless|skinless|ripe|baby|mini|lean|unsweetened|low-sodium|reduced-sodium|light|dark|plain|unsalted|cooked|uncooked|pure|canned|pure|ground|packed|heaping|level)\b/gi, ' ')
+      // Remove descriptor words (incl. store-bought, homemade)
+      .replace(/\b(store-bought|store bought|homemade|hand-made|large|medium|small|extra|firm|soft|silken|fresh|frozen|dried|raw|organic|whole|boneless|skinless|ripe|baby|mini|lean|unsweetened|low-sodium|reduced-sodium|light|dark|plain|unsalted|cooked|uncooked|pure|canned|ground|packed|heaping|level)\b/gi, ' ')
       // Remove "for X" phrases at end
       .replace(/\bfor\s+(serving|topping|garnish|dipping|coating|the\s+pan|pan)\b.*/gi, '')
       // Remove "cut into X" phrases
@@ -4959,6 +4959,15 @@ function renderGrocery() {
       .replace(/[^\w\s]/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
+    // Normalize color + produce combos so they merge properly
+    r = r.replace(/\b(red|yellow|green|purple|orange|white|brown)\s+bell\s+pepper\b/g, 'bell pepper');
+    r = r.replace(/\b(red|yellow|white|sweet|purple|vidalia)\s+onion\b/g, 'onion');
+    r = r.replace(/\b(baby|flat\s+leaf|curly)\s+spinach\b/g, 'spinach');
+    r = r.replace(/\b(roma|cherry|grape|sun\s*dried)\s+tomato\b/g, 'tomato');
+    r = r.replace(/\b(shiitake|cremini|button|portobello|portabella)\s+mushroom\b/g, 'mushroom');
+    // Normalize egg plural so all eggs merge under one key
+    r = r.replace(/^eggs$/, 'egg');
+    r = r.replace(/\beggs\b/g, 'egg');
     // Depluralize: avocados→avocado, berries→berry, potatoes→potato, leaves→leaf
     r = r.replace(/ies\b/g, 'y');       // berries→berry, blueberries→blueberry
     r = r.replace(/ves\b/g, 'f');       // leaves→leaf, halves→half
@@ -4979,10 +4988,10 @@ function renderGrocery() {
     // Egg whites → eggs
     var ewM = s.match(/^((?:\d+\s+)?\d+(?:\s*\/\s*\d+)?|\d+(?:\.\d+)?)\s+egg\s+whites?/i);
     if (ewM) {
-      return { qty: parseFraction(ewM[1].replace(/\s/g,'')), unit: '', name: 'eggs', display: 'eggs', cat: categorize('eggs'), isTaste: false };
+      return { qty: parseFraction(ewM[1].replace(/\s/g,'')), unit: '', name: 'egg', display: 'egg', cat: categorize('eggs'), isTaste: false };
     }
     if (/\begg\s+whites?\b/i.test(s)) {
-      return { qty: 2, unit: '', name: 'eggs', display: 'eggs', cat: categorize('eggs'), isTaste: false };
+      return { qty: 2, unit: '', name: 'egg', display: 'egg', cat: categorize('eggs'), isTaste: false };
     }
 
     var isTaste = /\bto\s+taste\b/i.test(s) || /\bpinch\b|\bdash\b/i.test(s);
@@ -5176,11 +5185,18 @@ function buildWeekIngredients(wk) {
         ings.forEach(function(ing) {
           var p = parseIngredient(ing);
           // Canonical key: unit|name so "cup|oats" and "oats" stay separate
-          var key = (p.unit ? p.unit + '|' : '') + p.name;
+          // Use canonical name only as key so same ingredient merges regardless of unit
+          var key = p.name;
           if (!key || key.length < 2) return;
+          // Skip water — not a shopping item
+          if (/^water\b/.test(key)) return;
+          // Skip salsa (no-tomato rule) and ketchup
+          if (/^salsa\b|^ketchup\b/.test(key)) return;
           if (!ingMap[key]) {
             ingMap[key] = { qty: p.qty, unit: p.unit, display: p.display, name: p.name, canonical: p.name, cat: p.cat, isTaste: p.isTaste };
           } else {
+            // If units match, just sum. If different, keep the unit already stored and sum qty.
+            if (!ingMap[key].unit && p.unit) { ingMap[key].unit = p.unit; }
             ingMap[key].qty += p.qty;
           }
         });
@@ -5190,7 +5206,11 @@ function buildWeekIngredients(wk) {
     // Build label strings and sort
     return Object.values(ingMap).map(function(item) {
       var qStr = (!item.isTaste && item.qty > 0) ? fmtQty(item.qty) : '';
-      var label = [qStr, item.unit, item.display].filter(Boolean).join(' ');
+      // Use canonical name as fallback display if display is empty/invalid
+      var dispName = item.display && item.display.length > 1 ? item.display : item.name;
+      // Title-case the display name for presentation
+      dispName = dispName.replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+      var label = [qStr, item.unit, dispName].filter(Boolean).join(' ');
       item.label = label;
       return item;
     }).sort(function(a, b) {
@@ -5632,7 +5652,7 @@ function renderExercise() {
       label:'💪 Foundation Strength',
       days:{
         Sun:{label:'🌟 Active Rest',acts:['Family walk: 10 min easy pace','Gentle full-body stretching: 5 min','Gratitude circle with family: 5 min']},
-        Mon:{label:'💪 Upper Body',acts:['Push-ups: 3×8 (modify on knees if needed)','Arm circles: 30s forward + 30s back','Tricep dips on chair: 3×10','Shoulder rolls: 10 each direction','Wall push-ups cool-down: 2×12']},
+        Mon:{label:'💪 Upper Body',acts:['Push-ups: 3×8 (modify on knees if needed)','Arm circles: 30s forward + 30s back','Tricep dips on chair: 3×10','Shoulder rolls: 10 each direction','Chest opener stretch: hold 20s each side']},
         Tue:{label:'🦵 Lower Body',acts:['Squats: 3×12','Calf raises: 3×15','Reverse lunges: 3×10 each leg','Glute bridges: 3×15','Seated leg raises: 2×12']},
         Wed:{label:'🧘 Core + Stretch',acts:['Dead-bug: 3×8 each side','Bird-dog: 3×10 each side','Cat-cow stretch: 10 reps','Child\'s pose: 60s hold','Side plank: 20s each side']},
         Thu:{label:'🏃 Cardio Burst',acts:['March in place: 2 min','High knees: 3×30s','Step touches: 2 min','Rest 60s','Repeat circuit 2×']},
@@ -5656,7 +5676,7 @@ function renderExercise() {
       label:'💪 Strength Building',
       days:{
         Sun:{label:'🌟 Active Rest',acts:['Foam roll or gentle stretching: 15 min','Short family walk: 15 min','Light mobility exercises: 10 min']},
-        Mon:{label:'🏋️ Push Day',acts:['Push-ups: 4×10 (progress from knees)','Pike push-ups: 3×8','Wall push-ups wide: 2×15','Chest stretch: 30s hold','Shoulder circles: 10 each way']},
+        Mon:{label:'🏋️ Push Day',acts:['Push-ups: 4×10 (progress from knees)','Pike push-ups: 3×8','Wide stance chest press hold: 2×15','Chest stretch: 30s hold','Shoulder circles: 10 each way']},
         Tue:{label:'🦵 Leg Power',acts:['Jump squats (low impact): 3×10','Lateral lunges: 3×10 each','Single-leg deadlift: 3×8 each','Wall sit: 3×30s','Standing quad stretch: 30s each']},
         Wed:{label:'🧘 Stretch & Recover',acts:['Full-body yoga: 20 min','Hip opening sequence: 10 min','Spine twists: 10 each side','Neck rolls: 5 each direction','Savasana: 5 min']},
         Thu:{label:'💪 Pull + Core',acts:['Towel rows (door): 3×12','Superman: 3×12','Dead-bug: 3×8 each','Bicycle crunches: 3×15','Plank: 3×25s']},
