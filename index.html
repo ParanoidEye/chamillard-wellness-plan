@@ -4796,6 +4796,19 @@ function renderRecipes() {
   ];
   const activeCat = categories.find(function(c){ return c.key === currentRecipeCategory; }) || categories[0];
 
+  // Build recipeDays map: recipe name → array of day numbers
+  var _recipePlan = buildDailyPlan(currentMonth);
+  var _mNum = {Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12}[currentMonth.split(' ')[0]] || 1;
+  var recipeDays = {};
+  _recipePlan.forEach(function(d) {
+    ['breakfast','lunch','dinner','snack'].forEach(function(meal) {
+      var n = d[meal];
+      if (!n) return;
+      if (!recipeDays[n]) recipeDays[n] = [];
+      recipeDays[n].push(d.day);
+    });
+  });
+
   // Seasonal tag helper
   function seasonTag(name) {
     const n = name.toLowerCase();
@@ -4822,6 +4835,13 @@ function renderRecipes() {
   activeCat.items.forEach(function(name) {
     const r = RECIPE_DB[name] || genRecipe(name);
     const sTags = seasonTag(name);
+    var _days = recipeDays[name] || [];
+    var _dateBadge = '';
+    if (_days.length > 0) {
+      var _shown = _days.slice(0, 4).map(function(d){ return _mNum + '/' + d; }).join(', ');
+      var _extra = _days.length > 4 ? ' <span style="color:#0369a1">+' + (_days.length - 4) + ' more</span>' : '';
+      _dateBadge = '<span class="pill" style="background:#e0f2fe;color:#0369a1;font-weight:700;">📅 ' + _shown + _extra + '</span>';
+    }
     html += `<div class="recipe-card" id="${slugName(name)}">
       <h4 class="font-display font-bold text-sm text-teal-700 mb-1">${name}</h4>
       <div class="flex flex-wrap gap-1 mb-2">
@@ -4830,6 +4850,7 @@ function renderRecipes() {
         <span class="pill pill-gold">👨‍👩‍👧‍👧 Serves ${r.serves}</span>
         <span class="pill ${r.freezer?'pill-teal':'pill-coral'}">${r.freezer?'🧊 Freezer ✅':'❌ No Freeze'}</span>
         ${sTags}
+        ${_dateBadge}
       </div>
       <div class="text-xs mb-2"><strong>Ingredients:</strong> ${r.ingredients.join(' · ')}</div>
       <ol class="text-xs pl-4 mb-2" style="list-style:decimal;">
