@@ -4888,46 +4888,137 @@ function renderGrocery() {
     return 'Other';
   }
 
-  // Parse a single ingredient string to extract a canonical name key (for dedup/merge)
-  function makeKey(ing) {
-    return ing.toLowerCase()
-      .replace(/[\d\/\.\-]+\s*(cups?|tbsp|tsp|oz|lb|lbs|g|kg|ml|l|cans?|bunch|cloves?|heads?|stalks?|slices?|pieces?|pinch|dash|pkg|package|block|bunch|bag|jar|bottle|can|carton|box)\b/g,'')
-      .replace(/\b(large|medium|small|extra|firm|fresh|frozen|dried|raw|organic|whole|boneless|skinless|ripe|baby|mini|ground|minced|chopped|diced|sliced|shredded|grated|cooked|uncooked|unsweetened|low-sodium|lean|93%|99%)\b/g,'')
-      .replace(/\s+/g,' ').trim()
-      .replace(/^,|,$/, '').trim();
+  // ─── Smart Ingredient Parser ─────────────────────────────────────────────
+  // Parses qty, unit, canonical name; sums quantities for the same ingredient.
+
+  function parseFraction(s) {
+    s = String(s).trim();
+    var mx = s.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/);
+    if (mx) return parseInt(mx[1]) + parseInt(mx[2]) / parseInt(mx[3]);
+    var fx = s.match(/^(\d+)\s*\/\s*(\d+)$/);
+    if (fx) return parseInt(fx[1]) / parseInt(fx[2]);
+    return parseFloat(s) || 0;
+  }
+
+  function fmtQty(n) {
+    if (!n && n !== 0) return '';
+    var i = Math.floor(n), f = n - i;
+    var fs = '';
+    if (Math.abs(f - 0.5)  < 0.02) fs = '\u00bd';
+    else if (Math.abs(f - 0.25) < 0.02) fs = '\u00bc';
+    else if (Math.abs(f - 0.75) < 0.02) fs = '\u00be';
+    else if (Math.abs(f - 0.333) < 0.02) fs = '\u2153';
+    else if (Math.abs(f - 0.667) < 0.02) fs = '\u2154';
+    else if (f > 0.02) fs = String(Math.round(f * 10) / 10).replace('0.', '.');
+    return (i > 0 ? String(i) : '') + fs || String(n);
+  }
+
+  function normalizeUnit(u) {
+    if (!u) return '';
+    u = u.toLowerCase().trim();
+    var m = { cups:'cup', cup:'cup', tablespoons:'tbsp', tablespoon:'tbsp', tbsps:'tbsp', tbsp:'tbsp',
+              teaspoons:'tsp', teaspoon:'tsp', tsps:'tsp', tsp:'tsp',
+              ounces:'oz', pounds:'lb', lbs:'lb', grams:'g', kilograms:'kg',
+              cloves:'clove', heads:'head', stalks:'stalk', bunches:'bunch',
+              cans:'can', slices:'slice', pieces:'piece', bags:'bag',
+              jars:'jar', cartons:'carton', boxes:'box', blocks:'block',
+              packages:'pkg', pkgs:'pkg' };
+    return m[u] || u;
+  }
+
+  function stripPrep(s) {
+    return s
+      .replace(/\([^)]*\)/g, ' ')
+      .replace(/\b(drained|rinsed|rinsed and drained|chopped|diced|minced|sliced|peeled|shredded|grated|julienned|cubed|halved|quartered|trimmed|cored|seeded|crushed|pressed|roughly|finely|thinly|freshly|coarsely|lightly|gently|toasted|roasted|cooked|uncooked|thawed|softened|melted|beaten|whisked|separated|pitted|deveined|deboned|scrambled|steamed|boiled|baked|saut\u00e9ed)\b/gi, ' ')
+      .replace(/\b(large|medium|small|extra|firm|soft|silken|fresh|frozen|dried|raw|organic|whole|boneless|skinless|ripe|baby|mini|lean|unsweetened|low-sodium|reduced-sodium|light|dark|plain|unsalted|cooked|uncooked)\b/gi, ' ')
+      .replace(/,\s*(and\b|or\b)?/g, ' ')
+      .replace(/\band\b/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .replace(/^[-,;\s]+|[-,;\s]+$/g, '')
+      .trim();
+  }
+
+  function canonicalize(s) {
+    return s.toLowerCase().replace(/[^\w\s]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function parseIngredient(ing) {
+    var s = ing.trim();
+
+    // Egg whites → eggs
+    var ewM = s.match(/^((?:\d+\s+)?\d+(?:\s*\/\s*\d+)?|\d+(?:\.\d+)?)\s+egg\s+whites?/i);
+    if (ewM) {
+      return { qty: parseFraction(ewM[1].replace(/\s/g,'')), unit: '', name: 'eggs', display: 'eggs', cat: categorize('eggs'), isTaste: false };
+    }
+    if (/\begg\s+whites?\b/i.test(s)) {
+      return { qty: 2, unit: '', name: 'eggs', display: 'eggs', cat: categorize('eggs'), isTaste: false };
+    }
+
+    var isTaste = /\bto\s+taste\b/i.test(s) || /\bpinch\b|\bdash\b/i.test(s);
+
+    // Match leading number (integer, fraction, or mixed fraction)
+    var qtyRaw = '', rest = s;
+    var nm = s.match(/^((?:\d+\s+)?\d+(?:\s*\/\s*\d+)?|\d+(?:\.\d+)?)\s*/);
+    if (nm) { qtyRaw = nm[1].trim(); rest = s.slice(nm[0].length); }
+
+    // Match unit
+    var unitRaw = '';
+    var um = rest.match(/^(cups?|tbsps?|tablespoons?|tsps?|teaspoons?|oz|ounces?|lbs?|pounds?|g(?:rams?)?|kg|ml|l(?:iter)?|cans?|cloves?|heads?|stalks?|bunches?|slices?|pieces?|bags?|jars?|blocks?|cartons?|pkgs?|packages?)\b\s*/i);
+    if (um) { unitRaw = um[1]; rest = rest.slice(um[0].length); }
+
+    // Parenthetical notes (e.g. "(15oz each)") right after unit
+    rest = rest.replace(/^\([^)]*\)\s*/, '');
+
+    var qty  = qtyRaw ? parseFraction(qtyRaw) : (isTaste ? 0 : 1);
+    var unit = normalizeUnit(unitRaw);
+    var cleanName = stripPrep(rest || s);
+    var canonical = canonicalize(cleanName);
+    if (!canonical || canonical.length < 2) {
+      cleanName = stripPrep(s); canonical = canonicalize(cleanName);
+    }
+    if (!canonical || canonical.length < 2) canonical = canonicalize(s);
+
+    return { qty: qty, unit: unit, name: canonical, display: cleanName || s, cat: categorize(ing), isTaste: isTaste };
   }
 
   // Extract ingredients from a recipe entry in RECIPE_DB
   function getIngredients(mealName) {
-    if(!mealName) return [];
-    const r = RECIPE_DB[mealName];
-    if(!r || !r.ingredients) return [];
+    if (!mealName) return [];
+    var r = RECIPE_DB[mealName];
+    if (!r || !r.ingredients) return [];
     return r.ingredients;
   }
 
-  // Build a merged ingredient list for a week
+  // Build a merged, quantity-summed ingredient list for a week
   function buildWeekIngredients(wk) {
-    const ingMap = {}; // key → {display, count, cat}
+    var ingMap = {}; // canonical key → accumulated item
 
     wk.forEach(function(day) {
       ['breakfast','lunch','dinner','snack'].forEach(function(meal) {
-        const ings = getIngredients(day[meal]);
+        var ings = getIngredients(day[meal]);
         ings.forEach(function(ing) {
-          const key = makeKey(ing);
-          if(!key || key.length < 2) return;
-          if(!ingMap[key]) {
-            ingMap[key] = {display: ing, count: 1, cat: categorize(ing)};
+          var p = parseIngredient(ing);
+          // Canonical key: unit|name so "cup|oats" and "oats" stay separate
+          var key = (p.unit ? p.unit + '|' : '') + p.name;
+          if (!key || key.length < 2) return;
+          if (!ingMap[key]) {
+            ingMap[key] = { qty: p.qty, unit: p.unit, display: p.display, name: p.name, cat: p.cat, isTaste: p.isTaste };
           } else {
-            ingMap[key].count++;
+            ingMap[key].qty += p.qty;
           }
         });
       });
     });
 
-    // Sort: category first, then display name
-    return Object.values(ingMap).sort(function(a,b){
-      if(a.cat < b.cat) return -1;
-      if(a.cat > b.cat) return 1;
+    // Build label strings and sort
+    return Object.values(ingMap).map(function(item) {
+      var qStr = (!item.isTaste && item.qty > 0) ? fmtQty(item.qty) : '';
+      var label = [qStr, item.unit, item.display].filter(Boolean).join(' ');
+      item.label = label;
+      return item;
+    }).sort(function(a, b) {
+      if (a.cat < b.cat) return -1; if (a.cat > b.cat) return 1;
       return a.display.localeCompare(b.display);
     });
   }
@@ -4979,10 +5070,9 @@ function renderGrocery() {
           const bg = idx%2===0?'bg-white':'bg-cream-50';
           const ck = currentMonth+'|w'+wi+'|'+item.display;
           const chk = localStorage.getItem('groc_'+ck)==='1';
-          const countBadge = item.count > 1 ? ` <span class="text-teal-500 font-bold">(×${item.count})</span>` : '';
           html += `<tr class="${bg} border-b border-charcoal-50 ${chk?'opacity-50':''}" id="grow-${encodeURIComponent(ck)}">
             <td class="p-1.5 w-8"><input type="checkbox" class="groc-cb w-4 h-4 accent-teal-600 cursor-pointer" data-ck="${ck}" ${chk?'checked':''} title="Mark as already have"></td>
-            <td class="p-1.5 font-medium ${chk?'line-through text-charcoal-400':''}">${item.display}${countBadge}</td>
+            <td class="p-1.5 font-medium ${chk?'line-through text-charcoal-400':''}">${item.label}</td>
           </tr>`;
         });
         html += `</table></div>`;
