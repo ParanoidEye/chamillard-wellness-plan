@@ -4809,20 +4809,6 @@ function renderRecipes() {
     });
   });
 
-  // Sort items per category: first 8 = calendar days 1-8 in order (deduped), rest = remaining pool items
-  var _catMealKey = {breakfasts:'breakfast', lunches:'lunch', dinners:'dinner', snacks:'snack'};
-  categories.forEach(function(cat) {
-    var mealKey = _catMealKey[cat.key];
-    var first8 = [];
-    var seen = {};
-    _recipePlan.slice(0, 8).forEach(function(d) {
-      var n = d[mealKey];
-      if (n && !seen[n]) { seen[n] = true; first8.push(n); }
-    });
-    var rest = cat.items.filter(function(n){ return !seen[n]; });
-    cat.items = first8.concat(rest);
-  });
-
   // Seasonal tag helper
   function seasonTag(name) {
     const n = name.toLowerCase();
